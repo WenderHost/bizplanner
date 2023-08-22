@@ -23,5 +23,3 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/debugging.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/enqueues.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/navigation.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/users.php' );
-
-
