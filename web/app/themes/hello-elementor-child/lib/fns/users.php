@@ -24,15 +24,12 @@ function get_current_business_plan(){
     return false;
   }
 
-  $business_plan = get_field( 'business_plan', $business_plan_id );
+  $business_plan = get_fields( $business_plan_id );
   //uber_log( '🔔 RAW $business_plan = ' . print_r( $business_plan, true ) );
 
-  //*
   if( is_array( $business_plan ) && array_key_exists( 'product_category', $business_plan ) && is_object( $business_plan['product_category'] ) )
     $business_plan['product_category'] = [ $business_plan['product_category']->term_id => $business_plan['product_category'] ];
-  /**/
 
-  //*
   if( is_array( $business_plan ) && array_key_exists( 'marketing_methods', $business_plan ) && is_array( $business_plan['marketing_methods'] ) ){
     $marketing_methods = [];
     foreach( $business_plan['marketing_methods'] as $term ){
@@ -56,7 +53,6 @@ function get_current_business_plan(){
     }
     $business_plan['customers'] = $customers;
   }
-  /**/
 
   $business_plan['ID'] = $business_plan_id;
   $business_plan['title'] = get_the_title( $business_plan_id );
@@ -135,6 +131,12 @@ function register_user( $record, $handler ){
   }
 }
 add_action( 'elementor_pro/forms/new_record', __NAMESPACE__ . '\\register_user', 10, 2 );
+
+function filter_business_plans_query( $query ){
+  $current_user = wp_get_current_user();
+  $query->set( 'author', $current_user->ID );
+}
+add_action( 'elementor/query/current_user_business_plans', __NAMESPACE__ . '\\filter_business_plans_query' );
 
 /**
  * Validates the User Registration fortm.
