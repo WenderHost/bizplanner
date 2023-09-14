@@ -7,38 +7,23 @@ namespace BizPlanner\users;
  * @return     bool  The current business plan.
  */
 function get_current_business_plan(){
+  global $post;
+
+  $current_business_plan = null;
+  $business_plan_id = null;
+
   $current_user_id = get_current_user_id();
+  if( ! $current_user_id )
+    return false;
 
-  if( $current_user_id ){
-    $current_business_plan = get_user_meta( $current_user_id, 'current_business_plan', true );
+  if( isset( $_COOKIE['bpid'] ) && is_numeric( $_COOKIE['bpid'] ) && 'business-plan' == get_post_type( $_COOKIE['bpid'] ) ){
+    $business_plan_post = get_post( $_COOKIE['bpid'] );
+    if( $current_user_id == $business_plan_post->post_author )
+      $business_plan_id = $_COOKIE['bpid'];
+  } else {
+    return false;
   }
-
-  if( $current_business_plan && is_numeric( $current_business_plan ) ){
-    $business_plan = get_field( 'business_plan', $current_business_plan );
-  }
-
-  if( is_array( $business_plan ) && array_key_exists( 'product_category', $business_plan ) && is_object( $business_plan['product_category'] ) )
-    $business_plan['product_category'] = $business_plan['product_category']->name;
-
-  if( is_array( $business_plan ) && array_key_exists( 'marketing_methods', $business_plan ) && is_array( $business_plan['marketing_methods'] ) ){
-    $marketing_methods = [];
-    foreach( $business_plan['marketing_methods'] as $term ){
-      $marketing_methods[] = $term->name;
-    }
-    $business_plan['marketing_methods'] = implode(',', $marketing_methods );
-  }
-
-  uber_log( '$business_plan = ' . print_r( $business_plan, true ) );
-
-  // Ensure all properties are initialized:
-  $business_plan_properties = [ 'company_name', 'product', 'product_description', 'product_category', 'marketing_methods', ];
-  foreach( $business_plan_properties as $prop ){
-    if( ! array_key_exists( $prop, $business_plan ) )
-      $business_plan[ $prop ] = null;
-  }
-
-  return $business_plan;
-}
+  $business_plan = get_field( 'business_plan', $business_plan_id );
 
 /**
  * Registers a new user in WordPress and sends the lead to ActiveCampaign
