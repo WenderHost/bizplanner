@@ -153,16 +153,16 @@
         },
         {
             "name": "elementor/elementor-pro",
-            "version": "3.16.0",
+            "version": "3.16.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:elementor/elementor-pro.git",
-                "reference": "8eb2f85b93d3c0ead2982ec43cb0196ab2195509"
+                "reference": "52703583030ad110b9a759753127af85468bd009"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.elementor.com/download/3.16.0",
-                "reference": "8eb2f85b93d3c0ead2982ec43cb0196ab2195509",
+                "url": "https://composer.elementor.com/download/3.16.1",
+                "reference": "52703583030ad110b9a759753127af85468bd009",
                 "shasum": ""
             },
             "require-dev": {
@@ -206,9 +206,9 @@
             ],
             "description": "WordPress website builder, with no limits of design. A website builder that delivers high-end page designs and advanced capabilities, never before seen on WordPress.",
             "support": {
-                "source": "https://github.com/elementor/elementor-pro/tree/v3.17.0-cloud-rc"
+                "source": "https://github.com/elementor/elementor-pro/tree/3.16.1"
             },
-            "time": "2023-09-12T08:38:54+00:00"
+            "time": "2023-09-14T14:47:24+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -1215,15 +1215,15 @@
         },
         {
             "name": "wpackagist-plugin/elementor",
-            "version": "3.16.2",
+            "version": "3.16.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/elementor/",
-                "reference": "tags/3.16.2"
+                "reference": "tags/3.16.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/elementor.3.16.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/elementor.3.16.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1290,12 +1290,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "a6eb298714dd4edd46783e25c65d125c9314533e"
+                "reference": "84d96d6951fa8f93e6ff37fcd8dc7b79eb67ed23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a6eb298714dd4edd46783e25c65d125c9314533e",
-                "reference": "a6eb298714dd4edd46783e25c65d125c9314533e",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/84d96d6951fa8f93e6ff37fcd8dc7b79eb67ed23",
+                "reference": "84d96d6951fa8f93e6ff37fcd8dc7b79eb67ed23",
                 "shasum": ""
             },
             "conflict": {
@@ -1665,7 +1665,7 @@
                 "pimcore/pimcore": "<10.6.8",
                 "pixelfed/pixelfed": "<=0.11.4",
                 "pocketmine/bedrock-protocol": "<8.0.2",
-                "pocketmine/pocketmine-mp": "<4.22.3|>=5,<5.2.1",
+                "pocketmine/pocketmine-mp": "<=4.23|>=5,<5.3.1",
                 "pressbooks/pressbooks": "<5.18",
                 "prestashop/autoupgrade": ">=4,<4.10.1",
                 "prestashop/blockwishlist": ">=2,<2.1.1",
@@ -1951,7 +1951,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-14T12:05:50+00:00"
+            "time": "2023-09-14T18:04:30+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
