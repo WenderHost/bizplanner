@@ -15,11 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'HELLO_ELEMENTOR_CHILD_VERSION', '2.0.0' );
+define( 'BP_REST_NAMESPACE', 'bizplanner/v1' );
+define( 'BP_BIZPLAN_ROUTE', '/bizplan/' );
 
 /**
  * Include required files
  */
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/adminbar.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/api.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/debugging.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/enqueues.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/navigation.php' );
