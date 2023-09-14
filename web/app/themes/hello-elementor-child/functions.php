@@ -21,6 +21,7 @@ define( 'BP_BIZPLAN_ROUTE', '/bizplan/' );
 /**
  * Include required files
  */
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/acf.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/adminbar.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/api.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/debugging.php' );

@@ -10,7 +10,8 @@ namespace BizPlanner\navigation;
  * @return     array  The filtered menu items
  */
 function modify_menu( $items, $args ) {
-  if( 'question-sidebar' != $args->menu )
+  $sidebar_menu = get_field( 'sidebar_menu', 'option' );
+  if( $sidebar_menu != $args->menu )
     return $items;
 
   $counter = 1;
