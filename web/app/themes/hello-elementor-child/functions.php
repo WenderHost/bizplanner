@@ -27,6 +27,7 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/api.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/debugging.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/enqueues.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/navigation.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.post_id.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_form.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.title_bar.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/users.php' );
