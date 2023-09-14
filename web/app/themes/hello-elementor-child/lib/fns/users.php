@@ -2,39 +2,6 @@
 namespace BizPlanner\users;
 
 /**
- * Message sent to users after they submit the "Register" form.
- *
- * @param      int   $user_id  The user identifier
- *
- * @return     boolean  Returns FALSE if no user found by the provided ID.
- */
-function create_user_message( $user_id ){
-  $user = get_userdata( $user_id );
-
-  if( ! $user )
-    return false;
-
-  // Get the "Create User Message Subject" from our ACF Options Page
-  $create_user_message_subject = get_field( 'create_user_message_subject', 'option' );
-  if( ! $create_user_message_subject || empty( $create_user_message_subject ) )
-    $create_user_message_subject = 'Thank You for Registering with ' . get_bloginfo( 'name' );
-
-  // Get the "Create User Message" from our ACF Options Page
-  $create_user_message = get_field( 'create_user_message', 'option' );
-  if( ! $create_user_message || empty( $create_user_message ) )
-    $create_user_message = nl2br( "Dear {firstname},\n\nThank you for registering with {site_name}. We will review the details you provided and notify you once your account has been approved/disapproved.\n\nBest Regards,\nThe NCC Team" );
-
-  // Replace any tokens in the message
-  $search = ['{site_name}','{firstname}'];
-  $replace = [ get_bloginfo( 'name' ), $user->first_name ];
-  $create_user_message = str_replace( $search, $replace, $create_user_message );
-
-  $headers[] = 'From: ' . get_bloginfo("name") . ' <' . get_bloginfo("admin_email") . '>' . "\r\n";
-  $headers[] = 'Content-Type: text/html; charset=UTF-8';
-  wp_mail($user->user_email, $create_user_message_subject, $create_user_message, $headers);
-}
-
-/**
  * Retrieves a user's currently active business plan.
  *
  * @return     bool  The current business plan.
