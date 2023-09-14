@@ -26,5 +26,7 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/navigation.php' )
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_form.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/users.php' );
 
-define( 'BUSINESS_PLAN', BizPlanner\users\get_current_business_plan() );
-uber_log( 'BUSINESS_PLAN = ' . print_r( BUSINESS_PLAN, true ) );
+if( ! is_admin() ){
+  $current_business_plan = BizPlanner\users\get_current_business_plan();
+  //uber_log( '$current_business_plan = ' . print_r( $current_business_plan, true ) );
+}
