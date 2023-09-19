@@ -35,7 +35,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
           // Re-enable the submit button and set its text to "Saved"
           submitButton.disabled = false;
-          submitButtonText.innerHTML = "Saved";
+          submitButtonText.innerHTML = "Saved!";
+          setTimeout( () => {
+            submitButtonText.innerHTML = "Save";
+          }, 1500 );
         } else {
           // The request encountered an error
           //console.error("AJAX request error:", xhr.status, xhr.statusText);
@@ -86,17 +89,18 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Get all anchor tags with class .breakdance-link
-  const breakdanceLinks = document.querySelectorAll(".breakdance-link");
+  // Get all anchor tags with class .bizplan-link
+  const bizplanLinks = document.querySelectorAll(".bizplan-link a.elementor-button");
 
   // Add click event listener to each anchor tag
-  breakdanceLinks.forEach(function(link) {
+  bizplanLinks.forEach(function(link) {
     link.addEventListener("click", function(event) {
       // Prevent the default action of the anchor tag (e.g., navigating to a new page)
       event.preventDefault();
 
       // Get the parent div of the anchor tag
-      const parentDiv = link.parentElement;
+      //const parentDiv = link.parentElement;
+      const parentDiv = link.closest('div.bizplan-link');
 
       // Get the href of this link
       const href = this.getAttribute('href');
