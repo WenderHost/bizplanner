@@ -58,7 +58,7 @@ function save_parameter( $parameter = null, $value = null ){
     case 'product_price':
     case 'marketing_methods':
       if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
-        $updated = update_field( 'business_plan_' . $parameter, $value, $current_business_plan['ID'] );
+        $updated = update_field( $parameter, $value, $current_business_plan['ID'] );
       } else {
         return new \WP_Error( 'nocurrentbizplan', __( 'No current business plan found.', 'bizplanner' ) );
       }
@@ -69,7 +69,7 @@ function save_parameter( $parameter = null, $value = null ){
         if( is_array( $value ) )
           $value = $value[0];
         $term = get_term_by( 'term_id', $value, $parameter );
-        $updated = update_field( 'business_plan_' . $parameter, $term, $current_business_plan['ID'] );
+        $updated = update_field( $parameter, $term, $current_business_plan['ID'] );
       }
       break;
 
