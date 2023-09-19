@@ -72,7 +72,6 @@ function question_form( $atts ){
           $html.= '</fieldset></div>';
         }
       } else {
-        $html.= 'I could not find a taxonomy name <code>' . $args['name'] . '</code>';
         $html.= 'I could not find a taxonomy named <code>' . $args['name'] . '</code>';
       }
       break;
