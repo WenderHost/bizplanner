@@ -98,11 +98,18 @@ function question_form( $atts ){
       break;
 
     default:
+      /*
       $html = '<div class="breakdance-form-field breakdance-form-field--text"><label class="breakdance-form-field__label" for="' . esc_attr( $args['name'] ) . '">' . $args['placeholder'] . '</label><input class="breakdance-form-field__input" id="' . esc_attr( $args['name'] ) . '" aria-describedby="' . esc_attr( $args['name'] ) . '" type="text" name="' . esc_attr( $args['name'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" value="' . esc_attr( $value ) . '" required=""/></div>';
+      /**/
+
+      $html = '<div class="elementor-field-type-text elementor-field-group elementor-column elementor-field-group-name elementor-col-100">
+                <label for="' . esc_attr( $args['name'] ) . '" class="elementor-field-label">' . $args['placeholder'] . '</label>
+                <input size="1" type="text" name="' . esc_attr( $args['name'] ) . '"  aria-describedby="' . esc_attr( $args['name'] ) . '" id="form-field-name" class="elementor-field elementor-size-sm  elementor-field-textual" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '">
+              </div>';
       break;
   }
+  $html.= '<style>#bizplanner-form label{padding-bottom: 6px; color: #fff} #bizplanner-form input{background-color: #fff;} #bizplanner-form .elementor-field-type-submit{margin-top: 10px;}</style>';
 
-  return '<form class="breakdance-form breakdance-form--vertical" id="bizplanner-form">' . $html . '<footer class="breakdance-form-field breakdance-form-footer" style="flex-direction: column; align-items: start;">
-            <button type="submit" class="button-atom button-atom--primary breakdance-form-button breakdance-form-button__submit" id="form-submit"><span class="button-atom__text">Save</span></button><div id="response-message"></div></footer></form>';
+  return '<form class="elementor-form" id="bizplanner-form">' . $html . '<div class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons"><button type="submit" class="elementor-button elementor-size-sm" id="form-submit"><span><span class="elementor-button-text">Save</span></span></button></div></form>';
 }
 add_shortcode( 'question_form', __NAMESPACE__ . '\\question_form' );
