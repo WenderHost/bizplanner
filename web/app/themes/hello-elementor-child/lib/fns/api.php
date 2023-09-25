@@ -6,7 +6,32 @@ namespace BizPlanner\api;
  * Registers the BizPlanner API.
  */
 function register_bizplanner_api(){
-  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE,[
+  /**
+   * Handles creating a `business-plan` CPT
+   */
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create',[
+    'methods'   => 'GET,POST',
+    'callback'  => function( \WP_REST_Request $request ){
+      // CODE GOES HERE
+    },
+    'permission_callback' => '__return_true',
+  ]);
+
+  /**
+   * Handles reading a `business-plan` CPT
+   */
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'read',[
+    'methods'   => 'GET,POST',
+    'callback'  => function( \WP_REST_Request $request ){
+      // CODE GOES HERE
+    },
+    'permission_callback' => '__return_true',
+  ]);
+
+  /**
+   * Handles updating a `business-plan` CPT
+   */
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'update',[
     'methods'   => 'GET,POST',
     'callback'  => function( \WP_REST_Request $request ){
       $status_code = 200;
@@ -32,6 +57,17 @@ function register_bizplanner_api(){
 
       //return rest_ensure_response( $response );
       wp_send_json( $response, $status_code );
+    },
+    'permission_callback' => '__return_true',
+  ]);
+
+  /**
+   * Handles deleting a `business-plan` CPT
+   */
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'delete',[
+    'methods'   => 'GET,POST',
+    'callback'  => function( \WP_REST_Request $request ){
+      // CODE GOES HERE
     },
     'permission_callback' => '__return_true',
   ]);
