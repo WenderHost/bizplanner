@@ -64,13 +64,13 @@ function get_current_business_plan(){
       $business_plan[ $prop ] = null;
   }
 
-  //uber_log( '🔔 PROCESSED $business_plan = ' . print_r( $business_plan, true ) );
+  uber_log( '🔔 PROCESSED $business_plan = ' . print_r( $business_plan, true ) );
 
   return $business_plan;
 }
 
 /**
- * Registers a new user in WordPress and sends the lead to ActiveCampaign
+ * Registers a new user in WordPress without requiring the user to enter an email address.
  *
  * @param      object   $record   The form submission object
  * @param      object   $handler  The form handler
@@ -78,7 +78,7 @@ function get_current_business_plan(){
  * @return     boolean  Returns `true` when new user is created.
  */
 function register_user( $record, $handler ){
-  // Only process the form named `wordpress_and_campaign_registration`:
+  // Only process the form named `wordpress_user_registration`:
   $form_name = $record->get_form_settings( 'form_name' );
   if( 'wordpress_user_registration' != $form_name )
     return;
@@ -88,50 +88,79 @@ function register_user( $record, $handler ){
   // Get our form field values
   $raw_fields = $record->get( 'fields' );
   $fields = [];
+  uber_log( '🔔 $raw_fields = ' . print_r( $raw_fields, true ) );
   foreach( $raw_fields as $id => $field ){
     switch( $id ){
+      /*
       case 'password':
       case 'postId':
         $$id = $field['value'];
         break;
+      /**/
 
       default:
         $fields[$id] = $field['value'];
     }
 
   }
+  uber_log( '🔔 $fields = ' . print_r( $fields, true ) );
 
   // Validate our data
-  if( ! is_email( $fields['email'] ) ){
-    \uber_log('🚨 `email` is not an email! Exiting...');
-    return false;
-  }
-  if( email_exists( $fields['email'] ) ){
+  if( empty( $fields['username'] ) || empty( $fields['password'] ) ){
     $handler->messages = [
-      'error' => ['Registration not sent. A user with that email address already exists.'],
+      'error' => 'Please enter a username and a password. These fields can not be empty.',
     ];
     return false;
   }
 
+  if( username_exists( $fields['username'] ) ){
+    $handler->messages = [
+      'error' => 'Please choose a different username. A user with that username exists.',
+    ];
+    return false;
+  }
+
+  if( 4 >= strlen( $fields['password'] ) ){
+    $handler->messages = [
+      'error' => 'Your password must be five or more characters.',
+    ];
+    return false;
+  }
+
+  // Build a fake email address from the submitted username
+  $user_email = $fields['username'] . '@bizplanner.dev';
+  uber_log( '🔔 $user_email = '. $user_email);
+  if( ! is_email( $user_email ) ){
+    $handler->messages = [
+      'error' => 'Please correct your username to use only letters and numbers.',
+    ];
+    return false;
+  }
+  $user_args = [
+    'user_pass' => $fields['password'],
+    'user_login' => $fields['username'],
+    'user_email' => $user_email,
+    'display_name' => $fields['username'],
+  ];
+  uber_log( '🔔 $user_args = ' . print_r( $user_args, true ) );
   // Add the user to WordPress
-  if( ! email_exists( $fields['email'] ) && ! username_exists( $fields['email'] ) ){
-    $user_id = wp_insert_user([
-      'user_pass' => wp_generate_password( 8, false ),
-      'user_login' => $fields['email'],
-      'user_email' => $fields['email'],
-      'display_name' => $fields['firstname'],
-      'first_name' => $fields['firstname'],
-      'last_name' => $fields['lastname'],
-    ]);
-    create_user_message( $user_id );
+  if( ! email_exists( $user_email ) && ! username_exists( $fields['username'] ) ){
+
+
+    $user_id = wp_insert_user( $user_args );
     return true;
   } else {
-    uber_log('🔔 A user with the email `' . $fields['email'] . '` already exists!' );
+    uber_log('🔔 A user with the email `' . $user_email . '` already exists!' );
     return false;
   }
 }
 add_action( 'elementor_pro/forms/new_record', __NAMESPACE__ . '\\register_user', 10, 2 );
 
+/**
+ * Only return business plans that belong to the currently logged in user.
+ *
+ * @param      object  $query  The query object
+ */
 function filter_business_plans_query( $query ){
   $current_user = wp_get_current_user();
   $query->set( 'author', $current_user->ID );
@@ -152,12 +181,15 @@ function validate_user_registration( $record, $handler ){
   if( 'wordpress_user_registration' != $form_name )
     return;
 
-  $email_field = $record->get_field([
-    'id' => 'email',
-  ]);
+  $username_field = $record->get_field( ['id' => 'username'] );
+  $password_field = $record->get_field( ['id' => 'password'] );
 
-  if( email_exists( $email_field['email']['value'] ) ){
-    $handler->add_error( $email_field['email']['id'], 'This email address is already in use in our system.' );
+  if( username_exists( $username_field['username']['value'] ) ){
+    $handler->add_error( $username_field['username']['id'], 'Another user already has that username. Please use a different one. (Hint: Try adding a number or more letters.' );
+  }
+
+  if( 5 > strlen( $password_field['password']['value'] ) ){
+    $handler->add_error( $password_field['password']['id'], 'Your password must be at least 5 characters.' );
   }
 }
 add_action( 'elementor_pro/forms/validation', __NAMESPACE__ . '\\validate_user_registration', 10, 2 );
