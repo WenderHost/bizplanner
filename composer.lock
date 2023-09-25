@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "126246528b495deb35ef4dfd176dbafc",
+    "content-hash": "681d318f299c39671cb35b0642f87ce8",
     "packages": [
         {
             "name": "composer/installers",
@@ -1230,6 +1230,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/elementor/"
+        },
+        {
+            "name": "wpackagist-plugin/login-or-logout-menu-item",
+            "version": "1.2.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/login-or-logout-menu-item/",
+                "reference": "tags/1.2.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/login-or-logout-menu-item.1.2.3.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/login-or-logout-menu-item/"
         },
         {
             "name": "wpackagist-theme/hello-elementor",
