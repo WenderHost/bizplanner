@@ -2,6 +2,9 @@
 
 namespace BizPlanner\api;
 
+/**
+ * Registers the BizPlanner API.
+ */
 function register_bizplanner_api(){
   register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE,[
     'methods'   => 'GET,POST',
@@ -12,7 +15,7 @@ function register_bizplanner_api(){
       $parameters = $request->get_params();
       $response->parameters = $parameters;
       $messages = [];
-      foreach ($parameters as $parameter => $value ) {
+      foreach ( $parameters as $parameter => $value ) {
         $saved = save_parameter( $parameter, $value );
         if( is_wp_error( $saved ) ){
           $status_code = 500;
