@@ -27,6 +27,7 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/api.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/debugging.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/enqueues.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/navigation.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.page_numbers.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.post_id.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.new_business_plan_button.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_form.php' );
