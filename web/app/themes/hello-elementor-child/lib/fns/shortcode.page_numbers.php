@@ -18,9 +18,7 @@ function page_numbers(){
     }
     $counter++;
   }
-  //$post_obj_html = '<pre>'. print_r( $post, true ).'</pre>' . '<p><pre style="color: #d9d9d9;">'.print_r($menu_items,true).'</pre></p>';
-  return '<div class="">' . $current_title . ' &bull; Page ' . $current_page_no . ' of ' . $total_pages . '</div>';
 
-  //return '<p><pre style="color: #d9d9d9;">'.print_r($menu_items,true).'</pre></p>';
+  return '<div class="">' . $current_title . ' &bull; Page ' . $current_page_no . ' of ' . $total_pages . '</div>';
 }
 add_shortcode( 'page_numbers', __NAMESPACE__ . '\\page_numbers' );
