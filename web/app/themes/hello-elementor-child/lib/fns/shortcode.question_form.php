@@ -1,5 +1,6 @@
 <?php
 namespace BizPlanner\shortcodes;
+use function BizPlanner\templates\{render_template};
 
 function question_form( $atts ){
   global $post, $current_business_plan;
@@ -43,7 +44,15 @@ function question_form( $atts ){
       $value = $business_plan[ $args['name'] ];
   }
   $html = '';
-  //$html.= '<pre>type: '.$args['type'].'<br>name: ' . $args['name'] . '<br>placeholder: ' . $args['placeholder'] . '</pre>';
+
+  // Initialize the data we send to our Handlebars templates
+  $data = [
+    'placeholder'     => $args['placeholder'],
+    'placeholder_esc' => esc_attr( $args['placeholder'] ),
+    'input_name'      => $args['name'],
+    'input_name_esc'  => esc_attr( $args['name'] ),
+    'value'           => $value,
+  ];
 
   switch( $args['type'] ){
     case 'checkbox':
@@ -52,11 +61,8 @@ function question_form( $atts ){
         $terms = get_terms([ 'taxonomy' => $args['name'], 'hide_empty' => false ]);
 
         if( $terms ){
-          // BREAKDANCE
-          $html.= '<div class="breakdance-form-field breakdance-form-field--' . $args['type'] . '">
-            <fieldset role="' . $args['type'] . 'group" aria-label="' . esc_attr( $args['placeholder'] ) . '">
-              <legend class="breakdance-form-field__label">' . $args['placeholder'] . '</legend>';
-
+          // ELEMENTOR
+          $options = [];
           foreach( $terms as $term ){
             if( isset( $value ) && is_array( $value ) && 0 < count( $value ) ){
               $checked = ( array_key_exists( $term->term_id, $value ) )? ' checked="checked"' : null ;
@@ -64,52 +70,55 @@ function question_form( $atts ){
               $checked = checked( $value, $term->term_id, false );
             }
 
-            $html.= '<div class="breakdance-form-' . $args['type'] . '">
-                <input type="' . $args['type'] . '" name="' . esc_attr( $args['name'] ) . '[]" value="' . $term->term_id . '" id="' . esc_attr( $term->slug ) . '" ' . $checked . '>
-                <label class="breakdance-form-radio__text" for="' . esc_attr( $term->slug ) . '">' . $term->name . '</label>
-              </div>';
+            // Get cost
+            $cost = get_field( 'cost', $term );
+
+            $options[] = [
+              'term_id'         => $term->term_id,
+              'checked'         => $checked,
+              'slug'            => $term->slug,
+              'slug_esc'        => esc_attr( $term->slug ),
+              'input_name'      => $args['name'],
+              'input_name_esc'  => esc_attr( $args['name'] ),
+              'name'            => $term->name,
+              'name_esc'        => esc_attr( $term->name ),
+              'cost'            => $cost,
+            ];
           }
-          $html.= '</fieldset></div>';
+          $data['options'] = $options;
+
+          $html = render_template( 'form.field-type-' . $args['type'], $data );
         }
       } else {
-        $html.= 'I could not find a taxonomy named <code>' . $args['name'] . '</code>';
+        $html = 'I could not find a taxonomy named <code>' . $args['name'] . '</code>';
       }
       break;
 
     case 'number':
-      $field_object = get_field_object( 'business_plan_' . $args['name'], $business_plan['ID'] );
-      $prepend = ( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? '<span class="prepend">' . $field_object['prepend'] . '</span>' : '' ;
-      $append = ( $field_object && array_key_exists( 'append', $field_object ) && ! empty( $field_object['append'] ) )? '<span class="append">' . $field_object['append'] . '</span>' : '' ;
+      $field_object = get_field_object( $args['name'], $business_plan['ID'] );
 
+      // Setup prepend/append display
+      $data['prepend'] = ( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? '<span class="prepend">' . $field_object['prepend'] . '</span>' : '' ;
+      $data['append'] = ( $field_object && array_key_exists( 'append', $field_object ) && ! empty( $field_object['append'] ) )? '<span class="append">' . $field_object['append'] . '</span>' : '' ;
+
+      // Setup min/max attributes
       $min = get_field( 'min', $post->ID );
-      $min_attr = ( ! empty( $min ) )? ' min="' . $min . '"' : null ;
+      $data['min_attr'] = ( ! empty( $min ) )? ' min="' . $min . '"' : null ;
       $max = get_field( 'max', $post->ID );
-      $max_attr = ( ! empty( $max ) )? ' max="' . $max . '"' : null ;
-      $html = '<style>.input-row{display: flex; align-items: center; width: 100%;} .input-row span.prepend{background-color: #eee; border-radius: 3px 0 0 3px; display: block; height: 100%; padding: 12px; font-size: 16px;}</style><div class="breakdance-form-field breakdance-form-field--number"><label class="breakdance-form-field__label" for="' . esc_attr( $args['name'] ) . '">
-            ' .  $args['placeholder'] . '</label><div class="input-row">' . $prepend . '
-    <input class="breakdance-form-field__input" id="' . esc_attr( $args['name'] ) . '" aria-describedby="' . esc_attr( $args['name'] ) . '" type="number" name="' . esc_attr( $args['name'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" value="' . esc_attr( $value ) . '"' . $min_attr . $max_attr . '>' . $append . '</div><!-- /.input-row --></div>';
+      $data['max_attr'] = ( ! empty( $max ) )? ' max="' . $max . '"' : null ;
+
+      $html = render_template( 'form.field-type-number', $data );
       break;
 
     case 'textarea':
-      $html = '<div class="breakdance-form-field breakdance-form-field--textarea" id="question-form-textarea">
-            <label class="breakdance-form-field__label" for="message">' . $args['placeholder'] . '<span class="breakdance-form-field__required">*</span></label>
-    <textarea class="breakdance-form-field__input" id="message" aria-describedby="message" type="textarea" name="' . esc_attr( $args['name'] ) . '" placeholder="" required="">' . $value . '</textarea></div>';
-      $html.= '<style>#question-form-textarea textarea{font-family: Arial, Helvetica, sans-serif;}</style>';
+      $html = render_template( 'form.field-type-textarea', $data );
       break;
 
     default:
-      /*
-      $html = '<div class="breakdance-form-field breakdance-form-field--text"><label class="breakdance-form-field__label" for="' . esc_attr( $args['name'] ) . '">' . $args['placeholder'] . '</label><input class="breakdance-form-field__input" id="' . esc_attr( $args['name'] ) . '" aria-describedby="' . esc_attr( $args['name'] ) . '" type="text" name="' . esc_attr( $args['name'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" value="' . esc_attr( $value ) . '" required=""/></div>';
-      /**/
-
-      $html = '<div class="elementor-field-type-text elementor-field-group elementor-column elementor-field-group-name elementor-col-100">
-                <label for="' . esc_attr( $args['name'] ) . '" class="elementor-field-label">' . $args['placeholder'] . '</label>
-                <input size="1" type="text" name="' . esc_attr( $args['name'] ) . '"  aria-describedby="' . esc_attr( $args['name'] ) . '" id="form-field-name" class="elementor-field elementor-size-sm  elementor-field-textual" value="' . esc_attr( $value ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '">
-              </div>';
+      $html = render_template( 'form.field-type-text', $data );
       break;
   }
-  $html.= '<style>#bizplanner-form label{padding-bottom: 6px; color: #fff} #bizplanner-form input{background-color: #fff;} #bizplanner-form .elementor-field-type-submit{margin-top: 10px;}</style>';
 
-  return '<form class="elementor-form" id="bizplanner-form">' . $html . '<div class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons"><button type="submit" class="elementor-button elementor-size-sm" id="form-submit"><span><span class="elementor-button-text">Save</span></span></button></div></form>';
+  return render_template( 'form', [ 'html' => $html ] );
 }
 add_shortcode( 'question_form', __NAMESPACE__ . '\\question_form' );

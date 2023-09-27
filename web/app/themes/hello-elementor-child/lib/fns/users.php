@@ -64,7 +64,7 @@ function get_current_business_plan(){
       $business_plan[ $prop ] = null;
   }
 
-  uber_log( '🔔 PROCESSED $business_plan = ' . print_r( $business_plan, true ) );
+  //uber_log( '🔔 PROCESSED $business_plan = ' . print_r( $business_plan, true ) );
 
   return $business_plan;
 }

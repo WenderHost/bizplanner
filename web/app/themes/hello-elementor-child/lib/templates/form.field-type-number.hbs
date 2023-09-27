@@ -1,0 +1,7 @@
+<style>.input-row{display: flex; align-items: center; width: 100%;} .input-row span.prepend{background-color: #eee; border-radius: 3px 0 0 3px; display: block; height: 100%; padding: 7px 10px; font-size: 16px;}</style>
+<div class="elementor-field-type-number elementor-field-group elementor-field-group-number_field elementor-col-100">
+  <label for="{{input_name}}" class="elementor-field-label">{{placeholder}}</label>
+  <div class="input-row">{{{prepend}}}
+    <input type="number" name="{{input_name}}" id="{{input_name}}" class="elementor-field elementor-size-sm  elementor-field-textual" value="{{value}}" placeholder="{{placeholder_esc}}" {{min_attr}}{{max_attr}}>
+  {{{append}}}</div><!-- /.input-row -->
+</div>

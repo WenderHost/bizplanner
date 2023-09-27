@@ -1,0 +1,10 @@
+<div class="elementor-field-type-radio elementor-field-group elementor-field-group-radio_field elementor-col-100">
+  <label for="form-field-radio_field" class="elementor-field-label" style="display: block;">{{placeholder}}</label>
+  <div class="elementor-field-subgroup">
+    {{#each options}}
+    <span class="elementor-field-option">
+      <input type="radio" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{{checked}}}>  <label for="{{slug_esc}}">{{name}}</label>
+    </span>
+    {{/each}}
+  </div>
+</div>

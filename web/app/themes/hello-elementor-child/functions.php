@@ -32,7 +32,9 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.post_id
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.new_business_plan_button.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_form.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.title_bar.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/templates.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/users.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/utilities.php' );
 
 if( ! is_admin() ){
   $current_business_plan = BizPlanner\users\get_current_business_plan();
