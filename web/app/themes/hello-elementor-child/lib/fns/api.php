@@ -55,7 +55,6 @@ function register_bizplanner_api(){
       if( $messages )
         $response->message = implode( "\n", $messages );
 
-      //return rest_ensure_response( $response );
       wp_send_json( $response, $status_code );
     },
     'permission_callback' => '__return_true',
