@@ -25,33 +25,32 @@ function get_current_business_plan(){
   }
 
   $business_plan = get_fields( $business_plan_id );
-  //uber_log( '🔔 RAW $business_plan = ' . print_r( $business_plan, true ) );
 
-  if( is_array( $business_plan ) && array_key_exists( 'product_category', $business_plan ) && is_object( $business_plan['product_category'] ) )
-    $business_plan['product_category'] = [ $business_plan['product_category']->term_id => $business_plan['product_category'] ];
-
-  if( is_array( $business_plan ) && array_key_exists( 'marketing_methods', $business_plan ) && is_array( $business_plan['marketing_methods'] ) ){
-    $marketing_methods = [];
-    foreach( $business_plan['marketing_methods'] as $term ){
-      if( is_object( $term ) && property_exists( $term, 'term_id' ) ){
-        $marketing_methods[$term->term_id] = $term;
-      } else {
-        $marketing_methods[] = $term;
-      }
-    }
-    $business_plan['marketing_methods'] = $marketing_methods;
+  /**
+   * Set the array key for options with a single value to be equal to the option's term_id
+   */
+  $set_single_term_id_as_array_key = [ 'product_category' ];
+  foreach( $set_single_term_id_as_array_key as $term_name ){
+    if( is_array( $business_plan ) && array_key_exists( $term_name, $business_plan ) && is_object( $business_plan[$term_name] ) )
+      $business_plan[$term_name] = [ $business_plan[$term_name]->term_id => $business_plan[$term_name] ];
   }
 
-  if( is_array( $business_plan ) && array_key_exists( 'customers', $business_plan ) && is_array( $business_plan['customers'] ) ){
-    $customers = [];
-    foreach( $business_plan['customers'] as $term ){
-      if( is_object( $term ) && property_exists( $term, 'term_id' ) ){
-        $customers[$term->term_id] = $term;
-      } else {
-        $customers[] = $term;
+  /**
+   * Set the array key for these selected options equal to the option's term_id
+   */
+  $set_term_ids_as_array_keys = [ 'marketing_methods', 'customers', 'management_team', 'sales_and_marketing_team' ];
+  foreach( $set_term_ids_as_array_keys as $term_name ){
+    if( is_array( $business_plan ) && array_key_exists( $term_name, $business_plan ) && is_array( $business_plan[ $term_name ] ) ){
+      $$term_name = [];
+      foreach( $business_plan[ $term_name ] as $term ){
+        if( is_object( $term ) && property_exists( $term, 'term_id' ) ){
+          $$term_name[$term->term_id] = $term;
+        } else {
+          $$term_name[] = $term;
+        }
       }
+      $business_plan[ $term_name ] = $$term_name;
     }
-    $business_plan['customers'] = $customers;
   }
 
   $business_plan['ID'] = $business_plan_id;
