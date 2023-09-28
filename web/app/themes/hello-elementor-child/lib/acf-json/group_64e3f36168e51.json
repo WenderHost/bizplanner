@@ -49,6 +49,26 @@
             "allow_null": 0
         },
         {
+            "key": "field_65157bf9c15ae",
+            "label": "Prompt",
+            "name": "prompt",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This is the question that appears above the field for this question form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_64f0ff27a3aa6",
             "label": "Placeholder",
             "name": "placeholder",
@@ -176,5 +196,5 @@
     "active": true,
     "description": "Options used to setup Question form pages.",
     "show_in_rest": 0,
-    "modified": 1695905707
+    "modified": 1695906846
 }

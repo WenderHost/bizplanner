@@ -1,0 +1,79 @@
+#bizplanner-form label{padding-bottom: 6px; color: #fff}
+#bizplanner-form input{background-color: #fff;}
+#bizplanner-form .elementor-field-type-submit{margin-top: 10px;}
+#bizplanner-form .question-row{display: flex;}
+#bizplanner-form .question-column{display: flex; flex-direction: column; width: 360px;}
+#bizplanner-form .question-row .avatar{width: 128px; height: 128px; margin-right: 20px;}
+#bizplanner-form .question-row .elementor-field-type-text label,
+#bizplanner-form .question-row .elementor-field-type-number label,
+#bizplanner-form .question-row .elementor-field-type-radio label.elementor-field-label,
+#bizplanner-form .question-row .elementor-field-type-textarea label,
+#bizplanner-form .question-row .elementor-field-type-checkbox label.elementor-field-label
+{background-color: #fff; padding: 1em; border-radius: 5px; color: #298FDB; font-family: "Roboto"; font-weight: 800; font-size: 1.25em; margin-bottom: 2em; position: relative; }
+#bizplanner-form .elementor-field-option{color: #fff;}
+#bizplanner-form .elementor-field-option label{display: inline-block; width: 180px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+#question-form-textarea textarea{font-family: Arial, Helvetica, sans-serif;}
+.elementor-field-type-number .input-row{display: flex; align-items: center; width: 100%;}
+.elementor-field-type-number .input-row span.prepend{background-color: #eee; border-radius: 3px 0 0 3px; display: block; height: 100%; padding: 7px 10px; font-size: 16px;}
+
+/* https://codepen.io/MarkBoots/pen/RwLPXgJ */
+[speech-bubble], [speech-bubble] * { box-sizing: border-box }
+
+[speech-bubble]{
+  --bbColor: #fff;
+  --bbArrowSize: 1.5rem;
+  --bbBorderRadius: 0.25rem;
+  --bbPadding: 1rem;
+  background: var(--bbColor);
+  border-radius: var(--bbBorderRadius);
+  padding: var(--bbPadding);
+  position: relative;
+  box-shadow: -3px 3px 3px rgba(0, 0, 0, .5);
+}
+
+[speech-bubble]::before{
+  content: '';
+  position: absolute;
+  background: var(--bbColor);
+}
+
+[speech-bubble][pbottom]{ margin-bottom: var(--bbArrowSize) }
+[speech-bubble][ptop]   { margin-top: var(--bbArrowSize); }
+[speech-bubble][pleft]  { margin-left: var(--bbArrowSize); }
+[speech-bubble][pright] { margin-right: var(--bbArrowSize); }
+
+
+/* bottom and top  */
+[speech-bubble][pbottom]::before,
+[speech-bubble][ptop]::before{
+  --width: calc(var(--bbArrowSize) / 2 * 3);
+  height: var(--bbArrowSize);
+  width: var(--width);
+}
+
+/* bottom */
+[speech-bubble][pbottom]::before{
+  top: calc(100% - 2px);
+}
+[speech-bubble][pbottom][aleft]::before{
+  left: 1rem;
+  clip-path: polygon(25% 0, 100% 0, 0% 100%)
+}
+[speech-bubble][pbottom][acenter]::before{
+  left: calc(50% - var(--width) / 2);
+  clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%)
+}
+[speech-bubble][pbottom][aright]::before{
+  right: 1rem;
+  clip-path: polygon(0 0, 75% 0, 100% 100%)
+}
+
+/* flip */
+[speech-bubble][pbottom][flip]::before,
+[speech-bubble][ptop][flip]::before{
+  transform: scaleX(-1)
+}
+[speech-bubble][pleft][flip]::before,
+[speech-bubble][pright][flip]::before{
+  transform: scaleY(-1)
+}

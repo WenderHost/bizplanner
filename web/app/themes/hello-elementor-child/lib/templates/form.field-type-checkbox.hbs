@@ -1,13 +1,9 @@
-<style>
-#bizplanner-form .elementor-field-option{color: #fff;}
-#bizplanner-form .elementor-field-option label{display: inline-block; width: 180px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-</style>
 <div class="elementor-field-type-checkbox elementor-field-group elementor-field-group-checkbox elementor-col-100">
-  <label for="form-field-checkbox" class="elementor-field-label" style="display: block;">{{placeholder}}</label>
+  <label speech-bubble pbottom aleft for="form-field-checkbox" class="elementor-field-label" style="display: block;">{{prompt}}</label>
   <div class="elementor-field-subgroup">
     {{#each options}}
     <span class="elementor-field-option">
-      <input type="checkbox" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{{checked}}}> <label for="{{slug_esc}}">{{name}}</label>
+      <input class="elementor-field-label" type="checkbox" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{{checked}}}> <label for="{{slug_esc}}">{{name}}</label>
       {{#if cost}}<span class="value-symbol">$</span><span class="value">{{cost}}</span>{{/if}}
     </span>
     {{/each}}

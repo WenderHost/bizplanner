@@ -15,9 +15,10 @@ function question_form( $atts ){
   }
 
   $args = shortcode_atts( [
-    'type' => null,
-    'name' => null,
+    'type'        => null,
+    'name'        => null,
     'placeholder' => null,
+    'prompt'      => null,
   ], $atts, $shortcode = '' );
 
   if( is_null( $args['name'] ) ){
@@ -32,9 +33,33 @@ function question_form( $atts ){
       $args['type'] = $type;
   }
 
+  if( is_null( $args['prompt'] ) ){
+    $prompt = get_field( 'prompt', $post->ID );
+    if( ! empty( $prompt ) ){
+      $args['prompt'] = $prompt;
+    } else {
+      $name = str_replace( [ '_','-' ], ' ', strtolower( $args['name'] ) );
+      switch( $args['type'] ){
+        case 'radio':
+        case 'checkbox':
+          $args['prompt'] = 'Select your ' . $name . ':';
+          break;
+
+        case 'textarea':
+          $args['prompt'] = 'Enter a detailed ' . $name . ':';
+          break;
+
+        default:
+          $args['prompt'] = 'Enter your ' . $name . ':';
+          break;
+      }
+    }
+    //$args['prompt'] = ( ! empty( $prompt ) )? $prompt : 'Enter your answer here.' ;
+  }
+
   if( is_null( $args['placeholder'] ) ){
     $placeholder = get_field( 'placeholder', $post->ID );
-    $args['placeholder'] = ( ! empty( $placeholder ) )? $placeholder : 'Enter your answer here.' ;
+    $args['placeholder'] = ( ! empty( $placeholder ) )? $placeholder : 'Type your answer here.' ;
   }
 
   $value = false;
@@ -47,23 +72,26 @@ function question_form( $atts ){
 
   // Initialize the data we send to our Handlebars templates
   $data = [
+    'prompt'          => $args['prompt'],
     'placeholder'     => $args['placeholder'],
     'placeholder_esc' => esc_attr( $args['placeholder'] ),
     'input_name'      => $args['name'],
     'input_name_esc'  => esc_attr( $args['name'] ),
     'value'           => $value,
   ];
-
+  //uber_log('🔔 $args = ' . print_r( $args, true ) );
+  //uber_log('🔔 $value = ' . print_r( $value, true ) );
   switch( $args['type'] ){
     case 'checkbox':
     case 'radio':
       if( taxonomy_exists( $args['name'] ) ){
         $terms = get_terms([ 'taxonomy' => $args['name'], 'hide_empty' => false ]);
-
+        //uber_log('🔔 $terms = '. print_r( $terms, true ) );
         if( $terms ){
           // ELEMENTOR
           $options = [];
           foreach( $terms as $term ){
+            //array_key_exists(key, array)
             if( isset( $value ) && is_array( $value ) && 0 < count( $value ) ){
               $checked = ( array_key_exists( $term->term_id, $value ) )? ' checked="checked"' : null ;
             } else {
@@ -119,6 +147,6 @@ function question_form( $atts ){
       break;
   }
 
-  return render_template( 'form', [ 'html' => $html ] );
+  return render_template( 'form', [ 'html' => $html, 'avatar' => get_stylesheet_directory_uri() . '/lib/img/bizplanner-avatar_01.png' ] );
 }
 add_shortcode( 'question_form', __NAMESPACE__ . '\\question_form' );
