@@ -1,0 +1,61 @@
+{
+    "key": "group_64e5226a0c564",
+    "title": "Taxonomy Options",
+    "fields": [
+        {
+            "key": "field_64e5226ab5810",
+            "label": "Cost",
+            "name": "cost",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "$",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "marketing_methods"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "management_team"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "sales_and_marketing_team"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Used for adding fields like \"Cost\" to taxonomy terms.",
+    "show_in_rest": 0,
+    "modified": 1695905653
+}
