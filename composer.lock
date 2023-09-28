@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1ed263c6e73d75474bf9ef4d19b5efb",
+    "content-hash": "c1b48ad85dbcf5a693fbc8dbeeca96d5",
     "packages": [
         {
             "name": "composer/installers",
@@ -1248,6 +1248,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/login-or-logout-menu-item/"
+        },
+        {
+            "name": "wpackagist-plugin/taxonomy-terms-order",
+            "version": "1.7.9",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/taxonomy-terms-order/",
+                "reference": "tags/1.7.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/taxonomy-terms-order.1.7.9.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/taxonomy-terms-order/"
         },
         {
             "name": "wpackagist-theme/hello-elementor",
