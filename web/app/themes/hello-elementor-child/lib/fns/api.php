@@ -89,19 +89,6 @@ function save_parameter( $parameter = null, $value = null ){
     return new \WP_Error( 'nullparameter', __( 'Parameter is null.', 'bizplanner' ) );
 
   switch( $parameter ){
-    case 'company_name':
-    case 'customers':
-    case 'product':
-    case 'product_description':
-    case 'product_price':
-    case 'marketing_methods':
-      if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
-        $updated = update_field( $parameter, $value, $current_business_plan['ID'] );
-      } else {
-        return new \WP_Error( 'nocurrentbizplan', __( 'No current business plan found.', 'bizplanner' ) );
-      }
-      break;
-
     case 'product_category':
       if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
         if( is_array( $value ) )
@@ -113,11 +100,14 @@ function save_parameter( $parameter = null, $value = null ){
 
     default:
       $logged_value = ( is_array( $value ) )? print_r( $value, true ) : $value ;
-      uber_log( '🔔 save_parameter():' . "\n - \$parameter = " . $parameter . "\n" . $logged_value );
-      return new \WP_Error( 'noparameterlogic', __( 'No logic found for saving `' . $parameter . '`.', 'bizplanner' ) );
+      if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
+        $updated = update_field( $parameter, $value, $current_business_plan['ID'] );
+      } else {
+        return new \WP_Error( 'nocurrentbizplan', __( 'No current business plan found.', 'bizplanner' ) );
+      }
   }
   if( ! $updated )
-    return new \WP_Error( 'notupdated', __( 'The value for `' . $parameter . '` was not updated.', 'bizplanner' ) );
+    return new \WP_Error( 'notupdated', __( 'The value for `' . $parameter . '` was not updated. Was attempted to run save_parameter( $parameter, $value) with the following: ' . "\n - \$parameter = " . $parameter . "\n" . $logged_value, 'bizplanner' ) );
 
   return $updated;
 }
