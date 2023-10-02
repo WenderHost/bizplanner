@@ -12,27 +12,39 @@ function register_bizplanner_api(){
 register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
     'methods'   => 'POST',
     'callback'  => function (\WP_REST_Request $request) {
+        $status_code = 200;
+        $response = new \stdClass();
+        $parameters = $request->get_params();
+        $response->parameters = $parameters;
+        $messages = [];
+
         $nonce = $request->get_header('X-WP-Nonce');
         if (!wp_verify_nonce($nonce, 'wp_rest')) {
-            return new WP_Error('invalid_nonce', 'Invalid nonce.', array('status' => 403));
-        }
-        $current_user_id = get_current_user_id();
-        $count_posts = count_user_posts($current_user_id, 'business-plan');
-        // Increment the count by 1 and append it to the title
-        $post_title = 'Business Plan #' . ($count_posts + 1);
+            $status_code = 403;
+            $response->message = 'Invalid nonce.';
+        } else {
+            $current_user_id = get_current_user_id();
+            $count_posts = count_user_posts($current_user_id, 'business-plan');
+            // Increment the count by 1 and append it to the title
+            $post_title = 'Business Plan #' . ($count_posts + 1);
 
-        $post_id = wp_insert_post(array(
-            'post_title'   => $post_title,
-            'post_type'    => 'business-plan',
-            'post_status'  => 'publish',
-            'post_author'  => $current_user_id,
-        ));
+            $post_id = wp_insert_post(array(
+                'post_title'   => $post_title,
+                'post_type'    => 'business-plan',
+                'post_status'  => 'publish',
+                'post_author'  => $current_user_id,
+            ));
 
-        if (is_wp_error($post_id)) {
-            return $post_id; // Return the error message if insertion failed
+            if (is_wp_error($post_id)) {
+                $status_code = 500;
+                $response->message = $post_id->get_error_message();
+            } else {
+                $response->message = 'Business plan created successfully.';
+                $response->post_id = $post_id;
+            }
         }
-        // Return the newly created post ID
-        return array('message' => 'Business plan created successfully.', 'post_id' => $post_id);
+
+        wp_send_json($response, $status_code);
     },
     'permission_callback' => '__return_true',
 ]);
