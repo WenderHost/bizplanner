@@ -1,6 +1,61 @@
-console.log( '🔔 bizplanner.js is loaded. bpapi = ', bpapi );
+//console.log( '🔔 bizplanner.js is loaded. bpapi = ', bpapi );
 
 // CREATE logic goes here:
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.querySelector('.elementor-element-ed5ebd2'); // Select the container by its class
+  if (container) {
+    const link = container.querySelector('a.elementor-button-link');
+    const responseMessage = container.querySelector("#response-message");
+    if (link) {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        const nonce = wpApiSettings.nonce;
+
+       
+        const xhr = new XMLHttpRequest();
+        link.innerHTML = "Creating...";
+
+        xhr.open("POST", bpapi.endpoint + 'create', true);
+         console.log(xhr);
+        xhr.setRequestHeader('X-WP-Nonce', nonce);
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            // Update the button text with the incremented counter
+            // Check if the responseMessage element exists before setting its innerHTML
+            if (responseMessage) {
+              responseMessage.innerHTML = '';
+            }
+
+              link.innerHTML = "Created!";
+              setTimeout(() => {
+     
+                 // Get the base URL dynamically and append the desired path
+                  const dynamicURL = window.location.origin + '/question/company-name/';
+                  // Redirect to the dynamic URL after a successful form submission
+                  window.location.href = dynamicURL;
+              }, 1500);
+          } else {
+            let response = JSON.parse(xhr.response);
+            console.log('🛑 xhr = ', xhr);
+            console.log('🛑 response = ', response);
+
+            // Check if the responseMessage element exists before setting its innerHTML
+            if (responseMessage) {
+              responseMessage.innerHTML = response.message;
+            }
+          }
+        };
+
+        // Send the request with the current counter value as the title
+
+      //  console.log('Sending request with data:', JSON.stringify());
+             xhr.send();
+
+      });
+    }
+  }
+});
 
 // READ logic goes here:
 
