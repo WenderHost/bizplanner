@@ -1,0 +1,66 @@
+#bizplanner-form label {
+  padding-bottom: 6px;
+  color: #fff;
+}
+#bizplanner-form input {
+  background-color: #fff;
+}
+#bizplanner-form .elementor-field-option {
+  color: #fff;
+}
+#bizplanner-form .elementor-field-option label {
+  display: inline-block;
+  width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#bizplanner-form .elementor-field-type-number .input-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+#bizplanner-form .elementor-field-type-number .input-row span.prepend {
+  background-color: #eee;
+  border-radius: 3px 0 0 3px;
+  display: block;
+  height: 100%;
+  padding: 7px 10px;
+  font-size: 16px;
+}
+#bizplanner-form .elementor-field-type-submit {
+  margin-top: 10px;
+}
+#bizplanner-form .question-column {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+}
+#bizplanner-form .question-row {
+  display: flex;
+}
+#bizplanner-form .question-row .avatar {
+  width: 128px;
+  height: 128px;
+  margin-right: 20px;
+}
+#bizplanner-form .question-row .elementor-field-type-text label,
+#bizplanner-form .question-row .elementor-field-type-number label,
+#bizplanner-form .question-row .elementor-field-type-radio label.elementor-field-label,
+#bizplanner-form .question-row .elementor-field-type-textarea label,
+#bizplanner-form .question-row .elementor-field-type-checkbox label.elementor-field-label {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 5px;
+  color: #298FDB;
+  font-family: "Roboto";
+  font-weight: 800;
+  font-size: 1.25em;
+  margin-bottom: 2em;
+  position: relative;
+}
+#bizplanner-form #question-form-textarea textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*# sourceMappingURL=form.css.map */
