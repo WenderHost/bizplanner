@@ -1,6 +1,10 @@
 //console.log( '🔔 bizplanner.js is loaded. bpapi = ', bpapi );
 
-// CREATE logic goes here:
+/**
+ * CREATE Logic
+ *
+ * Creates a new business plan
+ */
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.getElementById('start-new-plan-container');
   if (container) {
