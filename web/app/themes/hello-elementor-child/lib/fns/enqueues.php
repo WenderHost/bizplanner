@@ -16,7 +16,7 @@ function hello_elementor_child_scripts_styles() {
   wp_localize_script( 'bizplanner', 'bpapi', [
     'endpoint' => rest_url( BP_REST_NAMESPACE . BP_BIZPLAN_ROUTE ),
     'bpid'      => $bpid,
-    /*'nonce' => wp_create_nonce('ajax-nonce'),*/
+    'nonce' => wp_create_nonce('wp_rest'),
   ]);
 }
 add_action( 'wp_enqueue_scripts', 'hello_elementor_child_scripts_styles', 20 );

@@ -9,8 +9,8 @@ function register_bizplanner_api(){
   /**
    * Handles creating a `business-plan` CPT
    */
-register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
-    'methods'   => 'POST',
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
+    'methods'   => 'POST,GET',
     'callback'  => function (\WP_REST_Request $request) {
         $status_code = 200;
         $response = new \stdClass();
@@ -19,9 +19,9 @@ register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
         $messages = [];
 
         $nonce = $request->get_header('X-WP-Nonce');
-        if (!wp_verify_nonce($nonce, 'wp_rest')) {
-            $status_code = 403;
-            $response->message = 'Invalid nonce.';
+        if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+          $status_code = 403;
+          $response->message = 'Invalid nonce.';
         } else {
             $current_user_id = get_current_user_id();
             $count_posts = count_user_posts($current_user_id, 'business-plan');
@@ -44,10 +44,10 @@ register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
             }
         }
 
-        wp_send_json($response, $status_code);
+        wp_send_json( $response, $status_code );
     },
     'permission_callback' => '__return_true',
-]);
+  ]);
 
 
   /**
