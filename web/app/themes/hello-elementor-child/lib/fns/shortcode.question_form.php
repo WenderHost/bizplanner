@@ -126,7 +126,12 @@ function question_form( $atts ){
       $field_object = get_field_object( $args['name'], $business_plan['ID'] );
 
       // Setup prepend/append display
-      $data['prepend'] = ( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? '<span class="prepend">' . $field_object['prepend'] . '</span>' : '' ;
+      if( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) ){
+        $data['prepend'] = ( array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? '<span class="prepend">' . $field_object['prepend'] . '</span>' : '' ;
+      } else if( in_array( $args['name'], [ 'product_price' ] ) ){
+        $data['prepend'] = '<span class="prepend">$</span>';
+      }
+
       $data['append'] = ( $field_object && array_key_exists( 'append', $field_object ) && ! empty( $field_object['append'] ) )? '<span class="append">' . $field_object['append'] . '</span>' : '' ;
 
       // Setup min/max attributes

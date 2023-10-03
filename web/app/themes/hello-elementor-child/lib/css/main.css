@@ -78,6 +78,15 @@
   margin-top: 0;
 }
 
+.nextprevbuttons a.elementor-button {
+  background-color: #0D1645;
+  white-space: nowrap;
+}
+.nextprevbuttons.inactive a.elementor-button {
+  background-color: #eee;
+  color: #999;
+}
+
 #bizplanner-form label {
   padding-bottom: 6px;
   color: #fff;

@@ -1,0 +1,13 @@
+.nextprevbuttons{
+  a.elementor-button{
+    background-color: $navyblue;
+    white-space: nowrap;
+  }
+
+  &.inactive{
+    a.elementor-button{
+      background-color: #eee;
+      color: #999;
+    }
+  }
+}
