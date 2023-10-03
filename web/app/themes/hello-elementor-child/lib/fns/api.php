@@ -93,16 +93,55 @@ register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'create', [
     'permission_callback' => '__return_true',
   ]);
 
+
   /**
    * Handles deleting a `business-plan` CPT
    */
-  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'delete',[
-    'methods'   => 'GET,POST',
-    'callback'  => function( \WP_REST_Request $request ){
-      // CODE GOES HERE
-    },
-    'permission_callback' => '__return_true',
-  ]);
+    register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'delete/(?P<id>\d+)', [
+        'methods'   => 'DELETE',
+        'callback'  => function (\WP_REST_Request $request) {
+            $status_code = 200;
+            $response = new \stdClass();
+
+            $nonce = $request->get_header('X-WP-Nonce');
+            if (!wp_verify_nonce($nonce, 'wp_rest')) {
+                $status_code = 403;
+                $response->message = 'Invalid nonce.';
+            } else {
+                $id = $request->get_param('id');
+                
+                if (empty($id)) {
+                    $status_code = 400;
+                    $response->message = 'Invalid request. Please provide a valid ID.';
+                } else {
+                    // Check if the post exists and is of the 'business-plan' type
+                    $post = get_post($id);
+                    if (!$post || $post->post_type !== 'business-plan') {
+                        $status_code = 404;
+                        $response->message = 'Business plan not found.';
+                    } else {
+                        // Check if the current user has permission to delete the post
+                        if (!current_user_can('delete_post', $id)) {
+                            $status_code = 403;
+                            $response->message = 'You do not have permission to delete this business plan.';
+                        } else {
+                            // Delete the business plan
+                            if (wp_delete_post($id, true)) {
+                                $response->message = 'Business plan deleted successfully.';
+                            } else {
+                                $status_code = 500;
+                                $response->message = 'Failed to delete the business plan.';
+                            }
+                        }
+                    }
+                }
+            }
+
+            wp_send_json($response, $status_code);
+        },
+        'permission_callback' => '__return_true',
+    ]);
+
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\\register_bizplanner_api' );
 

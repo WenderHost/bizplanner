@@ -124,6 +124,71 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 // DELETE logic goes here
+// 
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll('.delete-business-plan .elementor-button-link'); // Select all delete buttons by their class
+    
+    deleteButtons.forEach(function (deleteButton) {
+        deleteButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            
+            // Get the business plan ID from the data attribute
+            const bpid = deleteButton.closest('.elementor-element').getAttribute('data-bpid');
+            
+            if (!bpid) {
+                console.error('Business plan ID not found.');
+                return;
+            }
+            
+            // Use a confirmation dialog
+            const confirmation = confirm('Are you sure you want to delete this business plan?');
+            
+            if (confirmation) {
+                // User clicked "Yes," proceed with the deletion
+                
+                const nonce = wpApiSettings.nonce;
+                
+                const xhr = new XMLHttpRequest();
+                deleteButton.innerHTML = "Deleting...";
+                
+                xhr.open("DELETE", bpapi.endpoint + 'delete/' + bpid, true);
+                xhr.setRequestHeader('X-WP-Nonce', nonce);
+                
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Display the success message
+                        const responseMessage = document.querySelector("#response-message");
+                        if (responseMessage) {
+                            responseMessage.innerHTML = 'Business plan deleted successfully.';
+                        }
+                        
+                        // Refresh the page after deletion
+                              setTimeout( () => {
+                                location.reload();
+                            }, 1500 );
+                      
+                    } else {
+                        let response = JSON.parse(xhr.response);
+                        console.error('🛑 xhr = ', xhr);
+                        console.error('🛑 response = ', response);
+                        
+                        // Handle error and display the error message
+                        const responseMessage = document.querySelector("#response-message");
+                        if (responseMessage) {
+                            responseMessage.innerHTML = response.message;
+                        }
+                    }
+                };
+                
+                // Send the delete request
+                xhr.send();
+            } else {
+                // User clicked "No," do nothing
+            }
+        });
+    });
+});
+
 
 /**
  * Logic for our "View" and "Edit" buttons.
