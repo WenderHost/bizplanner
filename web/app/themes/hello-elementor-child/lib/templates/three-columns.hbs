@@ -18,12 +18,22 @@
     </div>
   {{/each}}
   {{#if show_add_new}}
-    <div class="elementor-element e-con-full e-flex e-con e-child add-new">
-      <a href="#" class="add-new-card"><span>Start a New Plan</span></a>
+    <div class="elementor-element e-con-full e-flex e-con e-child add-new" id="start-new-plan-container">
+      <a href="#" class="add-new-card" id="start-new-plan">
+        <span>Start a New Plan</span>
+        <div id="response-message"></div>
+      </a>
+
     </div>
   {{/if}}
-  {{#if show_empty}}
+  {{#if show_empty_1}}
     <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 1</h2>
+    </div>
+  {{/if}}
+  {{#if show_empty_2}}
+    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 2</h2>
     </div>
   {{/if}}
 </div>

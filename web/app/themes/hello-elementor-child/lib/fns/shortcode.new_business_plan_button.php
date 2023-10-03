@@ -31,13 +31,15 @@ function new_business_plan_button(){
         'edit_url'  => home_url( 'question/company-name/' ),
       ];
     }
-    uber_log('🔔 count( $bp ) = ' . count( $bp ) );
-    $data['show_empty'] = ( 1 === count( $bp ) )? true : false ;
-    $data['show_add_new'] = ( 2 >= count( $bp ) )? true : false ;
+    $repeat_empty = ( 3 - count( $bp ) );
+    $data['show_empty_1'] = ( 2 > count( $bp ) )? true : false ;
+    $data['show_empty_2'] = ( 1 > count( $bp ) )? true : false ;
+
+    $data['show_add_new'] = ( 3 > count( $bp ) )? true : false ;
     $data['bp'] = $bp;
-    uber_log( '🔔 $data = ' . print_r( $data, true ) );
+
     $html = render_template( 'three-columns', $data );
-    return '<p style="color: #D9D9D9; margin-bottom: 1.5em;">Select a business plan below: <code>3 posts widget</code></p>' . $html;
+    return '<p style="color: #D9D9D9; margin-bottom: 1.5em;">Select a business plan below:</p>' . $html;
   } else {
     return '<p>User is not logged in.</p>';
   }

@@ -47,10 +47,18 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
         </div>
       </div>
     </div>
-';}).''.((LR::ifvar($cx, (($inary && isset($in['show_add_new'])) ? $in['show_add_new'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child add-new">
-      <a href="#" class="add-new-card"><span>Start a New Plan</span></a>
+';}).''.((LR::ifvar($cx, (($inary && isset($in['show_add_new'])) ? $in['show_add_new'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child add-new" id="start-new-plan-container">
+      <a href="#" class="add-new-card" id="start-new-plan">
+        <span>Start a New Plan</span>
+        <div id="response-message"></div>
+      </a>
+
     </div>
-' : '').''.((LR::ifvar($cx, (($inary && isset($in['show_empty'])) ? $in['show_empty'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+' : '').''.((LR::ifvar($cx, (($inary && isset($in['show_empty_1'])) ? $in['show_empty_1'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 1</h2>
+    </div>
+' : '').''.((LR::ifvar($cx, (($inary && isset($in['show_empty_2'])) ? $in['show_empty_2'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 2</h2>
     </div>
 ' : '').'</div>';
 };
