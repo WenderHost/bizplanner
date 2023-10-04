@@ -32,6 +32,7 @@ require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.page_nu
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.post_id.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.new_business_plan_button.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_form.php' );
+require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.question_sidebar_nav.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/shortcode.title_bar.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/templates.php' );
 require_once( get_stylesheet_directory( __FILE__ ) . '/lib/fns/users.php' );

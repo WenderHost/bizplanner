@@ -213,4 +213,26 @@
   transform: scaleY(-1);
 }
 
+/**/
+#question-sidebar-menu a {
+  color: #fff;
+  padding: 13px 20px;
+}
+#question-sidebar-menu a:hover {
+  background-color: #298FDB;
+}
+#question-sidebar-menu a:active, #question-sidebar-menu a.elementor-item-active {
+  color: #1f1e21;
+  background-color: #fff;
+}
+#question-sidebar-menu li.menu-item {
+  border-bottom: 1px solid #333;
+}
+#question-sidebar-menu i.fas {
+  margin-right: 10px;
+}
+#question-sidebar-menu li:nth-child(odd):not(.current-menu-item) a {
+  background-color: #29282c;
+}
+
 /*# sourceMappingURL=main.css.map */

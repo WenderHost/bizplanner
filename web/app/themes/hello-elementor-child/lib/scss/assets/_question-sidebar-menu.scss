@@ -1,0 +1,27 @@
+/**/
+#question-sidebar-menu{
+  a{
+    color: #fff;
+    padding: 13px 20px;
+
+    &:hover{
+      background-color: $blue;
+    }
+
+    &:active,
+    &.elementor-item-active{
+      color: $lighterblack;
+      background-color: #fff;
+    }
+  }
+
+  li.menu-item{
+      border-bottom: 1px solid #333;
+  }
+  i.fas{
+      margin-right: 10px;
+  }
+  li:nth-child(odd):not(.current-menu-item) a{
+      background-color: lighten($lighterblack,4%);
+  }
+}
