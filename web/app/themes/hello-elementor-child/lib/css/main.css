@@ -1,0 +1,216 @@
+/* main.scss */
+/* Variables */
+/* BizPlan Card */
+.add-new-card {
+  background-color: #fff;
+  border-width: 10px;
+  border-color: #eee;
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  min-height: 200px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+.add-new-card:hover {
+  background-color: #eee;
+  border-color: #fff;
+}
+.add-new-card:hover span {
+  background-color: #fff;
+}
+.add-new-card span {
+  border: 1px solid #eee;
+  display: inline-block;
+  width: auto;
+  min-width: 200px;
+  margin: 0 auto;
+  padding: 6px 12px;
+  color: #666;
+  font-weight: bold;
+  background-color: #eee;
+}
+
+.bizplan-cards.elementor-element.e-con-full.e-flex.e-con.e-child {
+  flex-direction: row;
+}
+.bizplan-cards.elementor-element.e-con-full.e-flex.e-con.e-child .elementor-element.add-new {
+  padding: 0;
+}
+
+.bizplan-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+.bizplan-card .button-row {
+  display: flex;
+  flex-direction: row;
+}
+.bizplan-card .bizplan-link {
+  margin-right: 12px;
+}
+.bizplan-card .bizplan-link:last-child {
+  margin-right: 0;
+  margin-left: auto;
+}
+.bizplan-card .bizplan-link a.elementor-button {
+  padding: 6px 12px;
+  background-color: #298FDB;
+}
+.bizplan-card .bizplan-link a.elementor-button:hover {
+  color: #298FDB;
+  background-color: #fff;
+}
+.bizplan-card .bizplan-link.delete-business-plan a.elementor-button {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+.bizplan-card .bizplan-link.delete-business-plan a.elementor-button:hover {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bizplan-card h3 {
+  margin-top: 0;
+}
+
+.nextprevbuttons a.elementor-button {
+  background-color: #0D1645;
+  white-space: nowrap;
+}
+.nextprevbuttons.inactive a.elementor-button {
+  background-color: #eee;
+  color: #999;
+}
+
+#bizplanner-form label {
+  padding-bottom: 6px;
+  color: #fff;
+}
+#bizplanner-form input {
+  background-color: #fff;
+}
+#bizplanner-form .elementor-field-option {
+  color: #fff;
+}
+#bizplanner-form .elementor-field-option label {
+  display: inline-block;
+  width: 180px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#bizplanner-form .elementor-field-type-number .input-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+#bizplanner-form .elementor-field-type-number .input-row span.prepend {
+  background-color: #eee;
+  border-radius: 3px 0 0 3px;
+  display: block;
+  height: 100%;
+  padding: 7px 10px;
+  font-size: 16px;
+}
+#bizplanner-form .elementor-field-type-submit {
+  margin-top: 10px;
+}
+#bizplanner-form .question-column {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+}
+#bizplanner-form .question-row {
+  display: flex;
+}
+#bizplanner-form .question-row .avatar {
+  width: 128px;
+  height: 128px;
+  margin-right: 20px;
+}
+#bizplanner-form .question-row .elementor-field-type-text label,
+#bizplanner-form .question-row .elementor-field-type-number label,
+#bizplanner-form .question-row .elementor-field-type-radio label.elementor-field-label,
+#bizplanner-form .question-row .elementor-field-type-textarea label,
+#bizplanner-form .question-row .elementor-field-type-checkbox label.elementor-field-label {
+  background-color: #fff;
+  padding: 1em;
+  border-radius: 5px;
+  color: #298FDB;
+  font-family: "Roboto";
+  font-weight: 800;
+  font-size: 1.25em;
+  margin-bottom: 2em;
+  position: relative;
+}
+#bizplanner-form #question-form-textarea textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+[speech-bubble]::before {
+  content: "";
+  position: absolute;
+  background: var(--bbColor);
+}
+
+[speech-bubble][pbottom] {
+  margin-bottom: var(--bbArrowSize);
+}
+
+[speech-bubble][ptop] {
+  margin-top: var(--bbArrowSize);
+}
+
+[speech-bubble][pleft] {
+  margin-left: var(--bbArrowSize);
+}
+
+[speech-bubble][pright] {
+  margin-right: var(--bbArrowSize);
+}
+
+/* bottom and top  */
+[speech-bubble][pbottom]::before,
+[speech-bubble][ptop]::before {
+  --width: calc(var(--bbArrowSize) / 2 * 3);
+  height: var(--bbArrowSize);
+  width: var(--width);
+}
+
+/* bottom */
+[speech-bubble][pbottom]::before {
+  top: calc(100% - 2px);
+}
+
+[speech-bubble][pbottom][aleft]::before {
+  left: 1rem;
+  clip-path: polygon(25% 0, 100% 0, 0% 100%);
+}
+
+[speech-bubble][pbottom][acenter]::before {
+  left: calc(50% - var(--width) / 2);
+  clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%);
+}
+
+[speech-bubble][pbottom][aright]::before {
+  right: 1rem;
+  clip-path: polygon(0 0, 75% 0, 100% 100%);
+}
+
+/* flip */
+[speech-bubble][pbottom][flip]::before,
+[speech-bubble][ptop][flip]::before {
+  transform: scaleX(-1);
+}
+
+[speech-bubble][pleft][flip]::before,
+[speech-bubble][pright][flip]::before {
+  transform: scaleY(-1);
+}
+
+/*# sourceMappingURL=main.css.map */

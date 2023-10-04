@@ -1,5 +1,6 @@
 <?php
 namespace BizPlanner\shortcodes;
+use function BizPlanner\templates\{render_template};
 
 /**
  * Shows the New Business Plan button when the user has not
@@ -14,15 +15,31 @@ function new_business_plan_button(){
   if( $current_user_id ){
     $posts = get_posts([
       'post_type'       => 'business-plan',
-      'posts_per_page'  => 1,
+      'posts_per_page'  => 3,
       'author'          => $current_user_id,
     ]);
 
-    if( ! $posts ){
-      return '<p style="color: #D9D9D9; margin-bottom: 1.5em;">Click the button below to get started:</p><div style="max-width: 450px; margin: 0 auto;">' . do_shortcode( '[elementor-template id="254"]' ) . '</div>';
-    } else {
-      return '<p style="color: #D9D9D9; margin-bottom: 1.5em;">Select a business plan below:</p>' . do_shortcode( '[elementor-template id="331"]' );
+    $data = [ 'one' => 'Testing' ];
+    $bp = [];
+    foreach( $posts as $post ){
+      $bp[] = [
+        'ID'  => $post->ID,
+        'title'   => get_the_title( $post ),
+        'company_name' => get_field( 'company_name', $post ),
+        'product' => get_field( 'product', $post ),
+        'view_url'  => '#',
+        'edit_url'  => home_url( 'question/company-name/' ),
+      ];
     }
+    $repeat_empty = ( 3 - count( $bp ) );
+    $data['show_empty_1'] = ( 2 > count( $bp ) )? true : false ;
+    $data['show_empty_2'] = ( 1 > count( $bp ) )? true : false ;
+
+    $data['show_add_new'] = ( 3 > count( $bp ) )? true : false ;
+    $data['bp'] = $bp;
+
+    $html = render_template( 'three-columns', $data );
+    return '<p style="color: #D9D9D9; margin-bottom: 1.5em;">Select a business plan below:</p>' . $html;
   } else {
     return '<p>User is not logged in.</p>';
   }

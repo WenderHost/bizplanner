@@ -1,40 +1,45 @@
 //console.log( '🔔 bizplanner.js is loaded. bpapi = ', bpapi );
 
-// CREATE logic goes here:
+/**
+ * CREATE Logic
+ *
+ * Creates a new business plan
+ */
 document.addEventListener("DOMContentLoaded", function () {
-  const container = document.querySelector('.elementor-element-ed5ebd2'); // Select the container by its class
+  const container = document.getElementById('start-new-plan-container');
   if (container) {
-    const link = container.querySelector('a.elementor-button-link');
-    const responseMessage = container.querySelector("#response-message");
+    const link = document.getElementById('start-new-plan');
+    const responseMessage = document.getElementById('response-message');
     if (link) {
       link.addEventListener('click', function (event) {
         event.preventDefault();
-        const nonce = wpApiSettings.nonce;
 
-       
         const xhr = new XMLHttpRequest();
-        link.innerHTML = "Creating...";
+        link.innerHTML = "One moment. We're setting up your new business plan...";
 
         xhr.open("POST", bpapi.endpoint + 'create', true);
-         console.log(xhr);
-        xhr.setRequestHeader('X-WP-Nonce', nonce);
+
+        xhr.setRequestHeader('X-WP-Nonce', bpapi.nonce);
 
         xhr.onload = function () {
+          console.log(xhr);
           if (xhr.status === 200) {
+            let response = JSON.parse(xhr.response);
             // Update the button text with the incremented counter
             // Check if the responseMessage element exists before setting its innerHTML
             if (responseMessage) {
               responseMessage.innerHTML = '';
             }
 
-              link.innerHTML = "Created!";
-              setTimeout(() => {
-     
-                 // Get the base URL dynamically and append the desired path
-                  const dynamicURL = window.location.origin + '/question/company-name/';
-                  // Redirect to the dynamic URL after a successful form submission
-                  window.location.href = dynamicURL;
-              }, 1500);
+            link.innerHTML = "Success! Your new plan is ready. Redirecting you, one moment...";
+            setCookie('bpid', response.post_id, 1);
+            setTimeout(() => {
+
+               // Get the base URL dynamically and append the desired path
+                const dynamicURL = window.location.origin + '/question/company-name/';
+                // Redirect to the dynamic URL after a successful form submission
+                window.location.href = dynamicURL;
+            }, 500);
           } else {
             let response = JSON.parse(xhr.response);
             console.log('🛑 xhr = ', xhr);
@@ -49,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Send the request with the current counter value as the title
 
-      //  console.log('Sending request with data:', JSON.stringify());
-             xhr.send();
+        //  console.log('Sending request with data:', JSON.stringify());
+        xhr.send();
 
       });
     }
@@ -126,14 +131,16 @@ document.addEventListener("DOMContentLoaded", function(){
 // DELETE logic goes here
 // 
 document.addEventListener("DOMContentLoaded", function () {
-    const deleteButtons = document.querySelectorAll('.delete-business-plan .elementor-button-link'); // Select all delete buttons by their class
+    const deleteButtons = document.querySelectorAll('.delete-business-plan .elementor-button'); // Select all delete buttons by their class
     
     deleteButtons.forEach(function (deleteButton) {
         deleteButton.addEventListener('click', function (event) {
             event.preventDefault();
+
+          //  alert('delete-business-plan');
             
             // Get the business plan ID from the data attribute
-            const bpid = deleteButton.closest('.elementor-element').getAttribute('data-bpid');
+            const bpid = deleteButton.closest('.delete-business-plan').getAttribute('data-bpid');
             
             if (!bpid) {
                 console.error('Business plan ID not found.');

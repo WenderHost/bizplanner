@@ -7,7 +7,7 @@
             "label": "Next Page",
             "name": "next_page",
             "aria-label": "",
-            "type": "page_link",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -21,16 +21,19 @@
             ],
             "post_status": "",
             "taxonomy": "",
-            "allow_archives": 1,
+            "return_format": "object",
             "multiple": 0,
-            "allow_null": 0
+            "allow_null": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         },
         {
             "key": "field_64e3f3947af7b",
             "label": "Previous Page",
             "name": "previous_page",
             "aria-label": "",
-            "type": "page_link",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -44,9 +47,12 @@
             ],
             "post_status": "",
             "taxonomy": "",
-            "allow_archives": 1,
+            "return_format": "object",
             "multiple": 0,
-            "allow_null": 0
+            "allow_null": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         },
         {
             "key": "field_65157bf9c15ae",
@@ -196,5 +202,5 @@
     "active": true,
     "description": "Options used to setup Question form pages.",
     "show_in_rest": 0,
-    "modified": 1695906846
+    "modified": 1696342799
 }

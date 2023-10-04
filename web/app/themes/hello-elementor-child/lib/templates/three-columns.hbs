@@ -1,0 +1,39 @@
+<div class="elementor-element e-con-full e-flex e-con e-child bizplan-cards" style="flex-direction: row;">
+  {{#each bp}}
+    <div class="elementor-element e-con-full e-flex e-con e-child bizplan-card">
+      <h3 style="margin-bottom: 3px;">{{title}}</h3>
+      <p>Company: {{company_name}}<br>
+      Product: {{product}}</p>
+      <div class="button-row">
+        <div class="bizplan-link view-business-plan" data-bpid="{{ID}}">
+          <a href="{{view_url}}" class="elementor-button" >View</a>
+        </div>
+        <div class="bizplan-link edit-business-plan" data-bpid="{{ID}}">
+          <a href="{{edit_url}}" class="elementor-button" >Edit</a>
+        </div>
+        <div class="bizplan-link delete-business-plan" data-bpid="{{ID}}">
+          <a href="{{delete_url}}" class="elementor-button" >Delete</a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+  {{#if show_add_new}}
+    <div class="elementor-element e-con-full e-flex e-con e-child add-new" id="start-new-plan-container">
+      <a href="#" class="add-new-card" id="start-new-plan">
+        <span>Start a New Plan</span>
+        <div id="response-message"></div>
+      </a>
+
+    </div>
+  {{/if}}
+  {{#if show_empty_1}}
+    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 1</h2>
+    </div>
+  {{/if}}
+  {{#if show_empty_2}}
+    <div class="elementor-element e-con-full e-flex e-con e-child empty">
+      <h2>Empty 2</h2>
+    </div>
+  {{/if}}
+</div>
