@@ -51,15 +51,68 @@ function register_bizplanner_api(){
 
 
   /**
-   * Handles reading a `business-plan` CPT
-   */
-  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'read',[
-    'methods'   => 'GET,POST',
-    'callback'  => function( \WP_REST_Request $request ){
-      // CODE GOES HERE
-    },
-    'permission_callback' => '__return_true',
-  ]);
+   * Handles reading a `business-plan` CPT 
+   * To use this just need to put on the HTML <div id = "user-information"></div>
+   */ 
+    register_rest_route(BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'read', [
+        'methods'   => 'GET',
+        'callback'  => function (\WP_REST_Request $request) {
+            $status_code = 200;
+            $response = new \stdClass();
+            
+            $current_user_id = get_current_user_id();
+            $business_plans = get_posts([
+                'post_type' => 'business-plan',
+                'author'    => $current_user_id,
+            ]);
+            error_log( print_r( $business_plans, true ) );
+            if (empty($business_plans)) {
+                $status_code = 404;
+                $response->message = 'No business plans found for the current user.';
+            } else {
+                $response->business_plans = $business_plans;
+
+                  foreach ($business_plans as $bpplan) {
+                      $postid = $bpplan->ID;
+
+                      // Replace these lines with the correct ACF field names
+                      $company_name = get_field('company_name', $postid);
+                      $product = get_field('product', $postid);
+                      $product_description = get_field('product_description', $postid);
+                      $product_category = get_field('product_category', $postid);
+                      $marketing_methods = get_field('marketing_methods', $postid);
+                      $customers = get_field('customers', $postid);
+                      $product_price = get_field('product_price', $postid);
+                      $management_team = get_field('management_team', $postid);
+                      $sales_and_marketing_team = get_field('sales_and_marketing_team', $postid);
+
+                      // Create an array to store the ACF field values
+                      $acf_data = [
+                          'company_name' => $company_name,
+                          'product' => $product,
+                          'product_description' => $product_description,
+                          'product_category' => $product_category,
+                          'marketing_methods' => $marketing_methods,
+                          'customers' => $customers,
+                          'product_price' => $product_price,
+                          'management_team' => $management_team,
+                          'sales_and_marketing_team' => $sales_and_marketing_team,
+                      ];
+
+                      // Add the ACF data to the response
+                      $response->business_plans[] = [
+                          'post_title' => $bpplan->post_title,
+                          'acf' => $acf_data,
+                      ];
+                  }
+
+            }
+
+            wp_send_json($response, $status_code);
+        },
+        'permission_callback' => '__return_true',
+    ]);
+
 
   /**
    * Handles updating a `business-plan` CPT

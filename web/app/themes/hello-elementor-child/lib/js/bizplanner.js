@@ -63,6 +63,183 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // READ logic goes here:
+document.addEventListener("DOMContentLoaded", function () {
+  const userInformation = document.getElementById('user-information');
+
+  // Check if the "user-information" element exists
+  if (userInformation) {
+    // Fetch user information using the WordPress REST API
+    fetch(bpapi.endpoint + 'read', {
+      method: 'GET',
+      headers: {
+        'X-WP-Nonce': bpapi.nonce
+      }
+    })
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error('Failed to fetch user information');
+      }
+    })
+    .then(data => {
+      // Check if business_plans array exists in the response
+      if (data.business_plans && Array.isArray(data.business_plans)) {
+        // Clear the userInformation element
+        userInformation.innerHTML = '';
+
+        // Create an HTML list to display the business plan details
+        const ul = document.createElement('ul');
+        ul.classList.add('business-plan-container');
+        data.business_plans.forEach(plan => {
+          // Check if business plan has ACF values
+          if (plan.acf) {
+            // Create an outer list item for each business plan
+            const li = document.createElement('li');
+             li.classList.add('business-plan-wrap');
+            // Display the post title for this business plan
+            const title = document.createElement('h2');
+            title.textContent = plan.post_title;
+            li.appendChild(title);
+
+            // Check and add ACF values as needed
+            if (plan.acf.company_name) {
+              const companyInfo = document.createElement('p');
+              companyInfo.textContent = `Name: ${plan.acf.company_name}`;
+              li.appendChild(companyInfo);
+            }
+
+            if (plan.acf.product) {
+              const productInfo = document.createElement('p');
+              productInfo.textContent = `Product: ${plan.acf.product}`;
+              li.appendChild(productInfo);
+            }
+
+            if (plan.acf.product_description) {
+              const productDescriptionInfo = document.createElement('p');
+              productDescriptionInfo.textContent = `Description: ${plan.acf.product_description}`;
+              li.appendChild(productDescriptionInfo);
+            }
+
+            // Check and add customer information within a nested list
+            if (plan.acf.customers) {
+              const customersArray = plan.acf.customers;
+
+              if (customersArray.length > 0) {
+                const customerList = document.createElement('ul');
+
+                customersArray.forEach((customer) => {
+                  if (customer.name) {
+                    const customerLi = document.createElement('li');
+                    customerLi.textContent = customer.name;
+                    customerList.appendChild(customerLi);
+                  }
+                });
+
+                const customersTitle = document.createElement('p');
+                customersTitle.textContent = 'Customers:';
+                li.appendChild(customersTitle);
+                li.appendChild(customerList);
+              }
+            }
+            // PRODUCT PRICE
+          if (plan.acf.product_price) {
+              const productPrice = document.createElement('p');
+              productPrice.textContent = `Product Price: ${plan.acf.product_price}`;
+              li.appendChild(productPrice);
+            }
+
+            if (plan.acf.marketing_methods) {
+              const marketing_methodsArray = plan.acf.marketing_methods;
+
+              if (marketing_methodsArray.length > 0) {
+                const marketing_methodList = document.createElement('ul');
+
+                marketing_methodsArray.forEach((marketing_method) => {
+                  if (marketing_method.name) {
+                    const marketing_methodLi = document.createElement('li');
+                    //console.log(marketing_methodsArray);
+                    marketing_methodLi.textContent = marketing_method.name;
+                    marketing_methodList.appendChild(marketing_methodLi);
+                  }
+                });
+
+                const marketing_methodsTitle = document.createElement('p');
+                marketing_methodsTitle.textContent = 'Marketing Method:';
+                li.appendChild(marketing_methodsTitle);
+                li.appendChild(marketing_methodList);
+              }
+            }
+
+        // For management team
+        if (plan.acf.management_team) {
+          const management_teamArray = plan.acf.management_team;
+
+          if (management_teamArray.length > 0) {
+            const management_teamList = document.createElement('ul');
+
+            management_teamArray.forEach((manager) => {
+              if (manager.name) {
+                const managerLi = document.createElement('li');
+                managerLi.textContent = manager.name;
+                management_teamList.appendChild(managerLi);
+              }
+            });
+
+            const management_teamTitle = document.createElement('p');
+            management_teamTitle.textContent = 'Management Team:';
+            li.appendChild(management_teamTitle);
+            li.appendChild(management_teamList);
+          }
+        }
+
+          if (plan.acf.sales_and_marketing_team) {
+            const sales_and_marketing_teamArray = plan.acf.sales_and_marketing_team;
+
+            if (sales_and_marketing_teamArray.length > 0) {
+              const sales_and_marketing_teamList = document.createElement('ul');
+
+              sales_and_marketing_teamArray.forEach((teamMember) => {
+                if (teamMember.name) {
+                  const teamMemberLi = document.createElement('li');
+                  teamMemberLi.textContent = teamMember.name;
+                  sales_and_marketing_teamList.appendChild(teamMemberLi);
+                }
+              });
+
+              const sales_and_marketing_teamTitle = document.createElement('p');
+              sales_and_marketing_teamTitle.textContent = 'Sales and Marketing Team:';
+              li.appendChild(sales_and_marketing_teamTitle);
+              li.appendChild(sales_and_marketing_teamList);
+            }
+          }
+ 
+
+
+            // Append the populated 'li' to the main list ('ul')
+            ul.appendChild(li);
+          }
+        });
+
+        // Append the list to the "user-information" element
+        userInformation.appendChild(ul);
+      } else {
+        userInformation.innerHTML = 'No business plans found for the current user.';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      userInformation.innerHTML = 'Error: Unable to fetch user information.';
+    });
+  }
+});
+
+
+
+
+
+
+
 
 /**
  * UPDATE Logic

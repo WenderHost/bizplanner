@@ -1,6 +1,26 @@
 /* main.scss */
 /* Variables */
 /* BizPlan Card */
+
+/*READ OR USER INFORMATION API*/
+#user-information ul.business-plan-container {
+    list-style: none;
+    padding-left: 0px;
+}
+ul.business-plan-container li.business-plan-wrap {
+    width: 31%;
+    display: inline-block;
+    background: #18519a;
+    margin-right: 20px;
+    padding: 20px;
+    color: #fff;
+    vertical-align: top;
+}
+li.business-plan-wrap h2 {
+    font-size: 24px;
+}
+/*READ OR USER INFORMATION API END*/
+
 .add-new-card {
   background-color: #fff;
   border-width: 10px;
