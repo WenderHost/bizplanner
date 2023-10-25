@@ -1,7 +1,7 @@
 <div class="elementor-element elementor-widget elementor-widget-button nextprevbuttons{{#if url}}{{else}} inactive{{/if}}">
   <div class="elementor-widget-container">
     <div class="elementor-button-wrapper">
-      <a class="elementor-button elementor-button-link elementor-size-sm" href="{{url}}">
+      <a class="elementor-button elementor-button-link elementor-size-sm" {{#if url}}href="{{url}}"{{/if}}>
         <span class="elementor-button-content-wrapper">
           <span class="elementor-button-icon elementor-align-icon-right"><i aria-hidden="true" class="fas fa-arrow-alt-circle-right"></i></span>
           <span class="elementor-button-text">Next{{#if pagename}}: {{pagename}}{{/if}}</span>

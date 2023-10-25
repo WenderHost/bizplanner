@@ -33,7 +33,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     return '<div class="elementor-element elementor-widget elementor-widget-button nextprevbuttons'.((LR::ifvar($cx, (($inary && isset($in['url'])) ? $in['url'] : null), false)) ? '' : ' inactive').'">
   <div class="elementor-widget-container">
     <div class="elementor-button-wrapper">
-      <a class="elementor-button elementor-size-sm" role="button" href="'.htmlspecialchars((string)(($inary && isset($in['url'])) ? $in['url'] : null), ENT_QUOTES, 'UTF-8').'">
+      <a class="elementor-button elementor-size-sm" role="button" '.((LR::ifvar($cx, (($inary && isset($in['url'])) ? $in['url'] : null), false)) ? 'href="'.htmlspecialchars((string)(($inary && isset($in['url'])) ? $in['url'] : null), ENT_QUOTES, 'UTF-8').'"' : '').'>
         <span class="elementor-button-content-wrapper">
           <span class="elementor-button-icon elementor-align-icon-left"><i aria-hidden="true" class="fas fa-arrow-alt-circle-left"></i></span>
           <span class="elementor-button-text">Previous'.((LR::ifvar($cx, (($inary && isset($in['pagename'])) ? $in['pagename'] : null), false)) ? ': '.htmlspecialchars((string)(($inary && isset($in['pagename'])) ? $in['pagename'] : null), ENT_QUOTES, 'UTF-8').'' : '').'</span>

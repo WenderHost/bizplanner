@@ -2,22 +2,17 @@
 
 namespace BizPlanner\shortcodes;
 
+/**
+ * Returns "{$question_title} • Page X of Y"
+ *
+ * @return     string  HTML for the current page indicator text.
+ */
 function page_numbers(){
   global $post;
-  $sidebar_menu = get_field( 'sidebar_menu', 'option' );
-  $menu_items = wp_get_nav_menu_items( $sidebar_menu );
-
-  $total_pages = count( $menu_items );
-  $counter = 1;
-  $current_page_no = 0;
-  $current_title = null;
-  foreach( $menu_items as $item ){
-    if( $post->post_title == $item->title ){
-      $current_title = $item->title;
-      $current_page_no = $counter;
-    }
-    $counter++;
-  }
+  $current_page_no = $post->menu_order + 1;
+  $questions_count = wp_count_posts( 'question' );
+  $total_pages = $questions_count->publish;
+  $current_title = $post->post_title;
 
   return '<div class="">' . $current_title . ' &bull; Page ' . $current_page_no . ' of ' . $total_pages . '</div>';
 }
