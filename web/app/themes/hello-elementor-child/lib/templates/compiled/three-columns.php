@@ -55,10 +55,10 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
 
     </div>
 ' : '').''.((LR::ifvar($cx, (($inary && isset($in['show_empty_1'])) ? $in['show_empty_1'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child empty">
-      <h2>Empty 1</h2>
+      &nbsp;
     </div>
 ' : '').''.((LR::ifvar($cx, (($inary && isset($in['show_empty_2'])) ? $in['show_empty_2'] : null), false)) ? '    <div class="elementor-element e-con-full e-flex e-con e-child empty">
-      <h2>Empty 2</h2>
+      &nbsp;
     </div>
 ' : '').'</div>';
 };
