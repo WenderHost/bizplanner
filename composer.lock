@@ -1215,15 +1215,15 @@
         },
         {
             "name": "wpackagist-plugin/elementor",
-            "version": "3.16.6",
+            "version": "3.17.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/elementor/",
-                "reference": "tags/3.16.6"
+                "reference": "tags/3.17.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/elementor.3.16.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/elementor.3.17.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1269,15 +1269,15 @@
         },
         {
             "name": "wpackagist-theme/hello-elementor",
-            "version": "2.8.1",
+            "version": "2.9.0",
             "source": {
                 "type": "svn",
                 "url": "https://themes.svn.wordpress.org/hello-elementor/",
-                "reference": "2.8.1"
+                "reference": "2.9.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/theme/hello-elementor.2.8.1.zip"
+                "url": "https://downloads.wordpress.org/theme/hello-elementor.2.9.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1305,10 +1305,10 @@
         },
         {
             "name": "wpengine/advanced-custom-fields-pro",
-            "version": "6.2.1.1",
+            "version": "6.2.2",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.2.1.1"
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.2.2"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
