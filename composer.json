@@ -23,24 +23,21 @@
     "issues": "https://github.com/roots/bedrock/issues",
     "forum": "https://discourse.roots.io/category/bedrock"
   },
-  "repositories": [
-    {
+  "repositories": {
+    "wpackagist": {
       "type": "composer",
       "url": "https://wpackagist.org",
       "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
     },
-    {
+    "satispress": {
+      "type": "composer",
+      "url": "https://packages.wenmarkdigital.com/satispress/"
+    },
+    "acf": {
       "type": "composer",
       "url": "https://connect.advancedcustomfields.com"
-    },
-    {
-      "type": "composer",
-      "url": "https://composer.elementor.com",
-      "only": [
-        "elementor/elementor-pro"
-      ]
     }
-  ],
+  },
   "require": {
     "php": ">=8.0",
     "composer/installers": "^2.2",
@@ -54,13 +51,14 @@
     "wpackagist-theme/twentytwentythree": "^1.0",
     "wpengine/advanced-custom-fields-pro": "^6.2",
     "wpackagist-plugin/elementor": "^3.15",
-    "elementor/elementor-pro": "^3.14",
     "wpackagist-theme/hello-elementor": "^2.8",
     "wpackagist-plugin/classic-editor": "^1.6",
     "wpackagist-plugin/dynamicconditions": "^1.6",
     "wpackagist-plugin/login-or-logout-menu-item": "^1.2",
     "zordius/lightncandy": "^1.2",
-    "wpackagist-plugin/taxonomy-terms-order": "^1.7"
+    "wpackagist-plugin/taxonomy-terms-order": "^1.7",
+    "mpdf/mpdf": "^8.2",
+    "wenmark/elementor-pro": "3.17.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
