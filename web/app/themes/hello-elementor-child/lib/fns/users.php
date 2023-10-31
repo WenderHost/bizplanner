@@ -105,11 +105,14 @@ function register_user( $record, $handler ){
   uber_log( '🔔 $fields = ' . print_r( $fields, true ) );
 
   // Validate our data
-  if( empty( $fields['username'] ) || empty( $fields['password'] ) ){
-    $handler->messages = [
-      'error' => 'Please enter a username and a password. These fields can not be empty.',
-    ];
-    return false;
+  $required_fields = ['fname','lname','grade','school','username','password'];
+  foreach ($required_fields as $value) {
+    if( empty( $fields[ $value ] ) ){
+      $handler->messages = [
+        'error' => 'All fields are required. Please make sure you enter values for each field.',
+      ];
+      return false;
+    }
   }
 
   if( username_exists( $fields['username'] ) ){
@@ -126,6 +129,8 @@ function register_user( $record, $handler ){
     return false;
   }
 
+
+
   // Build a fake email address from the submitted username
   $user_email = $fields['username'] . '@bizplanner.dev';
   uber_log( '🔔 $user_email = '. $user_email);
@@ -136,10 +141,16 @@ function register_user( $record, $handler ){
     return false;
   }
   $user_args = [
-    'user_pass' => $fields['password'],
-    'user_login' => $fields['username'],
-    'user_email' => $user_email,
-    'display_name' => $fields['username'],
+    'user_pass'     => $fields['password'],
+    'user_login'    => $fields['username'],
+    'user_email'    => $user_email,
+    'display_name'  => $fields['username'],
+    'first_name'    => $fields['fname'],
+    'last_name'     => $fields['lname'],
+    'meta_input' => [
+      'school'  => $fields['school'],
+      'grade'   => $fields['grade'],
+    ],
   ];
   uber_log( '🔔 $user_args = ' . print_r( $user_args, true ) );
   // Add the user to WordPress
@@ -147,6 +158,7 @@ function register_user( $record, $handler ){
 
 
     $user_id = wp_insert_user( $user_args );
+    wp_signon( [ 'user_login' => $fields['username'], 'user_password' => $fields['password'], 'remember' => false ] );
     return true;
   } else {
     uber_log('🔔 A user with the email `' . $user_email . '` already exists!' );
@@ -192,3 +204,46 @@ function validate_user_registration( $record, $handler ){
   }
 }
 add_action( 'elementor_pro/forms/validation', __NAMESPACE__ . '\\validate_user_registration', 10, 2 );
+
+/**
+ * Adds custom user meta fields.
+ *
+ * @param      object  $user   The user
+ */
+function add_custom_user_meta_fields($user) {
+    ?>
+    <h3><?php _e('Custom User Meta Fields', 'textdomain'); ?></h3>
+    <table class="form-table">
+        <tr>
+            <th><label for="school"><?php _e('School', 'textdomain'); ?></label></th>
+            <td>
+                <input type="text" name="school" id="school" value="<?php echo esc_attr(get_user_meta($user->ID, 'school', true)); ?>" class="regular-text" /><br />
+                <span class="description"><?php _e('The student\'s school', 'textdomain'); ?></span>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="grade"><?php _e('Grade', 'textdomain'); ?></label></th>
+            <td>
+                <input type="text" name="grade" id="grade" value="<?php echo esc_attr(get_user_meta($user->ID, 'grade', true)); ?>" class="regular-text" /><br />
+                <span class="description"><?php _e('The student\'s grade.', 'textdomain'); ?></span>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+add_action('show_user_profile', __NAMESPACE__ . '\\add_custom_user_meta_fields');
+add_action('edit_user_profile', __NAMESPACE__ . '\\add_custom_user_meta_fields');
+
+/**
+ * Save custom fields when edited by admin.
+ *
+ * @param      int  $user_id  The user identifier
+ */
+function save_custom_user_meta_fields($user_id) {
+    if (current_user_can('edit_user', $user_id)) {
+        update_user_meta($user_id, 'school', sanitize_text_field($_POST['school']));
+        update_user_meta($user_id, 'grade', sanitize_text_field($_POST['grade']));
+    }
+}
+add_action('personal_options_update', __NAMESPACE__ . '\\save_custom_user_meta_fields');
+add_action('edit_user_profile_update', __NAMESPACE__ . '\\save_custom_user_meta_fields');
