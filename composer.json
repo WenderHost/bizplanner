@@ -58,7 +58,8 @@
     "zordius/lightncandy": "^1.2",
     "wpackagist-plugin/taxonomy-terms-order": "^1.7",
     "mpdf/mpdf": "^8.2",
-    "wenmark/elementor-pro": "3.17.0"
+    "wenmark/elementor-pro": "^3.17",
+    "wpackagist-plugin/simple-page-ordering": "^2.6"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
