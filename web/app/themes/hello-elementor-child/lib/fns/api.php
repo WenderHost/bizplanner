@@ -140,7 +140,7 @@ function save_parameter( $parameter = null, $value = null ){
       }
   }
   if( ! $updated )
-    return new \WP_Error( 'notupdated', __( 'The value for `' . $parameter . '` was not updated. Was attempted to run save_parameter( $parameter, $value) with the following: ' . "\n - \$parameter = " . $parameter . "\n" . $logged_value, 'bizplanner' ) );
+    return new \WP_Error( 'notupdated', __( 'The value for `' . $parameter . '` was not updated. Have you mapped this value to the Business Plan CPT in the "Business Plan Options" ACF Field Group? Was attempted to run save_parameter( $parameter, $value ) with the following: ' . "\n - \$parameter = " . $parameter . "\n" . $logged_value, 'bizplanner' ) );
 
   return $updated;
 }
