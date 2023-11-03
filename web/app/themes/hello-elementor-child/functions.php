@@ -18,11 +18,13 @@ define( 'HELLO_ELEMENTOR_CHILD_VERSION', '2.0.0' );
 define( 'BP_REST_NAMESPACE', 'bizplanner/v1' );
 define( 'BP_BIZPLAN_ROUTE', '/bizplan/' );
 define( 'BP_DIR', trailingslashit( get_stylesheet_directory( __FILE__ ) ) );
+define( 'BP_DIR_URI', trailingslashit( get_stylesheet_directory_uri( __FILE__ ) ) );
 
 /**
  * Include required files
  */
 require_once( BP_DIR . 'lib/fns/acf.php' );
+require_once( BP_DIR . 'lib/fns/admin.php' );
 require_once( BP_DIR . 'lib/fns/adminbar.php' );
 require_once( BP_DIR . 'lib/fns/api.php' );
 require_once( BP_DIR . 'lib/fns/cpt.question.php' );
