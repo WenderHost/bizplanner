@@ -32,10 +32,23 @@ require_once( BP_DIR . 'lib/fns/debugging.php' );
 require_once( BP_DIR . 'lib/fns/enqueues.php' );
 require_once( BP_DIR . 'lib/fns/makepdf.php' );
 require_once( BP_DIR . 'lib/fns/navigation.php' );
-require_once( BP_DIR . 'lib/fns/shortcodes.php' );
 require_once( BP_DIR . 'lib/fns/templates.php' );
 require_once( BP_DIR . 'lib/fns/users.php' );
 require_once( BP_DIR . 'lib/fns/utilities.php' );
+
+/**
+ * Shortcode includes for logic found in /lib/shortcodes/
+ */
+require_once( BP_DIR . 'lib/shortcodes/bpdata.php' );
+//require_once( BP_DIR . 'lib/shortcodes/makepdf.php' );
+require_once( BP_DIR . 'lib/shortcodes/new_business_plan_button.php' );
+require_once( BP_DIR . 'lib/shortcodes/next-prev-navigation.php' );
+require_once( BP_DIR . 'lib/shortcodes/page_numbers.php' );
+require_once( BP_DIR . 'lib/shortcodes/post_id.php' );
+require_once( BP_DIR . 'lib/shortcodes/question_editor.php' );
+require_once( BP_DIR . 'lib/shortcodes/question_form.php' );
+require_once( BP_DIR . 'lib/shortcodes/question_sidebar_nav.php' );
+require_once( BP_DIR . 'lib/shortcodes/title_bar.php' );
 
 if( ! is_admin() ){
   $current_business_plan = BizPlanner\users\get_current_business_plan();
