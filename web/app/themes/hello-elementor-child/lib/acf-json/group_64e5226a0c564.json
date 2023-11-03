@@ -44,7 +44,14 @@
             {
                 "param": "taxonomy",
                 "operator": "==",
-                "value": "sales_and_marketing_team"
+                "value": "company_facility"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "startup_funding_source"
             }
         ]
     ],
@@ -57,5 +64,5 @@
     "active": true,
     "description": "Used for adding fields like \"Cost\" to taxonomy terms.",
     "show_in_rest": 0,
-    "modified": 1695905653
+    "modified": 1699029340
 }
