@@ -25,6 +25,7 @@ function get_current_business_plan(){
   }
 
   $business_plan = get_fields( $business_plan_id );
+  uber_log( '🔔 Here are the fields for a business plan: ' . print_r( $business_plan, true ) );
 
   /**
    * Set the array key for options with a single value to be equal to the option's term_id
@@ -38,7 +39,7 @@ function get_current_business_plan(){
   /**
    * Set the array key for these selected options equal to the option's term_id
    */
-  $set_term_ids_as_array_keys = [ 'marketing_methods', 'customers', 'management_team', 'sales_and_marketing_team' ];
+  $set_term_ids_as_array_keys = [ 'marketing_methods', 'customers', 'management_team', 'sales_and_marketing_team', 'retail_sale', 'direct_sale', 'production_methods', 'company_facility', 'startup_funding_source' ];
   foreach( $set_term_ids_as_array_keys as $term_name ){
     if( is_array( $business_plan ) && array_key_exists( $term_name, $business_plan ) && is_array( $business_plan[ $term_name ] ) ){
       $$term_name = [];
@@ -57,7 +58,7 @@ function get_current_business_plan(){
   $business_plan['title'] = get_the_title( $business_plan_id );
 
   // Ensure all properties are initialized:
-  $business_plan_properties = [ 'ID', 'company_name', 'product', 'product_description', 'product_category', 'marketing_methods', ];
+  $business_plan_properties = [ 'ID', 'company_name', 'product', 'product_description', 'product_category', 'marketing_methods', 'production_methods', 'company_facility', 'startup_funding_source' ];
   foreach( $business_plan_properties as $prop ){
     if( ! array_key_exists( $prop, $business_plan ) )
       $business_plan[ $prop ] = null;

@@ -1,22 +1,57 @@
-#bizplanner-form{
+header#header,
+footer#footer{
+  background-color: lighten($emeraldblue, 35%);;
+}
+aside#sidebar{
+  background-color: lighten($emeraldblue, 50%);
+}
+.alert{
+  p:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.bizplanner{
+  .avatar{
+    width: 150px;
+    height: 150px;
+  }
+  .left-column{
+    background-color: lighten($emeraldblue, 50%);
+    padding: 1em;
+    text-align: center;
+    min-width: 200px;
+  }
   label{
-    padding-bottom: 6px;
-    color: #fff;
+    vertical-align: baseline;
+    line-height: 1.25;
   }
 
-  input{
-    background-color: #fff;
+  label:empty{
+    display: none;
+  }
+}
+
+#bizplanner-form{
+  padding-bottom: 30px;
+
+  label{
+    /*padding-bottom: 6px;*/
+    color: $navyblue;
   }
 
   .elementor-field-option{
     color: #fff;
+    margin-bottom: .5em;
 
     label{
       display: inline-block;
-      width: 180px;
-      overflow: hidden;
+      width: 570px;
+      line-height: 1.25em;
+      margin-left: 6px;
+      /*overflow: hidden;
       white-space: nowrap;
-      text-overflow: ellipsis;
+      text-overflow: ellipsis;*/
     }
   }
 
@@ -43,17 +78,28 @@
   .question-column{
     display: flex;
     flex-direction: column;
-    width: 360px;
+    width: 600px;
   }
 
   .question-row{
     display: flex;
 
-    .avatar{
-      width: 128px;
-      height: 128px;
-      margin-right: 20px;
+    .additional-help{
+      font-weight: normal;
+      font-size: .8em;
+      margin-top: 1em;
+      line-height: 1.25em;
+
+      ul,ol{
+        padding-left: 20px;
+
+        li{
+          margin-bottom: .75em;
+        }
+      }
     }
+
+
 
     .elementor-field-type-text label,
     .elementor-field-type-number label,

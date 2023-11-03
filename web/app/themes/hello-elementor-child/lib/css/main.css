@@ -87,22 +87,56 @@
   color: #999;
 }
 
-#bizplanner-form label {
-  padding-bottom: 6px;
-  color: #fff;
+header#header,
+footer#footer {
+  background-color: #86cff8;
 }
-#bizplanner-form input {
-  background-color: #fff;
+
+aside#sidebar {
+  background-color: #cfecfc;
+}
+
+.alert p:last-child {
+  margin-bottom: 0;
+}
+
+.bizplanner .avatar {
+  width: 150px;
+  height: 150px;
+}
+.bizplanner .left-column {
+  background-color: #cfecfc;
+  padding: 1em;
+  text-align: center;
+  min-width: 200px;
+}
+.bizplanner label {
+  vertical-align: baseline;
+  line-height: 1.25;
+}
+.bizplanner label:empty {
+  display: none;
+}
+
+#bizplanner-form {
+  padding-bottom: 30px;
+}
+#bizplanner-form label {
+  /*padding-bottom: 6px;*/
+  color: #0D1645;
 }
 #bizplanner-form .elementor-field-option {
   color: #fff;
+  margin-bottom: 0.5em;
 }
 #bizplanner-form .elementor-field-option label {
   display: inline-block;
-  width: 180px;
-  overflow: hidden;
+  width: 570px;
+  line-height: 1.25em;
+  margin-left: 6px;
+  /*overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;*/
 }
 #bizplanner-form .elementor-field-type-number .input-row {
   display: flex;
@@ -123,15 +157,22 @@
 #bizplanner-form .question-column {
   display: flex;
   flex-direction: column;
-  width: 360px;
+  width: 600px;
 }
 #bizplanner-form .question-row {
   display: flex;
 }
-#bizplanner-form .question-row .avatar {
-  width: 128px;
-  height: 128px;
-  margin-right: 20px;
+#bizplanner-form .question-row .additional-help {
+  font-weight: normal;
+  font-size: 0.8em;
+  margin-top: 1em;
+  line-height: 1.25em;
+}
+#bizplanner-form .question-row .additional-help ul, #bizplanner-form .question-row .additional-help ol {
+  padding-left: 20px;
+}
+#bizplanner-form .question-row .additional-help ul li, #bizplanner-form .question-row .additional-help ol li {
+  margin-bottom: 0.75em;
 }
 #bizplanner-form .question-row .elementor-field-type-text label,
 #bizplanner-form .question-row .elementor-field-type-number label,

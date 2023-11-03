@@ -30,11 +30,6 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<style></style>
-<div class="elementor-field-type-textarea" id="question-form-textarea">
-  <label speech-bubble pbottom aleft class="" for="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'">'.htmlspecialchars((string)(($inary && isset($in['prompt'])) ? $in['prompt'] : null), ENT_QUOTES, 'UTF-8').'</label>
-  <textarea class="" id="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" aria-describedby="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" type="textarea" name="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" placeholder="" required="">'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'</textarea>
-</div>
-';
+    return '<textarea class="form-control" style="height: 100px" id="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" aria-describedby="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" type="textarea" name="'.htmlspecialchars((string)(($inary && isset($in['input_name_esc'])) ? $in['input_name_esc'] : null), ENT_QUOTES, 'UTF-8').'" placeholder="" required="">'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'</textarea>';
 };
 ?>

@@ -1,10 +1,10 @@
-<div class="elementor-field-type-radio elementor-field-group elementor-field-group-radio_field elementor-col-100">
-  <label speech-bubble pbottom aleft for="form-field-radio_field" class="elementor-field-label">{{prompt}}</label>
-  <div class="elementor-field-subgroup">
+<fieldset class="row">
+  <div class="">
     {{#each options}}
-    <span class="elementor-field-option">
-      <input type="radio" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{{checked}}}>  <label for="{{slug_esc}}">{{name}}</label>
-    </span>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="{{input_name_esc}}[]" id="{{slug_esc}}" value="{{term_id}}"{{{checked}}}>
+      <label class="form-check-label" for="{{slug_esc}}">{{name}}</label>
+    </div>
     {{/each}}
   </div>
-</div>
+</fieldset>

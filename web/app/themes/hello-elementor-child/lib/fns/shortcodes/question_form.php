@@ -79,6 +79,14 @@ function question_form( $atts ){
     'input_name_esc'  => esc_attr( $args['name'] ),
     'value'           => $value,
   ];
+
+  $additional_help = get_field( 'additional_help', $post->ID );
+  if( ! is_null( $current_business_plan ) )
+    $additional_help = str_replace( ['{{product}}'], [ $current_business_plan['product'] ], $additional_help );
+  if( $additional_help )
+    $data['additional_help'] = $additional_help;
+
+
   //uber_log('🔔 $args = ' . print_r( $args, true ) );
   //uber_log('🔔 $value = ' . print_r( $value, true ) );
   switch( $args['type'] ){
@@ -86,21 +94,58 @@ function question_form( $atts ){
     case 'radio':
       if( taxonomy_exists( $args['name'] ) ){
         $terms = get_terms([ 'taxonomy' => $args['name'], 'hide_empty' => false ]);
-        //uber_log('🔔 $terms = '. print_r( $terms, true ) );
+        //if( 'startup_funding_source' == $args['name'] )
+          //uber_log('🔔 `startup_funding_source` $terms = '. print_r( $terms, true ) );
         if( $terms ){
           // ELEMENTOR
+          $parents = [];
+          $children = [];
           $options = [];
+
           foreach( $terms as $term ){
-            //array_key_exists(key, array)
+
             if( isset( $value ) && is_array( $value ) && 0 < count( $value ) ){
-              $checked = ( array_key_exists( $term->term_id, $value ) )? ' checked="checked"' : null ;
+              $checked = ( array_key_exists( $term->term_id, $value ) )? ' checked' : null ;
             } else {
               $checked = checked( $value, $term->term_id, false );
             }
 
             // Get cost
             $cost = get_field( 'cost', $term );
+            $cost_formatted = ( $cost )? number_format( $cost ) : null ;
 
+            // If entered, use the $term->description in place of the $term->name
+            $name = ( ! empty( $term->description ) )? $term->description : $term->name ;
+
+            if( 0 == $term->parent ){
+              $parents[ $term->term_id ] = [
+                'term_id'         => $term->term_id,
+                'checked'         => $checked,
+                'slug'            => $term->slug,
+                'slug_esc'        => esc_attr( $term->slug ),
+                'input_name'      => $args['name'],
+                'input_name_esc'  => esc_attr( $args['name'] ),
+                'name'            => $name,
+                'name_esc'        => esc_attr( $term->name ),
+                'cost'            => $cost,
+                'cost_formatted'  => $cost_formatted,
+              ];
+            } elseif ( 0 < $term->parent ) {
+              $children[ $term->parent ][] = [
+                'term_id'         => $term->term_id,
+                'checked'         => $checked,
+                'slug'            => $term->slug,
+                'slug_esc'        => esc_attr( $term->slug ),
+                'input_name'      => $args['name'],
+                'input_name_esc'  => esc_attr( $args['name'] ),
+                'name'            => $name,
+                'name_esc'        => esc_attr( $term->name ),
+                'cost'            => $cost,
+                'cost_formatted'  => $cost_formatted,
+                'parent'          => $term->parent,
+              ];
+            }
+            /*
             $options[] = [
               'term_id'         => $term->term_id,
               'checked'         => $checked,
@@ -108,12 +153,24 @@ function question_form( $atts ){
               'slug_esc'        => esc_attr( $term->slug ),
               'input_name'      => $args['name'],
               'input_name_esc'  => esc_attr( $args['name'] ),
-              'name'            => $term->name,
+              'name'            => $name,
               'name_esc'        => esc_attr( $term->name ),
               'cost'            => $cost,
+              'cost_formatted'  => $cost_formatted,
             ];
+            /**/
           }
+          if( empty( $children ) ){
+            $options = $parents;
+          } else {
+            foreach( $parents as $term_id => $parent ){
+              $parents[ $term_id ]['children'] = $children[ $term_id ];
+            }
+            $options = $parents;
+          }
+
           $data['options'] = $options;
+          //uber_log( '🪵 $data = ' . print_r( $data, true ) );
 
           $html = render_template( 'form.field-type-' . $args['type'], $data );
         }
@@ -127,9 +184,9 @@ function question_form( $atts ){
 
       // Setup prepend/append display
       if( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) ){
-        $data['prepend'] = ( array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? '<span class="prepend">' . $field_object['prepend'] . '</span>' : '' ;
+        $data['prepend'] = ( array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? $field_object['prepend'] : '' ;
       } else if( in_array( $args['name'], [ 'product_price' ] ) ){
-        $data['prepend'] = '<span class="prepend">$</span>';
+        $data['prepend'] = '$';
       }
 
       $data['append'] = ( $field_object && array_key_exists( 'append', $field_object ) && ! empty( $field_object['append'] ) )? '<span class="append">' . $field_object['append'] . '</span>' : '' ;
@@ -151,7 +208,9 @@ function question_form( $atts ){
       $html = render_template( 'form.field-type-text', $data );
       break;
   }
+  $data['html'] = $html;
+  $data['avatar'] = get_stylesheet_directory_uri() . '/lib/img/bizplanner-avatar_01.png';
 
-  return render_template( 'form', [ 'html' => $html, 'avatar' => get_stylesheet_directory_uri() . '/lib/img/bizplanner-avatar_01.png' ] );
+  return render_template( 'form', $data );
 }
 add_shortcode( 'question_form', __NAMESPACE__ . '\\question_form' );

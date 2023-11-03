@@ -1,16 +1,23 @@
-<div class="elementor-field-type-checkbox elementor-field-group elementor-field-group-checkbox elementor-col-100">
-  <label speech-bubble pbottom aleft for="form-field-checkbox" class="elementor-field-label" style="display: block;">{{prompt}}</label>
-  <div class="elementor-field-subgroup">
-    {{#each options}}
-    <span class="elementor-field-option">
-      <input class="elementor-field-label" type="checkbox" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{{checked}}}> <label for="{{slug_esc}}">{{name}}</label>
-      {{#if cost}}<span class="value-symbol">$</span><span class="value">{{cost}}</span>{{/if}}
-    </span>
+{{#each options}}
+  {{#if children}}
+  <div class=""><strong>{{{name}}}</strong></div>
+    {{#each children}}
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{checked}}>
+      <label class="form-check-label" for="{{slug_esc}}">{{{name}}}</label>
+      {{#if cost}} &ndash; <span class="value-symbol">$</span><span class="value">{{cost_formatted}}</span>{{/if}}
+    </div>
     {{/each}}
-  </div>
-  {{#if cost}}
-  <div class="total">
-
+  {{else}}
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="{{term_id}}" id="{{slug_esc}}" name="{{input_name_esc}}[]"{{checked}}>
+    <label class="form-check-label" for="{{slug_esc}}">{{{name}}}</label>
+    {{#if cost}} &ndash; <span class="value-symbol">$</span><span class="value">{{cost_formatted}}</span>{{/if}}
   </div>
   {{/if}}
+{{/each}}
+{{#if cost}}
+<div class="total">
+
 </div>
+{{/if}}

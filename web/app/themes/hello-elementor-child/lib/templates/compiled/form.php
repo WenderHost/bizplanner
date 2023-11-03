@@ -30,7 +30,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<form class="elementor-form" id="bizplanner-form">
+    return '<!--<form class="elementor-form" id="bizplanner-form">
   <div class="question-row">
     <img src="'.htmlspecialchars((string)(($inary && isset($in['avatar'])) ? $in['avatar'] : null), ENT_QUOTES, 'UTF-8').'" class="avatar" />
     <div class="question-column">
@@ -41,6 +41,27 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     </div>
   </div>
 
-</form>';
+</form>-->
+
+<!-- Card with an image on left -->
+<div class="card mb-3 bizplanner">
+  <div class="row g-0">
+    <div class="col-md-auto left-column">
+      <img src="'.htmlspecialchars((string)(($inary && isset($in['avatar'])) ? $in['avatar'] : null), ENT_QUOTES, 'UTF-8').'" class="img-fluidAAA rounded-start avatar" alt="...">
+    </div>
+    <div class="col-md-8 right-column">
+      <div class="card-body">
+        <h5 class="card-title">'.htmlspecialchars((string)(($inary && isset($in['prompt'])) ? $in['prompt'] : null), ENT_QUOTES, 'UTF-8').'</h5>
+'.((LR::ifvar($cx, (($inary && isset($in['additional_help'])) ? $in['additional_help'] : null), false)) ? '        <div class="alert alert-primary fade show" role="alert">
+          '.(($inary && isset($in['additional_help'])) ? $in['additional_help'] : null).'
+        </div>
+' : '').'        <form class="g-3" id="bizplanner-form">
+          '.(($inary && isset($in['html'])) ? $in['html'] : null).'
+          <button type="submit" class="btn btn-primary" id="form-submit" style="margin-top: 1rem;"><span>Save</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><!-- End Card with an image on left -->';
 };
 ?>
