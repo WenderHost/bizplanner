@@ -1,0 +1,37 @@
+<!--<form class="elementor-form" id="bizplanner-form">
+  <div class="question-row">
+    <img src="{{avatar}}" class="avatar" />
+    <div class="question-column">
+      {{{html}}}
+      <div class="footer elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
+        <button type="submit" class="elementor-button elementor-size-sm" id="form-submit"><span><span class="elementor-button-text">Save</span></span></button>
+      </div>
+    </div>
+  </div>
+
+</form>-->
+
+<!-- Card with an image on left -->
+<div class="card mb-3 bizplanner">
+  <div class="row g-0">
+    <div class="col-md-auto left-column">
+      <img src="{{avatar}}" class="img-fluidAAA rounded-start avatar" alt="...">
+    </div>
+    <div class="col-md-8 right-column">
+      <div class="card-body">
+        <h5 class="card-title">{{prompt}}</h5>
+        <p id="response-message"></p>
+        {{#if additional_help}}
+        <div class="alert alert-primary fade show" role="alert">
+          {{{additional_help}}}
+        </div>
+        {{/if}}
+        <form class="g-3" id="bizplanner-form">
+          <input type="hidden" name="field_name" value="{{input_name}}" />
+          {{{html}}}
+          <button type="submit" class="btn btn-primary" id="form-submit" style="margin-top: 1rem;"><span>Save</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div><!-- End Card with an image on left -->

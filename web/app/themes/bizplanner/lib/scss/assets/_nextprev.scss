@@ -1,0 +1,19 @@
+  .nextprevbuttons{
+  a.elementor-button{
+    background-color: $navyblue;
+    white-space: nowrap;
+  }
+
+  &.inactive{
+    a.elementor-button{
+      background-color: #eee;
+      color: #999;
+    }
+  }
+}
+.btn-nextprev{
+  &.btn-selected.btn-primary-outline{
+    border: 1px solid #fff;
+    color: #fff;
+  }
+}

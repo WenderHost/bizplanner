@@ -1,0 +1,66 @@
+<style>
+.card-buttons{
+  display: flex;
+  flex-direction: row;
+}
+.card-buttons a:first-child{
+  margin-right: 8px;
+}
+.card-buttons a:last-child{
+  margin-left: auto;
+}
+</style>
+<div class="container">
+  <div class="row">
+  {{#each bp}}
+    <div class="col">
+      <!-- Card with titles, buttons, and links -->
+      <div class="card bizplan">
+        <div class="card-body">
+          <h5 class="card-title">{{title}}</h5>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th style="width: 25%;">Company:</th>
+                <td style="width: 75%;">{{company_name}}</td>
+              </tr>
+              <tr>
+                <th style="width: 25%;">Product:</th>
+                <td style="width: 75%;">{{product}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card-buttons">
+            <a href="{{view_url}}" class="btn btn-primary btn-sm view-business-plan" data-bpid="{{ID}}">View</a>
+            <a href="{{edit_url}}" class="btn btn-primary btn-sm edit-business-plan" data-bpid="{{ID}}">Edit</a>
+            <a href="{{view_url}}" class="btn btn-secondary btn-sm delete-business-plan" data-bpid="{{ID}}">Delete</a>
+          </div>
+        </div>
+      </div><!-- End Card with titles, buttons, and links -->
+    </div><!--  /.col -->
+  {{/each}}
+  {{#if show_add_new}}
+    <div class="col">
+      <div class="card bizplan add-new-card">
+        <div class="card-body text-center">
+          <a href="#" class="" id="start-new-plan">
+            <span id="new-plan-button-text">Start a New Plan</span>
+            <div id="response-message"></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  {{#if show_empty_1}}
+    <div class="col">
+      &nbsp;
+    </div>
+  {{/if}}
+  {{#if show_empty_2}}
+    <div class="col">
+      &nbsp;
+    </div>
+  {{/if}}
+  </div>
+</div>

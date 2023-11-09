@@ -1,0 +1,11 @@
+/* Print Styles */
+@media print{
+  #main{
+    margin-left: 0;
+  }
+  .pagetitle{
+    h1{
+      margin-bottom: 1em;
+    }
+  }
+}

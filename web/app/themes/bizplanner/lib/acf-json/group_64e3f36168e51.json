@@ -1,0 +1,190 @@
+{
+    "key": "group_64e3f36168e51",
+    "title": "Question Options",
+    "fields": [
+        {
+            "key": "field_65157bf9c15ae",
+            "label": "Prompt",
+            "name": "prompt",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "This is the question that appears above the field for this question form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64f0ff27a3aa6",
+            "label": "Placeholder",
+            "name": "placeholder",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64f0ff2fa3aa7",
+            "label": "Field Type",
+            "name": "type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "text": "Text",
+                "radio": "Radio",
+                "checkbox": "Checkbox",
+                "textarea": "Multiline Text",
+                "number": "Number",
+                "range": "Range",
+                "dashboard": "Dashboard"
+            },
+            "default_value": "text",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_65009f4b141ea",
+            "label": "Minimum",
+            "name": "min",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64f0ff2fa3aa7",
+                        "operator": "==",
+                        "value": "number"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_64f0ff2fa3aa7",
+                        "operator": "==",
+                        "value": "range"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1,
+            "min": 1,
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_65009f8a141eb",
+            "label": "Maximum",
+            "name": "max",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64f0ff2fa3aa7",
+                        "operator": "==",
+                        "value": "number"
+                    }
+                ],
+                [
+                    {
+                        "field": "field_64f0ff2fa3aa7",
+                        "operator": "==",
+                        "value": "range"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1000000,
+            "min": "",
+            "max": 1000000,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_65411ab2af52c",
+            "label": "Additional Help",
+            "name": "additional_help",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "If your prompt requires additional instructions, add them here.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "question"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Options used to setup Question form pages.",
+    "show_in_rest": 0,
+    "modified": 1699565316
+}
