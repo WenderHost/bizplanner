@@ -32,7 +32,7 @@ require_once( BP_DIR . 'lib/fns/cpt.question.php' );
 require_once( BP_DIR . 'lib/fns/debugging.php' );
 require_once( BP_DIR . 'lib/fns/enqueues.php' );
 require_once( BP_DIR . 'lib/fns/makepdf.php' );
-require_once( BP_DIR . 'lib/fns/navigation.php' );
+//require_once( BP_DIR . 'lib/fns/navigation.php' );
 require_once( BP_DIR . 'lib/fns/templates.php' );
 require_once( BP_DIR . 'lib/fns/users.php' );
 require_once( BP_DIR . 'lib/fns/utilities.php' );
