@@ -22,6 +22,10 @@ function get_question_sidebar_nav( $atts ){
     $sanitized_title = str_replace( '-', '_', sanitize_title( $question->post_name ) );
     $css_classes = ( is_array( $current_business_plan ) && array_key_exists( $sanitized_title, $current_business_plan ) && ! empty( $current_business_plan[ $sanitized_title ] ) )? 'fa-check-circle' : 'fa-circle fa-regular' ;
 
+    // Set "Star" icon for Financial Plan page:
+    if( 'financial-plan' == $question->post_name )
+      $css_classes = 'fa-star fa-solid';
+
     $current = ( $post->ID == $question->ID )? 'current-menu-item' : 'collapsed';
     $active = ( $post->ID == $question->ID )? 'elementor-item-active' : null;
 
