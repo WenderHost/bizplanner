@@ -10,8 +10,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= BP_DIR_URI ?>lib/niceadmin/assets/img/favicon.png" rel="icon">
-  <link href="<?= BP_DIR_URI ?>lib/niceadmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<?= BP_DIR_URI ?>lib/img/bizplanner-icon_32x32.png" rel="icon">
+  <link href="<?= BP_DIR_URI ?>lib/img/bizplanner-icon_180x180.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
