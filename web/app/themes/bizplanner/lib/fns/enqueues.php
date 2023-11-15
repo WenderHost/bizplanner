@@ -7,8 +7,12 @@ use function BizPlanner\question\{get_adjacent_question};
  * @return void
  */
 function hello_elementor_child_scripts_styles() {
+
   wp_enqueue_style( 'hello-elementor-child-style', get_stylesheet_directory_uri() . '/style.css', [ 'hello-elementor-theme-style' ], HELLO_ELEMENTOR_CHILD_VERSION );
-  wp_enqueue_style( 'bizplanner', get_stylesheet_directory_uri() . '/lib/css/main.css', null, filemtime( get_stylesheet_directory() . '/lib/css/main.css') );
+
+  $main_css = ( 'development' != BP_ENV )? 'dist/main.css' : 'main.css' ;
+  wp_enqueue_style( 'bizplanner', get_stylesheet_directory_uri() . '/lib/css/' . $main_css, null, filemtime( get_stylesheet_directory() . '/lib/css/' . $main_css ) );
+
   wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/f4de4ed03f.js', null, '1.0.0', false );
 
   wp_enqueue_script( 'bizplanner', get_stylesheet_directory_uri() . '/lib/js/bizplanner.js', null, filemtime( dirname( __FILE__ ) . '/../js/bizplanner.js' ), true );

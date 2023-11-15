@@ -19,6 +19,7 @@ define( 'BP_REST_NAMESPACE', 'bizplanner/v1' );
 define( 'BP_BIZPLAN_ROUTE', '/bizplan/' );
 define( 'BP_DIR', trailingslashit( get_stylesheet_directory( __FILE__ ) ) );
 define( 'BP_DIR_URI', trailingslashit( get_stylesheet_directory_uri( __FILE__ ) ) );
+define( 'BP_ENV', getenv( 'WP_ENV' ) );
 
 /**
  * Include required files
