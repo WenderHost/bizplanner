@@ -10,8 +10,7 @@ function remove_admin_bar() {
   if( is_array( $user_roles ) && in_array( 'administrator', $user_roles ) )
     return;
 
-  if (is_singular('question'))
-    show_admin_bar(false);
+  show_admin_bar(false);
 }
 add_action('wp', __NAMESPACE__ . '\\remove_admin_bar');
 
