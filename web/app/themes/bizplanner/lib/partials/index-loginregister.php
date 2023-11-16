@@ -56,7 +56,7 @@
           </div>
           <div class="col-12">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
           </div>
           <div class="col-12">
             <label for="avatar" class="form-label">Your Avatar</label>
