@@ -49,7 +49,7 @@ $net_profit = ( $revenue ) - ( $production_costs + $operating_expenses );
               </tr>
               <tr>
                 <th>Net Profit</th>
-                <td class="total-cell pad-right">$<?= number_format( $net_profit ) ?></td>
+                <td class="total-cell pad-right<?php if( 0 > $net_profit ){echo ' negative';} ?>">$<?= number_format( $net_profit ) ?></td>
               </tr>
               <tr>
                 <th>Startup Funding</th>
@@ -57,7 +57,7 @@ $net_profit = ( $revenue ) - ( $production_costs + $operating_expenses );
               </tr>
               <tr>
                 <th>Cash Reserves</th>
-                <td class="total-cell pad-right">$<?= number_format( $net_profit + $startup_funding ) ?></td>
+                <td class="total-cell pad-right<?php if( 0 > ($net_profit + $startup_funding) ){echo ' negative';} ?>">$<?= number_format( $net_profit + $startup_funding ) ?></td>
               </tr>
             </tbody>
           </table>
@@ -72,4 +72,5 @@ $net_profit = ( $revenue ) - ( $production_costs + $operating_expenses );
 <style>
   table td.total-cell{text-align: right; font-weight: bold;}
   table td.total-cell.pad-right{padding-right: 1.8em;}
+  .negative{color: #f00 !important;}
 </style>
