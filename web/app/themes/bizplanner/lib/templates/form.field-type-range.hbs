@@ -1,2 +1,30 @@
-<input type="range" class="form-range" name="{{input_name}}"  aria-describedby="{{input_name}}" id="{{input_name}}" value="{{value}}" step="100" {{{min_attr}}}{{{max_attr}}}/>
-<p id="range-value">{{value}}</p>
+<div class="row">
+  <div class="col-11">
+    <input class="form-range" type="range" value="{{value}}" min="{{atts.min}}" max="{{atts.max}}" step="{{atts.step}}" name="{{input_name}}"  aria-describedby="{{input_name}}" id="range" oninput="rangevalue.value=value"/>
+  </div>
+  <div class="col-1">
+    <input type="number" id="rangevalue" value="{{value}}" step="{{atts.step}}" oninput="range.value=value">
+  </div>
+</div>
+<script type="text/javascript">
+const rangeInputs = document.querySelectorAll('input[type="range"]')
+const numberInput = document.querySelector('input[type="number"]')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== 'range') {
+    target = document.getElementById('range')
+  }
+  const min = target.min
+  const max = target.max
+  const val = target.value
+
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener('input', handleInputChange)
+})
+
+numberInput.addEventListener('input', handleInputChange)
+</script>

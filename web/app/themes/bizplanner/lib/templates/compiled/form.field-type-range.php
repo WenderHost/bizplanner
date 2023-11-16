@@ -30,7 +30,35 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<input type="range" class="form-range" name="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'"  aria-describedby="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'" id="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'" value="'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'" step="100" '.(($inary && isset($in['min_attr'])) ? $in['min_attr'] : null).''.(($inary && isset($in['max_attr'])) ? $in['max_attr'] : null).'/>
-<p id="range-value">'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'</p>';
+    return '<div class="row">
+  <div class="col-11">
+    <input class="form-range" type="range" value="'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'" min="'.htmlspecialchars((string)((isset($in['atts']) && is_array($in['atts']) && isset($in['atts']['min'])) ? $in['atts']['min'] : null), ENT_QUOTES, 'UTF-8').'" max="'.htmlspecialchars((string)((isset($in['atts']) && is_array($in['atts']) && isset($in['atts']['max'])) ? $in['atts']['max'] : null), ENT_QUOTES, 'UTF-8').'" step="'.htmlspecialchars((string)((isset($in['atts']) && is_array($in['atts']) && isset($in['atts']['step'])) ? $in['atts']['step'] : null), ENT_QUOTES, 'UTF-8').'" name="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'"  aria-describedby="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'" id="range" oninput="rangevalue.value=value"/>
+  </div>
+  <div class="col-1">
+    <input type="number" id="rangevalue" value="'.htmlspecialchars((string)(($inary && isset($in['value'])) ? $in['value'] : null), ENT_QUOTES, 'UTF-8').'" step="'.htmlspecialchars((string)((isset($in['atts']) && is_array($in['atts']) && isset($in['atts']['step'])) ? $in['atts']['step'] : null), ENT_QUOTES, 'UTF-8').'" oninput="range.value=value">
+  </div>
+</div>
+<script type="text/javascript">
+const rangeInputs = document.querySelectorAll(\'input[type="range"]\')
+const numberInput = document.querySelector(\'input[type="number"]\')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== \'range\') {
+    target = document.getElementById(\'range\')
+  }
+  const min = target.min
+  const max = target.max
+  const val = target.value
+
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + \'% 100%\'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener(\'input\', handleInputChange)
+})
+
+numberInput.addEventListener(\'input\', handleInputChange)
+</script>';
 };
 ?>
