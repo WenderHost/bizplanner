@@ -373,30 +373,13 @@ function handleAvatarOptionClick(event) {
 // Add click event listener to each avatar option
 avatarOptions.forEach(option => {
   option.addEventListener('click', handleAvatarOptionClick);
-});// Get the input[type="range"] element
-const rangeInput = document.querySelector('input[type="range"]');
-
-// Get the element where you want to display the updated value
-const output = document.getElementById('range-value'); // Replace 'output' with the actual ID of your output element
-
-// Function to update the value when the range input changes
-function updateRangeValue() {
-  // Get the current value of the range input
-  const value = rangeInput.value;
-  
-  // Update the output element with the current value
-  output.textContent = value;
-}
-
-// Add input event listener to the range input
-if( rangeInput )
-  rangeInput.addEventListener('input', updateRangeValue);
-// Function to handle keydown event
+});// Function to handle keydown event
 function handleKeyUp(event) {
   const buttonDelay = 300; // milliseconds to wait before moving to the next/prev URL
+  var focusedInput = document.querySelector('.form-control:focus');
 
   // Check if the pressed key is the right arrow key (key code 39)
-  if (event.keyCode === 39) {
+  if (event.keyCode === 39 && ! focusedInput ) {
     const nextBtn = document.getElementById('next-question-btn');
     nextBtn.classList.remove('btn-primary');
     nextBtn.classList.add('btn-selected', 'btn-primary-outline');
@@ -405,7 +388,7 @@ function handleKeyUp(event) {
     },buttonDelay);
   }
 
-  if(event.keyCode === 37) {
+  if(event.keyCode === 37 && ! focusedInput ) {
     const previousBtn = document.getElementById('previous-question-btn');
     previousBtn.classList.remove('btn-primary');
     previousBtn.classList.add('btn-selected', 'btn-primary-outline');
@@ -417,3 +400,32 @@ function handleKeyUp(event) {
 
 // Add event listener to the document for the keydown event
 document.addEventListener('keyup', handleKeyUp);
+/**
+ * Apply focus to first input element
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the first input with class "form-control" inside the form with id "bizplanner-form"
+    var firstInput = document.querySelector('form#bizplanner-form input.form-control');
+    var firstTextarea = document.querySelector('form#bizplanner-form textarea.form-control');
+    //var firstCheckInput = document.querySelector('form#bizplanner-form input.form-check-input');
+
+    // Check if the input element is found before applying focus
+    if (firstInput) {
+        // Apply focus to the first input
+        firstInput.focus();
+    }
+
+    // Check if the input element is found before applying focus
+    if (firstTextarea) {
+        // Apply focus to the first input
+        firstTextarea.focus();
+    }
+
+    // Check if the input element is found before applying focus
+    /*
+    if (firstCheckInput) {
+        // Apply focus to the first input
+        firstCheckInput.focus();
+    }
+    */
+});

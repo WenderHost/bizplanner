@@ -30,20 +30,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<!--<form class="elementor-form" id="bizplanner-form">
-  <div class="question-row">
-    <img src="'.htmlspecialchars((string)(($inary && isset($in['avatar'])) ? $in['avatar'] : null), ENT_QUOTES, 'UTF-8').'" class="avatar" />
-    <div class="question-column">
-      '.(($inary && isset($in['html'])) ? $in['html'] : null).'
-      <div class="footer elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
-        <button type="submit" class="elementor-button elementor-size-sm" id="form-submit"><span><span class="elementor-button-text">Save</span></span></button>
-      </div>
-    </div>
-  </div>
-
-</form>-->
-
-<!-- Card with an image on left -->
+    return '<!-- Card with an image on left -->
 <div class="card mb-3 bizplanner">
   <div class="row g-0">
     <div class="col-md-auto left-column">
