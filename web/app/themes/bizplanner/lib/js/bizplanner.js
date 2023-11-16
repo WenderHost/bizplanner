@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 document.addEventListener("DOMContentLoaded", function(){
   const form = document.getElementById('bizplanner-form');
-  console.info( '🔔 form = ', form );
-  const submitButton = form.querySelector("#bizplanner-form button[type='submit']");
-  const submitButtonText = form.querySelector("#bizplanner-form button[type='submit'] span");
-  const responseMessage = document.getElementById("response-message");
 
   if( form ){
+    const submitButton = form.querySelector("#bizplanner-form button[type='submit']");
+    const submitButtonText = form.querySelector("#bizplanner-form button[type='submit'] span");
+    const responseMessage = document.getElementById("response-message");
+
     /**
      * Handles saving our form data.
      *
