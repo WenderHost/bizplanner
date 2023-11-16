@@ -179,19 +179,23 @@ function question_form( $atts ){
 
       // Setup min/max attributes
       $min = get_field( 'min', $post->ID );
-      $data['min_attr'] = ( ! empty( $min ) )? ' min="' . $min . '"' : null ;
+      $data['atts']['min'] = ( ! empty( $min ) )? $min : null ;
       $max = get_field( 'max', $post->ID );
-      $data['max_attr'] = ( ! empty( $max ) )? ' max="' . $max . '"' : null ;
+      $data['atts']['max'] = ( ! empty( $max ) )? $max : null ;
 
       $html = render_template( 'form.field-type-number', $data );
       break;
 
     case 'range':
-      // Setup min/max attributes
+      // Setup min/max/step attributes
       $min = get_field( 'min', $post->ID );
-      $data['min_attr'] = ( ! empty( $min ) )? ' min="' . $min . '"' : null ;
+      $data['atts']['min'] = ( ! empty( $min ) )? $min : 0 ;
+
       $max = get_field( 'max', $post->ID );
-      $data['max_attr'] = ( ! empty( $max ) )? ' max="' . $max . '"' : null ;
+      $data['atts']['max'] = ( ! empty( $max ) )? $max : 100000 ;
+
+      $step = get_field( 'step', $post->ID );
+      $data['atts']['step'] = ( ! empty( $step ) )? $step : intval( $data['atts']['max']/10 ) ;
 
       $html = render_template( 'form.field-type-range', $data );
       break;

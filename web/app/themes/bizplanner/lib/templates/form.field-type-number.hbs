@@ -1,4 +1,4 @@
 <div class="input-group mb-3">
   {{#if prepend}}<span class="input-group-text">{{prepend}}</span>{{/if}}
-  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="{{input_name}}" id="{{input_name}}" value="{{value}}" placeholder="{{placeholder_esc}}" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" title="Input an amount in US Dollar format (e.g. 100.00)" {{min_attr}}{{max_attr}}>
+  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="{{input_name}}" id="{{input_name}}" value="{{value}}" placeholder="{{placeholder_esc}}" inputmode="decimal" pattern="^\d+(\.\d{1,2})?$" title="Input an amount in US Dollar format (e.g. 100.00)" min="{{atts.min}}" max="{{atts.max}}">
 </div>
