@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "753cb87c181e17ed0223004b0a82a04e",
+    "content-hash": "71a5382e7db1a2dd4b3d143d34035174",
     "packages": [
         {
             "name": "composer/installers",
@@ -1664,6 +1664,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/spinupwp/"
+        },
+        {
+            "name": "wpackagist-plugin/super-progressive-web-apps",
+            "version": "2.2.21",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/super-progressive-web-apps/",
+                "reference": "tags/2.2.21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/super-progressive-web-apps.2.2.21.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/super-progressive-web-apps/"
         },
         {
             "name": "wpackagist-plugin/taxonomy-terms-order",
