@@ -21,7 +21,15 @@ function login_user_api(){
 
       $user = wp_signon( [ 'user_login' => $username, 'user_password' => $password ] );
       if( is_wp_error( $user ) ){
-        $response->message = $user->get_error_message();
+        $err_codes = $user->get_error_codes();
+        $errors = [];
+        if ( in_array( 'invalid_username', $err_codes ) ) {
+          $errors[] = 'Invalid username.';
+        }
+        if ( in_array( 'incorrect_password', $err_codes ) ) {
+          $errors[] = 'The password you entered is incorrect.';
+        }
+        $response->message = '<p>Please correct the following errors:</p> <ul><li>' . implode('</li><li>', $errors ) . '</li></ul>';
         wp_send_json( $response, 403 );
       } else {
         $response->message = 'Success! You\'re logged in. Redirecting...';
