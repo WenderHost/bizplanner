@@ -3,7 +3,7 @@ global $current_business_plan;
 $current_user = wp_get_current_user();
 $current_user_id = get_current_user_id();
 $avatar = get_user_meta( $current_user_id, 'avatar', true );
-if( ! is_int( $avatar ) )
+if( ! is_numeric( $avatar ) )
   $avatar = 0;
 $avatar_url = BP_DIR_URI . 'lib/img/bizplanner-avatar_' . $avatar . '.png';
 ?>
