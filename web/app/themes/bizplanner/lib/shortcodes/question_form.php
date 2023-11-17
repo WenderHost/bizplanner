@@ -171,7 +171,7 @@ function question_form( $atts ){
       // Setup prepend/append display
       if( $field_object && array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) ){
         $data['prepend'] = ( array_key_exists( 'prepend', $field_object ) && ! empty( $field_object['prepend'] ) )? $field_object['prepend'] : '' ;
-      } else if( in_array( $args['name'], [ 'product_price' ] ) ){
+      } else if( in_array( $args['name'], [ 'product_price', 'production_costs' ] ) ){
         $data['prepend'] = '$';
       }
 
