@@ -1,11 +1,18 @@
 <?php if( is_user_logged_in() && is_single() && 'question' == get_post_type() ): ?>
 <!-- Footer -->
-<footer id="footer" class="footer fixed-bottom d-print-none">
-  <div class="container text-center">
-    <div class="row align-items-center">
+<style>
+  #juniorachievement-blackandwhite-logo, #hollingsworth-logo{max-width: 120px;}
+</style>
+<footer id="footer" class="footer fixed-bottom d-print-none" style="padding: 0;">
+  <div class="container-fluid text-center">
+    <div class="row align-items-center row-nextprev" style="border-bottom: 2px solid #fff; padding: 1em;">
       <div class="col"><?= do_shortcode( '[nextprev type="previous"]' ) ?></div>
-      <div class="col"><?= do_shortcode( '[page_numbers]' ) ?></div>
+      <div class="col" style="color: #14448C;"><?= do_shortcode( '[page_numbers]' ) ?></div>
       <div class="col"><?= do_shortcode( '[nextprev type="next"]' ) ?></div>
+    </div>
+    <div class="row justify-content-center row-logos" style="padding: 1em 0;">
+      <div class="col-2"><?php get_template_part( 'lib/partials/juniorachievement', 'blackandwhitelogo' ); ?></div>
+      <div class="col-2"><?php get_template_part( 'lib/partials/hollingsworth', 'whitelogo' ); ?></div>
     </div>
   </div>
 </footer><!-- End Footer -->

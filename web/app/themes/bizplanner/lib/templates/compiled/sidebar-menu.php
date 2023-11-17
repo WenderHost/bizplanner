@@ -30,7 +30,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<ul class="sidebar-nav" id="sidebar-nav" style="margin-bottom: 80px;">
+    return '<ul class="sidebar-nav" id="sidebar-nav">
 '.LR::sec($cx, (($inary && isset($in['questions'])) ? $in['questions'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);return '  <li class="nav-item">
     <a class="nav-link '.htmlspecialchars((string)(($inary && isset($in['current'])) ? $in['current'] : null), ENT_QUOTES, 'UTF-8').'" href="'.htmlspecialchars((string)(($inary && isset($in['permalink'])) ? $in['permalink'] : null), ENT_QUOTES, 'UTF-8').'">
       <!--<i class="bi bi-grid"></i>-->

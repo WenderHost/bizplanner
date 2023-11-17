@@ -96,9 +96,13 @@
   color: #fff;
 }
 
+.row-nextprev {
+  background-color: #9fd9fa;
+}
+
 header#header,
 footer#footer {
-  background-color: #86cff8;
+  background-color: #3eb2f4;
 }
 
 aside#sidebar {
