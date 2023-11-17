@@ -8,11 +8,11 @@
           <p class="response-message" style="display: none;"></p>
           <div class="col-12">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required>
+            <input type="text" class="form-control" id="login_username" name="username" required>
           </div>
           <div class="col-12">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="login_password" name="password" required>
           </div>
           <div class="text-left">
             <button type="submit" class="btn btn-primary">Log In</button>
@@ -55,8 +55,34 @@
             <input type="text" class="form-control" id="username" name="username" autocapitalize="off" required>
           </div>
           <div class="col-12">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
+            <label for="visiblePasswordField" class="form-label">Password</label>
+            <input type="text" class="form-control" id="visiblePasswordField" oninput="updateHiddenPasswordField(event)" required>
+            <input type="hidden" id="hiddenPasswordField" name="password">
+            <style>
+              #passwordMask {
+                font-family: monospace; /* Ensure consistent character width */
+                letter-spacing: .25ch;   /* Adjust as needed for character spacing */
+              }
+            </style>
+            <script>
+              var actualPassword = '';
+              function updateHiddenPasswordField(event) {
+                // Handle backspace key press
+                if (event.inputType === "deleteContentBackward") {
+                  actualPassword = actualPassword.slice(0, -1);
+                } else {
+                  // Append the newly typed value to the existing actualPassword
+                  actualPassword += event.data;
+                }
+
+                // Update the hidden input with the actual password value
+                document.getElementById("hiddenPasswordField").value = actualPassword;
+
+                // Create a string with the same length as the password, filled with dots
+                var maskedValue = '•'.repeat(actualPassword.length);
+                document.getElementById("visiblePasswordField").value = maskedValue;
+              }
+            </script>
           </div>
           <div class="col-12">
             <label for="avatar" class="form-label">Your Avatar</label>
