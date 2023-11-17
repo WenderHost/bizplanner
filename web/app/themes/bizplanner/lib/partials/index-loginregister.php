@@ -9,7 +9,7 @@
           <div class="alert alert-success response-message fade show" style="display: none;" role="alert"></div>
           <div class="col-12">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="login_username" name="username" required>
+            <input type="text" class="form-control" id="login_username" name="username" autocapitalize="off" required>
           </div>
           <div class="col-12">
             <label for="password" class="form-label">Password</label>
