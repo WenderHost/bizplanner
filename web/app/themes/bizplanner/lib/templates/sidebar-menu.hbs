@@ -1,14 +1,4 @@
-<!--<ul id="question-sidebar-menu" class="elementor-nav-menu sm-vertical">
-  {{#each questions}}
-  <li class="menu-item menu-item-type-post_type menu-item-object-question {{current}}">
-    <a href="{{permalink}}" aria-current="page" class="elementor-item {{active}}">
-      <i class="fas {{classes}}" aria-hidden="true"></i> <span>{{counter}}. {{title}}</span>
-    </a>
-  </li>
-  {{/each}}
-</ul>-->
-
-<ul class="sidebar-nav" id="sidebar-nav">
+<ul class="sidebar-nav" id="sidebar-nav" style="margin-bottom: 80px;">
   {{#each questions}}
   <li class="nav-item">
     <a class="nav-link {{current}}" href="{{permalink}}">
@@ -19,6 +9,3 @@
   </li><!-- End Dashboard Nav -->
   {{/each}}
 </ul>
-<!-- li.current-menu-item -->
-<!-- li.current-menu-item a.elementor-item-active -->
-<!--  fa-check-circle OR fa-circle fa-regular -->

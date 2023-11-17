@@ -30,15 +30,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<!--<ul id="question-sidebar-menu" class="elementor-nav-menu sm-vertical">
-'.LR::sec($cx, (($inary && isset($in['questions'])) ? $in['questions'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);return '  <li class="menu-item menu-item-type-post_type menu-item-object-question '.htmlspecialchars((string)(($inary && isset($in['current'])) ? $in['current'] : null), ENT_QUOTES, 'UTF-8').'">
-    <a href="'.htmlspecialchars((string)(($inary && isset($in['permalink'])) ? $in['permalink'] : null), ENT_QUOTES, 'UTF-8').'" aria-current="page" class="elementor-item '.htmlspecialchars((string)(($inary && isset($in['active'])) ? $in['active'] : null), ENT_QUOTES, 'UTF-8').'">
-      <i class="fas '.htmlspecialchars((string)(($inary && isset($in['classes'])) ? $in['classes'] : null), ENT_QUOTES, 'UTF-8').'" aria-hidden="true"></i> <span>'.htmlspecialchars((string)(($inary && isset($in['counter'])) ? $in['counter'] : null), ENT_QUOTES, 'UTF-8').'. '.htmlspecialchars((string)(($inary && isset($in['title'])) ? $in['title'] : null), ENT_QUOTES, 'UTF-8').'</span>
-    </a>
-  </li>
-';}).'</ul>-->
-
-<ul class="sidebar-nav" id="sidebar-nav">
+    return '<ul class="sidebar-nav" id="sidebar-nav" style="margin-bottom: 80px;">
 '.LR::sec($cx, (($inary && isset($in['questions'])) ? $in['questions'] : null), null, $in, true, function($cx, $in) {$inary=is_array($in);return '  <li class="nav-item">
     <a class="nav-link '.htmlspecialchars((string)(($inary && isset($in['current'])) ? $in['current'] : null), ENT_QUOTES, 'UTF-8').'" href="'.htmlspecialchars((string)(($inary && isset($in['permalink'])) ? $in['permalink'] : null), ENT_QUOTES, 'UTF-8').'">
       <!--<i class="bi bi-grid"></i>-->
@@ -46,9 +38,6 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
       <span>'.htmlspecialchars((string)(($inary && isset($in['counter'])) ? $in['counter'] : null), ENT_QUOTES, 'UTF-8').'. '.htmlspecialchars((string)(($inary && isset($in['title'])) ? $in['title'] : null), ENT_QUOTES, 'UTF-8').'</span>
     </a>
   </li><!-- End Dashboard Nav -->
-';}).'</ul>
-<!-- li.current-menu-item -->
-<!-- li.current-menu-item a.elementor-item-active -->
-<!--  fa-check-circle OR fa-circle fa-regular -->';
+';}).'</ul>';
 };
 ?>
