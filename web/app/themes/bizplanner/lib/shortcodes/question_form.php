@@ -86,6 +86,14 @@ function question_form( $atts ){
   if( $additional_help )
     $data['additional_help'] = $additional_help;
 
+  if( stristr( $data['prompt'], '{{product}}') ){
+    if( is_null( $current_business_plan ) ){
+      $data['prompt'] = str_replace( '{{product}}', '<em>product</em>', $data['prompt'] );
+    } else {
+      $data['prompt'] = str_replace( '{{product}}', '<em>' . $current_business_plan['product'] . '</em>', $data['prompt'] );
+    }
+  }
+
 
   //uber_log('🔔 $args = ' . print_r( $args, true ) );
   //uber_log('🔔 $value = ' . print_r( $value, true ) );

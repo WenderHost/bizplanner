@@ -38,7 +38,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     </div>
     <div class="col-md-8 right-column">
       <div class="card-body">
-        <h5 class="card-title">'.htmlspecialchars((string)(($inary && isset($in['prompt'])) ? $in['prompt'] : null), ENT_QUOTES, 'UTF-8').'</h5>
+        <h5 class="card-title">'.(($inary && isset($in['prompt'])) ? $in['prompt'] : null).'</h5>
         <p id="response-message"></p>
 '.((LR::ifvar($cx, (($inary && isset($in['additional_help'])) ? $in['additional_help'] : null), false)) ? '        <div class="alert alert-primary fade show" role="alert">
           '.(($inary && isset($in['additional_help'])) ? $in['additional_help'] : null).'
