@@ -37,12 +37,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
           // Re-enable the submit button and set its text to "Saved"
           submitButton.disabled = false;
-          console.log('response.data = ', response.data );
+          console.log('response = ', response );
+          if( 'block' == responseMessage.style.display )
+            responseMessage.style.display = 'none';
           responseMessage.style.display = 'block';
+          responseMessage.classList = 'alert alert-success response-message fade show';
           responseMessage.innerHTML = response.message;
           setTimeout( () => {
             submitButton.innerHTML = "Redirecting...";
-            window.location.href = response.data.redirect_url;
+            window.location.href = response.redirect_url;
           }, 1500 );
         } else {
           // The request encountered an error
@@ -53,8 +56,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
           // Re-enable the submit button and set its text to the original text
           submitButton.disabled = false;
-          submitButton.innerHTML = "Log In";
-          responseMessage.innerHTML = response.message;
+          submitButton.innerHTML = "Register";
+
+          // If we're showing consecutive error messages, add a delay:
+          if( 'block' == responseMessage.style.display ){
+            responseMessage.style.display = 'none';
+            setTimeout(() => {
+              responseMessage.style.display = 'block';
+              responseMessage.classList = 'alert alert-danger response-message fade show';
+              responseMessage.innerHTML = response.message;
+            }, 300 );
+          } else {
+            responseMessage.style.display = 'block';
+            responseMessage.classList = 'alert alert-danger response-message fade show';
+            responseMessage.innerHTML = response.message;
+          }
         }
       };
 

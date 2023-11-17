@@ -6,6 +6,7 @@
         <!-- Vertical Form -->
         <form class="row g-3" id="bizplanner-login">
           <p class="response-message" style="display: none;"></p>
+          <div class="alert alert-success response-message fade show" style="display: none;" role="alert"></div>
           <div class="col-12">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="login_username" name="username" required>
@@ -27,7 +28,7 @@
         <h5 class="card-title">Register</h5>
         <!-- Vertical Form -->
         <form class="row g-3" id="bizplanner-register">
-          <p class="response-message" style="display: none;"></p>
+          <div class="alert alert-danger response-message fade show" style="display: none;" role="alert"></div>
           <div class="col-md-6">
             <label for="fname" class="form-label">First Name</label>
             <input type="text" class="form-control" id="fname" name="fname">
@@ -67,8 +68,9 @@
             <script>
               var actualPassword = '';
               function updateHiddenPasswordField(event) {
-                // Handle backspace key press
-                if (event.inputType === "deleteContentBackward") {
+
+                if ( event.inputType === "deleteContentBackward" ) {
+                  // Remove the last character from actualPassword
                   actualPassword = actualPassword.slice(0, -1);
                 } else {
                   // Append the newly typed value to the existing actualPassword
@@ -88,7 +90,7 @@
             <label for="avatar" class="form-label">Your Avatar</label>
             <div class="row">
               <div class="col-3">
-                <div class="avatar-frame"><img class="img-fluid" id="avatar" src="<?= BP_DIR_URI ?>lib/img/bizplanner-avatar_0.png" /></div>
+                <div class="avatar-frame"><img class="img-fluid" id="avatar" style="cursor: pointer;" src="<?= BP_DIR_URI ?>lib/img/bizplanner-avatar_0.png" data-bs-toggle="modal" data-bs-target="#ExtralargeModal" /></div>
                 <input type="hidden" name="avatar" id="selectedavatar" value="0" />
               </div>
               <div class="col-9">

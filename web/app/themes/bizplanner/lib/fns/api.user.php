@@ -43,19 +43,21 @@ function register_user_api(){
     'methods' => 'POST,GET',
     'callback'  => function( \WP_REST_Request $request ){
       $status_code = 200;
-      $response = new \stdClass();
       $parameters = $request->get_params();
 
       $nonce = $request->get_header('X-WP-Nonce');
       if( ! wp_verify_nonce( $nonce, 'wp_rest') )
-        wp_send_json( ['message' => 'Invalid nonce.'], 403 );
+        wp_send_json( [ 'message' => 'Invalid nonce.' ], 403 );
 
       // Build a fake email address from the submitted username
       $user_email = $parameters['username'] . '@bizplanner.dev';
       uber_log( '🔔 $user_email = '. $user_email);
       if( ! is_email( $user_email ) )
-        wp_send_json( ['message' => 'Please correct your username to use only letters and numbers.'], 403 );
+        wp_send_json( [ 'message' => 'Please correct your username to use only letters and numbers.' ], 403 );
 
+      if( 0 == $parameters['avatar'] ){
+        wp_send_json( ['message' => 'Don\'t forget to pick Your Avatar.' ], 403 );
+      }
       $avatar = 1;
       if( array_key_exists( 'avatar', $parameters ) && is_numeric( $parameters['avatar'] ) )
         $avatar = $parameters['avatar'];
@@ -76,9 +78,9 @@ function register_user_api(){
       if( ! email_exists( $user_email ) && ! username_exists( $parameters['username'] ) ){
         $user_id = wp_insert_user( $user_args );
         wp_signon( [ 'user_login' => $parameters['username'], 'user_password' => $parameters['password'], 'remember' => false ] );
-
-        $response->data = ['redirect_url' => home_url() ];
-        wp_send_json( $response, 200 );
+        wp_send_json( ['redirect_url' => home_url(), 'message' => 'Success! You are now logged in. Redirecting...' ], 200 );
+      } else if( email_exists( $user_email ) || username_exists( $parameters['username'] ) ) {
+        wp_send_json( ['message' => 'That username is taken. Please pick a new one.' ], 403 );
       }
     },
     'permission_callback' => '__return_true',

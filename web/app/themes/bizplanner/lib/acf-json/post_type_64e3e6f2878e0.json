@@ -78,8 +78,8 @@
     "query_var": "post_type_key",
     "query_var_name": "",
     "can_export": true,
-    "delete_with_user": false,
+    "delete_with_user": true,
     "register_meta_box_cb": "",
     "enter_title_here": "",
-    "modified": 1695905774
+    "modified": 1700236145
 }
