@@ -110,7 +110,7 @@
                       <div class="modal-body" id="avatar-selector" style="background-color: #eee;">
                         <?php
                         $counter = 1;
-                        for ($counter = 1; $counter < 5; $counter++) {
+                        for ($counter = 1; $counter < 7; $counter++) {
                           echo '<img class="avatar-option" src="' . BP_DIR_URI . 'lib/img/bizplanner-avatar_' . $counter . '.png" data-bpavatar="' . $counter . '" style="" />';
                         }
                         ?>
