@@ -59,7 +59,6 @@ function register_user_api(){
 
       // Build a fake email address from the submitted username
       $user_email = $parameters['username'] . '@bizplanner.dev';
-      uber_log( '🔔 $user_email = '. $user_email);
       if( ! is_email( $user_email ) )
         wp_send_json( [ 'message' => 'Please correct your username to use only letters and numbers.' ], 403 );
 
