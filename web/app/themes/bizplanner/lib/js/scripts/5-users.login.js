@@ -41,21 +41,35 @@ document.addEventListener("DOMContentLoaded", function(){
           console.log('response.data = ', response.data );
           responseMessage.style.display = 'block';
           responseMessage.innerHTML = response.message;
+          responseMessage.classList = 'alert alert-success response-message fade show';
           setTimeout( () => {
             submitButton.innerHTML = "Redirecting...";
             window.location.href = response.data.redirect_url;
           }, 1500 );
         } else {
           // The request encountered an error
-          //console.error("AJAX request error:", xhr.status, xhr.statusText);
           let response = JSON.parse(xhr.response);
-          console.log( '🛑 xhr = ', xhr );
-          console.log( '🛑 response = ', response );
 
-          // Re-enable the submit button and set its text to the original text
-          submitButton.disabled = false;
-          submitButton.innerHTML = "Log In";
-          responseMessage.innerHTML = response.message;
+          // If we're showing consecutive error messages, add a delay:
+          if( 'block' == responseMessage.style.display ){
+            responseMessage.style.display = 'none';
+            setTimeout(() => {
+              // Re-enable the submit button and set its text to the original text
+              submitButton.disabled = false;
+              submitButton.innerHTML = "Log In";
+              responseMessage.style.display = 'block';
+              responseMessage.classList = 'alert alert-danger response-message fade show';
+              responseMessage.innerHTML = response.message;
+            }, 300 );
+          } else {
+            // Re-enable the submit button and set its text to the original text
+            submitButton.disabled = false;
+            submitButton.innerHTML = "Log In";
+
+            responseMessage.style.display = 'block';
+            responseMessage.classList = 'alert alert-danger response-message fade show';
+            responseMessage.innerHTML = response.message;
+          }
         }
       };
 
