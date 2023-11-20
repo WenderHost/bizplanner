@@ -10,8 +10,10 @@ function get_next_prev_button( $atts ){
 
   $type = ( is_null( $args['type'] ) || ! in_array( $args['type'], [ 'next', 'previous' ] ) )? 'previous' : $args['type'] ;
 
+
   global $post;
   $data = [];
+  $data['next'] = ( 'next' == $type )? true : false ;
   //$question = get_field( $type . '_page', $post->ID );
   $previous = ( 'previous' == $type )? true : false ;
   $question = get_adjacent_question( $post->ID, $previous );
@@ -22,7 +24,7 @@ function get_next_prev_button( $atts ){
     $data['url'] = ( $question )? get_the_permalink( $question ) : false ;
     $data['pagename'] = ( $question )? $question->post_title : false ;
   }
-  $html = render_template( $args['type'], $data );
+  $html = render_template( 'next-prev', $data );
 
   return $html;
 }

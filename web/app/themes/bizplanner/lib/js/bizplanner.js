@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 document.addEventListener("DOMContentLoaded", function(){
   const form = document.getElementById('bizplanner-form');
+  const btnNextPrev = document.querySelectorAll('a.btn-nextprev');
 
   if( form ){
     const submitButton = form.querySelector("#bizplanner-form button[type='submit']");
@@ -131,6 +132,20 @@ document.addEventListener("DOMContentLoaded", function(){
       xhr.send(formData);
     }
     form.addEventListener('submit', saveForm );
+    btnNextPrev.forEach( (btn) => {
+      console.info('btn.href', btn.href);
+      var href = btn.href;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerHTML = 'Saving... One moment.';
+        console.info('this =', this );
+        saveForm();
+        setTimeout( () => {
+          window.location.href = href;
+        }, 2000);
+      });
+    });
 
     /**
      * Auto-saves the form any time it loses focus.
