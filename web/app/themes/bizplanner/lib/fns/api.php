@@ -93,12 +93,14 @@ function register_bizplanner_api(){
             continue;
 
           $saved = save_parameter( $parameter, $value );
-          if( is_wp_error( $saved ) ){
+          if( is_wp_error( $saved ) && 'notupdated' != $saved->get_error_code() ){
             $status_code = 500;
 
             $response->message = $saved->get_error_message();
             // '$saved->get_error_message() = ' . $saved->get_error_message(). "\n" .
             uber_log( '$response = ' . print_r( $response, true ) );
+          } else if( is_wp_error( $saved ) && 'notupdated' == $saved->get_error_code() ){
+            $messages[] = '- No change to `' . $parameter . '`.' . "\n";
           } else if( $saved ){
             $messages[] = '- Saved `' . $parameter . '`.' . "\n";
           }
@@ -140,6 +142,7 @@ function save_parameter( $parameter = null, $value = null ){
     return new \WP_Error( 'nullparameter', __( 'Parameter is null.', 'bizplanner' ) );
 
   uber_log('🔔 checked if $parameter is_null() and PASSED.');
+  $logged_value = '';
 
   switch( $parameter ){
     case 'product_category':
