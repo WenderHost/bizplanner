@@ -27,7 +27,6 @@ function get_question_sidebar_nav( $atts ){
       $css_classes = 'fa-star fa-solid';
 
     $current = ( $post->ID == $question->ID )? 'current-menu-item' : 'collapsed';
-    $active = ( $post->ID == $question->ID )? 'elementor-item-active' : null;
 
     $data['questions'][] = [
       'title' => $question->post_title,
@@ -35,7 +34,6 @@ function get_question_sidebar_nav( $atts ){
       'classes'   => $css_classes,
       'counter'   => $counter,
       'current'   => $current,
-      'active'    => $active,
     ];
     $counter++;
   }
