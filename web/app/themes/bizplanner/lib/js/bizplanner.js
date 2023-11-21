@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function(){
   const form = document.getElementById('bizplanner-form');
   const btnNextPrev = document.querySelectorAll('a.btn-nextprev');
+  const btnSidebarNav = document.querySelectorAll('#sidebar-nav a.nav-link');
 
   if( form ){
     const submitButton = form.querySelector("#bizplanner-form button[type='submit']");
@@ -133,17 +134,29 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     form.addEventListener('submit', saveForm );
     btnNextPrev.forEach( (btn) => {
-      console.info('btn.href', btn.href);
       var href = btn.href;
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         btn.disabled = true;
         btn.innerHTML = 'Saving... One moment.';
-        console.info('this =', this );
+        //console.info('this =', this );
         saveForm();
         setTimeout( () => {
           window.location.href = href;
         }, 2000);
+      });
+    });
+    btnSidebarNav.forEach( (btn) => {
+      var href = btn.href;
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        //btn.innerHTML = 'Saving... One moment.';
+        //console.info('this =', this );
+        saveForm();
+        setTimeout( () => {
+          window.location.href = href;
+        }, 850);
       });
     });
 
