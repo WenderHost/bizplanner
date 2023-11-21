@@ -31,16 +31,16 @@
           <div class="alert alert-danger response-message fade show" style="display: none;" role="alert"></div>
           <div class="col-md-6">
             <label for="fname" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="fname" name="fname">
+            <input type="text" class="form-control" id="fname" name="fname" required>
           </div>
           <div class="col-md-6">
             <label for="lname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lname" name="lname">
+            <input type="text" class="form-control" id="lname" name="lname" required>
           </div>
           <div class="col-md-5">
             <label for="username" class="form-label">Grade</label>
-            <select class="form-select" aria-label="Select your grade..." name="grade">
-              <option selected="">Select your grade...</option>
+            <select class="form-select" aria-label="Select your grade..." name="grade" required>
+              <option selected="" value="">Select your grade...</option>
               <option value="4th">4th</option>
               <option value="5th">5th</option>
               <option value="6th">6th</option>
@@ -111,7 +111,7 @@
                         <?php
                         $counter = 1;
                         for ($counter = 1; $counter < 15; $counter++) {
-                          echo '<img class="avatar-option" src="' . BP_DIR_URI . 'lib/img/bizplanner-avatar_' . $counter . '.png" data-bpavatar="' . $counter . '" style="" />';
+                          echo '<img class="avatar-option" src="' . BP_DIR_URI . 'lib/img/bizplanner-avatar_' . $counter . '.png" data-bpavatar="' . $counter . '" style="" data-bs-dismiss="modal" data-bs-target="#ExtralargeModal" />';
                         }
                         ?>
                       </div>
