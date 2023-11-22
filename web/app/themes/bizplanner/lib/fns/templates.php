@@ -2,6 +2,7 @@
 
 namespace BizPlanner\templates;
 use function BizPlanner\utilities\{get_alert};
+use LightnCandy\LightnCandy;
 
 /**
  * Renders a Handlebars template.
@@ -52,9 +53,13 @@ function render_template( $filename = '', $data = [] ){
 
   if( 'true' == $template['compile'] ){
     $hbs_template = file_get_contents( $template['filename'] );
-    $phpStr = \LightnCandy\LightnCandy::compile( $hbs_template, [
-      'flags' => \LightnCandy\LightnCandy::FLAG_SPVARS | \LightnCandy\LightnCandy::FLAG_PARENT | \LightnCandy\LightnCandy::FLAG_ELSE
-    ] );
+    $phpStr = LightnCandy::compile( $hbs_template, array(
+      'flags' => LightnCandy::FLAG_SPVARS | LightnCandy::FLAG_PARENT | LightnCandy::FLAG_ELSE | LightnCandy::FLAG_EXTHELPER,
+      'helpers' => array(
+        'numberformat' => __NAMESPACE__ . '\\LnC_helper_numberformat',
+        'processarray' => __NAMESPACE__ . '\\LnC_helper_processarray',
+      ),
+    ) );
     if ( ! is_writable( dirname( $template['filename_compiled'] ) ) )
       \wp_die( 'I can not write to the directory.' );
     file_put_contents( $template['filename_compiled'], '<?php' . "\n" . $phpStr . "\n" . '?>' );
@@ -66,6 +71,41 @@ function render_template( $filename = '', $data = [] ){
   $renderer = include( $template['filename_compiled'] );
 
   return $renderer( $data );
+}
+
+/**
+ * Handlebars helper function for number_format()
+ *
+ * @param      float  $number  The number
+ *
+ * @return     string  Formatted number
+ */
+function LnC_helper_numberformat( $number ){
+  settype( $number, 'float' );
+  if( is_float( $number ) )
+    return number_format( $number );
+
+  return $number;
+}
+
+/**
+ * Handlebars helper for processing an array of WP Term objects into a comma-delimited string of Term Names.
+ *
+ * @param      array  $array  The array of terms
+ *
+ * @return     string  Comma separated string of term names
+ */
+function LnC_helper_processarray( $array ){
+  if( ! is_array( $array ) )
+    return $array;
+
+  $term_names = [];
+  foreach( $array as $item ){
+    if( is_object( $item ) && property_exists( $item, 'term_id') ){
+      $term_names[] = $item->name;
+    }
+  }
+  return implode( ', ', $term_names );
 }
 
 /**
