@@ -137,11 +137,10 @@ add_action( 'rest_api_init', __NAMESPACE__ . '\\register_bizplanner_api' );
 function save_parameter( $parameter = null, $value = null ){
   global $current_business_plan;
   $updated = false;
-  uber_log('🔔 running save_parameter with $value = ' . print_r( $value, true ) );
+  uber_log('🔔 running save_parameter for `' . $parameter . '` with $value = ' . print_r( $value, true ) );
   if( is_null( $parameter ) )
     return new \WP_Error( 'nullparameter', __( 'Parameter is null.', 'bizplanner' ) );
 
-  uber_log('🔔 checked if $parameter is_null() and PASSED.');
   $logged_value = '';
 
   switch( $parameter ){
@@ -157,7 +156,7 @@ function save_parameter( $parameter = null, $value = null ){
     default:
       $logged_value = ( is_array( $value ) )? print_r( $value, true ) : $value ;
       if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
-        uber_log('🔔 $parameter = ' . $parameter . ' $value = ' . print_r($value,true) );
+        uber_log('🔔 running update_field(' . $parameter . ', ' . print_r($value,true) . ', ' . $current_business_plan['ID'] . ' );' );
         $updated = update_field( $parameter, $value, $current_business_plan['ID'] );
       } else {
         return new \WP_Error( 'nocurrentbizplan', __( 'No current business plan found.', 'bizplanner' ) );
