@@ -26,7 +26,7 @@ get_template_part( 'lib/partials/layout', 'sidebar' );
             break;
 
           default:
-          get_template_part( 'lib/partials/question', 'form' );
+            get_template_part( 'lib/partials/question', 'form' );
         }
         ?>
       </div><!-- .row -->
