@@ -28,7 +28,7 @@ function new_business_plan_button(){
         'company_name' => get_field( 'company_name', $post ),
         'product' => get_field( 'product', $post ),
         'description' => get_field( 'description', $post ),
-        'view_url'  => home_url( 'question/finanical-plan/' ),
+        'view_url'  => home_url( 'question/financial-plan/' ),
         'edit_url'  => home_url( 'question/company-name/' ),
       ];
     }
