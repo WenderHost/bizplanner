@@ -12,9 +12,10 @@ function get_current_business_plan(){
   $current_business_plan = null;
   $business_plan_id = null;
 
-  $current_user_id = get_current_user_id();
-  if( ! $current_user_id )
+  $current_user = wp_get_current_user();
+  if( ! $current_user )
     return false;
+  $current_user_id = $current_user->ID;
 
   if( isset( $_COOKIE['bpid'] ) && is_numeric( $_COOKIE['bpid'] ) && 'business-plan' == get_post_type( $_COOKIE['bpid'] ) ){
     $business_plan_post = get_post( $_COOKIE['bpid'] );
@@ -75,6 +76,8 @@ function get_current_business_plan(){
   $business_plan['title'] = get_the_title( $business_plan_id );
 
   // Get User meta
+  $business_plan['user']['firstname'] = $current_user->user_firstname;
+  $business_plan['user']['lastname'] = $current_user->user_lastname;
   $user_meta_fields = ['school','grade','avatar'];
   foreach( $user_meta_fields as $meta_field ){
     $business_plan['user'][ $meta_field ] = get_user_meta( $current_user_id, $meta_field, true );
@@ -89,6 +92,24 @@ function get_current_business_plan(){
       $business_plan[ $prop ] = null;
   }
 
+  // Initial Financial Plan vars
+  $financial_plan_array_keys = ['cost_per_unit','revenue','material_costs','operating_expenses','production_costs','net_profit','profitable','cash_reserves','positive_cash_reserves'];
+  foreach( $financial_plan_array_keys as $key ){
+    $business_plan['financial_plan'][ $key ] = null;
+  }
+
+  // Peform calculations for Financial Plan
+  if( $business_plan['ID'] && is_numeric( $business_plan['ID'] ) ){
+    $business_plan['financial_plan']['cost_per_unit'] = $business_plan['production_costs']; // This is a "kludge" due to our original spec having production_costs == cost_per_unit
+    $business_plan['financial_plan']['revenue'] = ( array_key_exists( 'product_price', $business_plan ) )? $business_plan['product_price'] * $business_plan['quantity'] : null;
+    $business_plan['financial_plan']['material_costs'] = ( array_key_exists( 'quantity', $business_plan ) )? $business_plan['production_costs'] * $business_plan['quantity'] : null;
+    $business_plan['financial_plan']['operating_expenses'] = $business_plan['management_team_cost'] + $business_plan['marketing_methods_cost'];
+    $business_plan['financial_plan']['production_costs'] = $business_plan['financial_plan']['material_costs'] + $business_plan['company_facility_cost'];
+    $business_plan['financial_plan']['net_profit'] = floatval( $business_plan['financial_plan']['revenue'] - ( $business_plan['financial_plan']['production_costs'] + $business_plan['financial_plan']['operating_expenses'] ) );
+    $business_plan['financial_plan']['profitable'] = ( 0 > $business_plan['financial_plan']['net_profit'] )? false : true ;
+    $business_plan['financial_plan']['cash_reserves'] = $business_plan['financial_plan']['net_profit'] + $business_plan['startup_funding_source_cost'];
+    $business_plan['financial_plan']['positive_cash_reserves'] = ( 0 > ( $business_plan['financial_plan']['net_profit'] + $business_plan['startup_funding_source_cost'] ))? false : true ;
+  }
   //uber_log( '🔔 PROCESSED $business_plan = ' . print_r( $business_plan, true ) );
 
   return $business_plan;
