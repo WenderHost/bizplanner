@@ -1,0 +1,114 @@
+<style>
+#financial-plan h1{font-size: 1.6rem; margin: 0;}
+#financial-plan h2{font-size: 1.5rem; font-weight: bold; padding-top: .5em; border-top: 1px solid rgb(222, 226, 230);}
+#financial-plan h3{font-size: 1.2rem; font-weight: bold;}
+#financial-plan{padding-top: 1em;}
+#financial-plan .row{margin-bottom: 1rem;}
+</style>
+<div id="financial-plan">
+  <div class="row">
+    <div class="col" style="display: flex; flex-direction: column; justify-content: center;"><h1 class="title">Business Plan<br>{{current_business_plan.company_name}}</h1></div>
+    <div class="col text-end"><img src="{{logo}}" alt="Entreprenuerial Xchange" width="220" /></div>
+  </div>
+  <div class="row">
+    <div class="col"><strong>Student:</strong> {{current_business_plan.user.firstname}} {{current_business_plan.user.lastname}}</div>
+    <div class="col"><strong>Grade:</strong> {{current_business_plan.user.grade}}</div>
+    <div class="col"><strong>School:</strong> {{current_business_plan.user.school}}</div>
+  </div>
+  <div class="row">
+    <div class="col"><strong>Product Description:</strong><br>{{current_business_plan.product_description}}</div>
+    <div class="col"><strong>Tagline/Slogan:</strong><br>{{current_business_plan.tagline_or_slogan}}</div>
+  </div>
+<h2>Marketing and Sales Plan</h2>
+<div class="row">
+  <div class="col">
+    <strong>Product:</strong> {{current_business_plan.product}}<br>
+    <strong>Category:</strong> {{processarray current_business_plan.product_category}}<br>
+    <strong>Description:</strong> {{current_business_plan.product_description}}<br>
+    <strong>Competitors:</strong> {{current_business_plan.competitors}}<br>
+    <strong>Differences:</strong> {{current_business_plan.differences}}
+  </div>
+</div>
+<h3>Pricing Plan</h3>
+<div class="row">
+  <div class="col-6"><strong>Price:</strong> {{current_business_plan.product_price}}</div>
+  <div class="col-6"><strong>First Year Sales:</strong> {{numberformat current_business_plan.quantity}}</div>
+</div>
+<h3>Sales Distribution</h3>
+<div class="row">
+  <div class="col">
+    <strong>Customers:</strong> {{processarray current_business_plan.customers}}<br>
+    <strong>Retail Sales:</strong> {{processarray current_business_plan.retail_sale}}<br>
+    <strong>Direct Sales:</strong> {{processarray current_business_plan.direct_sale}}
+  </div>
+</div>
+<h3>Marketing Methods</h3>
+<div class="row">
+  <div class="col">
+    {{processarray current_business_plan.marketing_methods}}
+  </div>
+</div>
+
+<h2>Operatings/Manufacturing Plan</h2>
+<div class="row">
+  <div class="col">
+    <strong>Production:</strong> {{processarray current_business_plan.production_methods}}<br>
+    <strong>Product Cost:</strong> ${{current_business_plan.financial_plan.cost_per_unit}}<br>
+    <strong>Manufacturing Quantity:</strong> {{numberformat current_business_plan.quantity}}<br>
+    <strong>Company Facilities:</strong> {{processarray current_business_plan.company_facility}}
+  </div>
+</div>
+
+<h2>Management Team</h2>
+<div class="row">
+  <div class="col">
+    {{processarray current_business_plan.management_team}}
+  </div>
+</div>
+
+<h2>Financial Plan</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <th style="width: 55%;">Income/Revenue Goal <span style="font-size: .8em; font-weight: normal;">({{numberformat current_business_plan.quantity}} sold x ${{current_business_plan.product_price}}/<em>{{current_business_plan.product}}</em>)</span></th>
+      <td class="total-cell pad-right" style="width: 45%;">${{numberformat current_business_plan.financial_plan.revenue}}</td>
+    </tr>
+    <tr>
+      <th>Production Costs</th>
+      <td class="total-cell">${{numberformat current_business_plan.financial_plan.production_costs}} &boxdl;</td>
+    </tr>
+    <tr>
+      <td>&bull; Product Costs (${{current_business_plan.financial_plan.cost_per_unit}} <span style="font-size: .8em;">per</span> <em style="font-size: .8em;">{{current_business_plan.product}}</em> x {{numberformat current_business_plan.quantity}})</td>
+      <td style="text-align: right;">${{numberformat current_business_plan.financial_plan.material_costs}}</td>
+    </tr>
+    <tr>
+      <td>&bull; Facility Expenses</td>
+      <td style="text-align: right;">${{numberformat current_business_plan.company_facility_cost}}</td>
+    </tr>
+    <tr>
+      <th>Operating Expenses</th>
+      <td class="total-cell">${{numberformat current_business_plan.financial_plan.operating_expenses}} &boxdl;</td>
+    </tr>
+    <tr>
+      <td>&bull; Management Labor</td>
+      <td style="text-align: right;">${{numberformat current_business_plan.management_team_cost}}</td>
+    </tr>
+    <tr>
+      <td>&bull; Marketing/Advertising Expenses</td>
+      <td style="text-align: right;">${{numberformat current_business_plan.marketing_methods_cost}}</td>
+    </tr>
+    <tr>
+      <th>Net Profit</th>
+      <td class="total-cell pad-right{{#if current_business_plan.financial_plan.profitable}} positive{{else}} negative{{/if}}">${{numberformat current_business_plan.financial_plan.net_profit}}</td>
+    </tr>
+    <tr>
+      <th>Startup Funding</th>
+      <td class="total-cell pad-right">${{numberformat current_business_plan.startup_funding_source_cost}}</td>
+    </tr>
+    <tr>
+      <th>Cash Reserves</th>
+      <td class="total-cell pad-right{{#if current_business_plan.financial_plan.positive_cash_reserves}}{{else}} negative{{/if}}">${{numberformat current_business_plan.financial_plan.cash_reserves}}</td>
+    </tr>
+  </tbody>
+</table>
+</div><!-- #financial-plan -->
