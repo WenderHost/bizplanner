@@ -66,11 +66,34 @@ document.addEventListener("DOMContentLoaded", function(){
   const form = document.getElementById('bizplanner-form');
   const btnNextPrev = document.querySelectorAll('a.btn-nextprev');
   const btnSidebarNav = document.querySelectorAll('#sidebar-nav a.nav-link');
+  let saved = true;
 
   if( form ){
     const submitButton = form.querySelector("#bizplanner-form button[type='submit']");
     const submitButtonText = form.querySelector("#bizplanner-form button[type='submit'] span");
     const responseMessage = document.getElementById("response-message");
+
+    function checkChanges(){
+      let formFields = form.elements;
+      for( var i = 0; i < formFields.length; i ++ ){
+        if( formFields[i].type !== 'button' && formFields[i].value !== formFields[i].defaultValue ){
+          saved = false;
+          break;
+        }
+      }
+      console.log('Form saved status :', saved);
+    }
+
+    // Add event listeners to form fields to detect changes
+    let formFields = form.elements;
+
+    for (var i = 0; i < formFields.length; i++) {
+      if (formFields[i].type !== "button") {
+        formFields[i].addEventListener("change", function() {
+            saved = false;
+        });
+      }
+    }
 
     /**
      * Handles saving our form data.
@@ -102,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function(){
       xhr.onload = function() {
         if (xhr.status === 200) {
           // The request was successful
+          saved = true;
           console.log("AJAX request successful!");
           console.log(xhr.responseText);
           // You can handle the response data here
@@ -136,27 +160,35 @@ document.addEventListener("DOMContentLoaded", function(){
     btnNextPrev.forEach( (btn) => {
       var href = btn.href;
       btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        btn.disabled = true;
-        btn.innerHTML = 'Saving... One moment.';
-        //console.info('this =', this );
-        saveForm();
-        setTimeout( () => {
-          window.location.href = href;
-        }, 2000);
+        if( saved ){
+          console.log('Form is saved. Not auto-saving.');
+        } else {
+          e.preventDefault();
+          btn.disabled = true;
+          btn.innerHTML = 'Saving... One moment.';
+          //console.info('this =', this );
+          saveForm();
+          setTimeout( () => {
+            window.location.href = href;
+          }, 2000);
+        }
       });
     });
     btnSidebarNav.forEach( (btn) => {
       var href = btn.href;
       btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        btn.disabled = true;
-        //btn.innerHTML = 'Saving... One moment.';
-        //console.info('this =', this );
-        saveForm();
-        setTimeout( () => {
-          window.location.href = href;
-        }, 850);
+        if( saved ){
+          console.log('Form is saved. Not auto-saving.');
+        } else {
+          e.preventDefault();
+          btn.disabled = true;
+          //btn.innerHTML = 'Saving... One moment.';
+          //console.info('this =', this );
+          saveForm();
+          setTimeout( () => {
+            window.location.href = href;
+          }, 850);
+        }
       });
     });
 
