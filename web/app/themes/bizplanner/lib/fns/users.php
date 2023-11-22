@@ -95,14 +95,14 @@ function get_current_business_plan(){
   // Initial Financial Plan vars
   $financial_plan_array_keys = ['cost_per_unit','revenue','material_costs','operating_expenses','production_costs','net_profit','profitable','cash_reserves','positive_cash_reserves'];
   foreach( $financial_plan_array_keys as $key ){
-    $business_plan['financial_plan'][ $key ] = null;
+    $business_plan['financial_plan'][ $key ] = 0;
   }
 
   // Peform calculations for Financial Plan
   if( $business_plan['ID'] && is_numeric( $business_plan['ID'] ) ){
     $business_plan['financial_plan']['cost_per_unit'] = $business_plan['production_costs']; // This is a "kludge" due to our original spec having production_costs == cost_per_unit
-    $business_plan['financial_plan']['revenue'] = ( array_key_exists( 'product_price', $business_plan ) )? $business_plan['product_price'] * $business_plan['quantity'] : null;
-    $business_plan['financial_plan']['material_costs'] = ( array_key_exists( 'quantity', $business_plan ) )? $business_plan['production_costs'] * $business_plan['quantity'] : null;
+    $business_plan['financial_plan']['revenue'] = ( array_key_exists( 'product_price', $business_plan ) && is_numeric( $business_plan['product_price'] ) && is_numeric( $business_plan['quantity'] ) )? $business_plan['product_price'] * $business_plan['quantity'] : 0;
+    $business_plan['financial_plan']['material_costs'] = ( array_key_exists( 'quantity', $business_plan ) && is_numeric( $business_plan['production_costs'] ) && is_numeric( $business_plan['quantity'] ) )? $business_plan['production_costs'] * $business_plan['quantity'] : 0;
     $business_plan['financial_plan']['operating_expenses'] = $business_plan['management_team_cost'] + $business_plan['marketing_methods_cost'];
     $business_plan['financial_plan']['production_costs'] = $business_plan['financial_plan']['material_costs'] + $business_plan['company_facility_cost'];
     $business_plan['financial_plan']['net_profit'] = floatval( $business_plan['financial_plan']['revenue'] - ( $business_plan['financial_plan']['production_costs'] + $business_plan['financial_plan']['operating_expenses'] ) );
