@@ -65,7 +65,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
 </div>
 <h3>Pricing Plan</h3>
 <div class="row">
-  <div class="col-6"><strong>Price:</strong> '.htmlspecialchars((string)((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['product_price'])) ? $in['current_business_plan']['product_price'] : null), ENT_QUOTES, 'UTF-8').'</div>
+  <div class="col-6"><strong>Price:</strong> $'.htmlspecialchars((string)((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['product_price'])) ? $in['current_business_plan']['product_price'] : null), ENT_QUOTES, 'UTF-8').'</div>
   <div class="col-6"><strong>First Year Sales:</strong> '.htmlspecialchars((string)LR::hbch($cx, 'numberformat', array(array(((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['quantity'])) ? $in['current_business_plan']['quantity'] : null)),array()), 'enc', $in), ENT_QUOTES, 'UTF-8').'</div>
 </div>
 <h3>Sales Distribution</h3>
