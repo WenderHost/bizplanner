@@ -85,11 +85,11 @@ function get_current_business_plan(){
   if( empty( $business_plan['user']['avatar'] ) )
     $business_plan['user']['avatar'] = 0;
 
-  // Initialize taxonomies as an empty array
+  // Initialize taxonomies as `null`
   $array_properties = [ 'product_category', 'marketing_methods', 'production_methods', 'company_facility', 'startup_funding_source' ];
   foreach( $array_properties as $prop ){
     if( ! array_key_exists( $prop, $business_plan ) )
-      $business_plan[ $prop ] = [];
+      $business_plan[ $prop ] = null;
   }
 
   // Initialize `string` properties as `null`
@@ -100,7 +100,7 @@ function get_current_business_plan(){
   }
 
   // Initialize `numeric` properties with a value of "0"
-  $numeric_properties = [ 'ID', 'production_costs' ];
+  $numeric_properties = [ 'ID', 'production_costs', 'quantity' ];
   foreach( $numeric_properties as $prop ){
     if( ! array_key_exists( $prop, $business_plan ) )
       $business_plan[ $prop ] = 0;
@@ -115,7 +115,7 @@ function get_current_business_plan(){
   // Peform calculations for Financial Plan
   if( $business_plan['ID'] && is_numeric( $business_plan['ID'] ) ){
     $business_plan['financial_plan']['cost_per_unit'] = $business_plan['production_costs']; // This is a "kludge" due to our original spec having production_costs == cost_per_unit
-    $business_plan['financial_plan']['revenue'] = ( array_key_exists( 'product_price', $business_plan ) && is_numeric( $business_plan['product_price'] ) && is_numeric( $business_plan['quantity'] ) )? $business_plan['product_price'] * $business_plan['quantity'] : 0;
+    $business_plan['financial_plan']['revenue'] = ( array_key_exists( 'product_price', $business_plan ) && is_numeric( $business_plan['product_price'] ) && array_key_exists( 'quantity', $business_plan ) && is_numeric( $business_plan['quantity'] ) )? $business_plan['product_price'] * $business_plan['quantity'] : 0;
     $business_plan['financial_plan']['material_costs'] = ( array_key_exists( 'quantity', $business_plan ) && is_numeric( $business_plan['production_costs'] ) && is_numeric( $business_plan['quantity'] ) )? $business_plan['production_costs'] * $business_plan['quantity'] : 0;
     $business_plan['financial_plan']['operating_expenses'] = $business_plan['management_team_cost'] + $business_plan['marketing_methods_cost'];
     $business_plan['financial_plan']['production_costs'] = $business_plan['financial_plan']['material_costs'] + $business_plan['company_facility_cost'];
