@@ -46,7 +46,9 @@ function register_bizplanner_api(){
 
         wp_send_json( $response, $status_code );
     },
-    'permission_callback' => '__return_true',
+    'permission_callback' => function() {
+      return current_user_can( 'publish_business-plans' );
+    },
   ]);
 
 
@@ -58,7 +60,9 @@ function register_bizplanner_api(){
     'callback'  => function( \WP_REST_Request $request ){
       // CODE GOES HERE
     },
-    'permission_callback' => '__return_true',
+    'permission_callback' => function(){
+      return current_user_can( 'read_business-plan' );
+    },
   ]);
 
   /**
@@ -110,7 +114,9 @@ function register_bizplanner_api(){
       }
       wp_send_json( $response, $status_code );
     },
-    'permission_callback' => '__return_true',
+    'permission_callback' => function(){
+      return current_user_can( 'edit_business-plan' );
+    },
   ]);
 
   /**
@@ -121,7 +127,9 @@ function register_bizplanner_api(){
     'callback'  => function( \WP_REST_Request $request ){
       // CODE GOES HERE
     },
-    'permission_callback' => '__return_true',
+    'permission_callback' => function(){
+      return current_user_can( 'delete_business-plan' );
+    },
   ]);
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\\register_bizplanner_api' );
