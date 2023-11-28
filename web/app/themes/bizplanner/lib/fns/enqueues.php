@@ -15,6 +15,7 @@ function hello_elementor_child_scripts_styles() {
 
   wp_enqueue_script( 'font-awesome', 'https://kit.fontawesome.com/f4de4ed03f.js', null, '1.0.0', false );
 
+  $bizplanner_js = ( 'development' != BP_ENV )? 'bizplanner-dist.js' : 'bizplanner.js' ;
   wp_enqueue_script( 'bizplanner', get_stylesheet_directory_uri() . '/lib/js/bizplanner.js', null, filemtime( dirname( __FILE__ ) . '/../js/bizplanner.js' ), true );
   // Localize the bizplanner script and provide the BPID:
   $bpid = ( isset( $_COOKIE['bpid'] ) && is_numeric( $_COOKIE['bpid'] ) )? $_COOKIE['bpid'] : null ;

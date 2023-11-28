@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "concat:js": "globcat web/app/themes/bizplanner/lib/js/scripts/*.js --output web/app/themes/bizplanner/lib/js/bizplanner.js",
+    "uglify:js": "uglifyjs web/app/themes/bizplanner/lib/js/bizplanner.js --compress --mangle --output web/app/themes/bizplanner/lib/js/bizplanner-dist.js",
     "build": "npm run sass:prod && npm run build:js",
     "build:css": "npm-run-all --parallel sass:*",
-    "build:js": "npm run concat:js",
+    "build:js": "npm run concat:js && npm run uglify:js",
     "sass:dev": "sass --update --style=expanded web/app/themes/bizplanner/lib/scss:web/app/themes/bizplanner/lib/css",
     "sass:prod": "sass --no-source-map --style=compressed web/app/themes/bizplanner/lib/scss:web/app/themes/bizplanner/lib/css/dist",
     "watch:css": "onchange 'web/app/themes/bizplanner/lib/scss/assets/*.scss' -- npm run build:css",
