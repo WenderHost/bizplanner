@@ -85,11 +85,25 @@ function get_current_business_plan(){
   if( empty( $business_plan['user']['avatar'] ) )
     $business_plan['user']['avatar'] = 0;
 
-  // Ensure all properties are initialized:
-  $business_plan_properties = [ 'ID', 'company_name', 'product', 'product_description', 'product_category', 'marketing_methods', 'production_methods', 'company_facility', 'startup_funding_source' ];
-  foreach( $business_plan_properties as $prop ){
+  // Initialize taxonomies as an empty array
+  $array_properties = [ 'product_category', 'marketing_methods', 'production_methods', 'company_facility', 'startup_funding_source' ];
+  foreach( $array_properties as $prop ){
+    if( ! array_key_exists( $prop, $business_plan ) )
+      $business_plan[ $prop ] = [];
+  }
+
+  // Initialize `string` properties as `null`
+  $string_properties = [ 'company_name', 'product', 'product_description' ];
+  foreach( $string_properties as $prop ){
     if( ! array_key_exists( $prop, $business_plan ) )
       $business_plan[ $prop ] = null;
+  }
+
+  // Initialize `numeric` properties with a value of "0"
+  $numeric_properties = [ 'ID', 'production_costs' ];
+  foreach( $numeric_properties as $prop ){
+    if( ! array_key_exists( $prop, $business_plan ) )
+      $business_plan[ $prop ] = 0;
   }
 
   // Initial Financial Plan vars
