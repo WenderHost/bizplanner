@@ -1,7 +1,12 @@
 <?php
 
-// Add a custom user role called "Student"
+/**
+ * Adds a custom user role called "Student".
+ */
 function add_student_role() {
+  $business_plan_capabilities = [ 'edit_business-plan', 'read_business-plan', 'delete_business-plan', 'edit_published_business-plans', 'publish_business-plans', 'read_private_business-plans', 'edit_private_business-plans' ];
+
+  if( ! get_role( 'student' ) ){
     add_role(
         'student',
         __('Student'),
@@ -15,21 +20,25 @@ function add_student_role() {
             'edit_private_posts' => true,
         )
     );
-}
-add_action('init', 'add_student_role');
-
-// Add capabilities for the "business-plan" custom post type
-function add_student_caps() {
-    // Get the "Student" role
     $student_role = get_role('student');
+    $admin_role = get_role('administrator');
+    $editor_role = get_role('editor');
 
-    // Add capabilities for the "business-plan" CPT
-    $student_role->add_cap('edit_business-plan');
-    $student_role->add_cap('read_business-plan');
-    $student_role->add_cap('delete_business-plan');
-    $student_role->add_cap('edit_published_business-plans');
-    $student_role->add_cap('publish_business-plans');
-    $student_role->add_cap('read_private_business-plans');
-    $student_role->add_cap('edit_private_business-plans');
+    foreach( $business_plan_capabilities as $cap ){
+      $student_role->add_cap( $cap );
+      $admin_role->add_cap( $cap );
+      $editor_role->add_cap( $cap );
+    }
+  }
 }
-add_action('init', 'add_student_caps');
+add_action( 'after_switch_theme', 'add_student_role' );
+
+/**
+ * Removes a student role.
+ */
+function remove_student_role(){
+  $student_role = get_role( 'student' );
+  if( $student_role )
+    remove_role( 'student' );
+}
+add_action( 'switch_theme', 'remove_student_role' );
