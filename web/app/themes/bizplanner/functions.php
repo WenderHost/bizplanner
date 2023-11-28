@@ -42,7 +42,6 @@ require_once( BP_DIR . 'lib/fns/utilities.php' );
  * Shortcode includes for logic found in /lib/shortcodes/
  */
 require_once( BP_DIR . 'lib/shortcodes/bpdata.php' );
-//require_once( BP_DIR . 'lib/shortcodes/makepdf.php' );
 require_once( BP_DIR . 'lib/shortcodes/new_business_plan_button.php' );
 require_once( BP_DIR . 'lib/shortcodes/next-prev-navigation.php' );
 require_once( BP_DIR . 'lib/shortcodes/page_numbers.php' );
