@@ -32,14 +32,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     );
     
     $inary=is_array($in);
-    return '<style>
-#financial-plan h1{font-size: 1.6rem; margin: 0;}
-#financial-plan h2{font-size: 1.5rem; font-weight: bold; padding-top: .5em; border-top: 1px solid rgb(222, 226, 230);}
-#financial-plan h3{font-size: 1.2rem; font-weight: bold;}
-#financial-plan{padding-top: 1em;}
-#financial-plan .row{margin-bottom: 1rem;}
-</style>
-<div id="financial-plan">
+    return '<div id="financial-plan">
   <div class="row">
     <div class="col" style="display: flex; flex-direction: column; justify-content: center;"><h1 class="title">Business Plan<br>'.htmlspecialchars((string)((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['company_name'])) ? $in['current_business_plan']['company_name'] : null), ENT_QUOTES, 'UTF-8').'</h1></div>
     <div class="col text-end"><img src="'.htmlspecialchars((string)(($inary && isset($in['logo'])) ? $in['logo'] : null), ENT_QUOTES, 'UTF-8').'" alt="Entreprenuerial Xchange" width="220" /></div>
@@ -83,7 +76,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
   </div>
 </div>
 
-<h2>Operatings/Manufacturing Plan</h2>
+<h2>Operating/Manufacturing Plan</h2>
 <div class="row">
   <div class="col">
     <strong>Production:</strong> '.htmlspecialchars((string)LR::hbch($cx, 'processarray', array(array(((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['production_methods'])) ? $in['current_business_plan']['production_methods'] : null)),array()), 'enc', $in), ENT_QUOTES, 'UTF-8').'<br>
@@ -92,14 +85,13 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     <strong>Company Facilities:</strong> '.htmlspecialchars((string)LR::hbch($cx, 'processarray', array(array(((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['company_facility'])) ? $in['current_business_plan']['company_facility'] : null)),array()), 'enc', $in), ENT_QUOTES, 'UTF-8').'
   </div>
 </div>
-
-<h2>Management Team</h2>
+'.((LR::ifvar($cx, ((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['management_team'])) ? $in['current_business_plan']['management_team'] : null), false)) ? '<h2>Management Team</h2>
 <div class="row">
   <div class="col">
     '.htmlspecialchars((string)LR::hbch($cx, 'processarray', array(array(((isset($in['current_business_plan']) && is_array($in['current_business_plan']) && isset($in['current_business_plan']['management_team'])) ? $in['current_business_plan']['management_team'] : null)),array()), 'enc', $in), ENT_QUOTES, 'UTF-8').'
   </div>
 </div>
-
+' : '').'
 <h2>Financial Plan</h2>
 <table class="table">
   <tbody>

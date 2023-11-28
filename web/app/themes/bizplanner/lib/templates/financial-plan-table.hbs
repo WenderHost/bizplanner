@@ -1,0 +1,138 @@
+<table class="table">
+  <tr>
+    <td>
+      <h1 class="title" style="font-size: 28px; font-weight: bold; text-transform: uppercase;">Business Plan</h1>
+      <h2 style="font-size: 18px; font-weight: bold;">{{current_business_plan.company_name}}</h2>
+    </td>
+    <td style="text-align: right;"><img src="{{logo}}" alt="Entreprenuerial Xchange" width="140" /></td>
+  </tr>
+</table>
+<div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+<table class="table">
+  <tr>
+    <td style="width: 40%;"><span style="font-weight: bold;">Student:</span> {{current_business_plan.user.firstname}} {{current_business_plan.user.lastname}}</td>
+    <td style="width: 20%;"><span style="font-weight: bold;">Grade:</span> {{current_business_plan.user.grade}}</td>
+    <td style="width: 40%;"><span style="font-weight: bold;">School:</span> {{current_business_plan.user.school}}</td>
+  </tr>
+  <tr>
+    <td colspan="2"><span style="font-weight: bold;">Product Description:</span><br>{{current_business_plan.product_description}}</td>
+    <td><span style="font-weight: bold;">Tagline/Slogan:</span><br>{{current_business_plan.tagline_or_slogan}}</td>
+  </tr>
+</table>
+<div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+<h2 style="font-size: 18px; font-weight: bold; text-transform: uppercase;">Marketing and Sales Plan</h2>
+<table class="table">
+  <tr>
+    <td style="width: 15%;"><span style="font-weight: bold;">Product:</span> </td>
+    <td style="width: 85%;">{{current_business_plan.product}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Category:</span> </td>
+    <td>{{processarray current_business_plan.product_category}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Description:</span> </td>
+    <td>{{current_business_plan.product_description}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Competitors:</span> </td>
+    <td>{{current_business_plan.competitors}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Differences:</span> </td>
+    <td>{{current_business_plan.differences}}</td>
+  </tr>
+</table>
+<h3 style="font-size: 15px; font-weight: bold;">Pricing Plan</h3>
+<table class="table">
+  <tr>
+    <td style="width: 50%;"><span style="font-weight: bold;">Price:</span> ${{current_business_plan.product_price}}</td>
+    <td style="width: 50%;"><span style="font-weight: bold;">First Year Sales:</span> {{numberformat current_business_plan.quantity}}</td>
+  </tr>
+</table>
+<h3 style="font-size: 15px; font-weight: bold;">Sales Distribution</h3>
+<table class="table">
+  <tr>
+    <td style="width: 15%;"><span style="font-weight: bold;">Customers:</span> </td>
+    <td style="width: 85%;">{{processarray current_business_plan.customers}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Retail Sales:</span> </td>
+    <td>{{processarray current_business_plan.retail_sale}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Direct Sales:</span> </td>
+    <td>{{processarray current_business_plan.direct_sale}}</td>
+  </tr>
+</table>
+<h3 style="font-size: 15px; font-weight: bold;">Marketing Methods</h3>
+{{processarray current_business_plan.marketing_methods}}
+<div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+<h2 style="font-size: 18px; font-weight: bold; text-transform: uppercase;">Operating/Manufacturing Plan</h2>
+<table class="table">
+  <tr>
+    <td style="width: 25%;"><span style="font-weight: bold;">Production:</span> </td>
+    <td style="width: 75%;">{{processarray current_business_plan.production_methods}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Product Cost:</span> </td>
+    <td>${{current_business_plan.financial_plan.cost_per_unit}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Manufacturing Quantity:</span> </td>
+    <td>{{numberformat current_business_plan.quantity}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Company Facilities:</span> </td>
+    <td>{{processarray current_business_plan.company_facility}}</td>
+  </tr>
+</table>
+{{#if current_business_plan.management_team}}
+<div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+<h2 style="font-size: 18px; font-weight: bold; text-transform: uppercase;">Management Team</h2>
+{{processarray current_business_plan.management_team}}
+{{/if}}
+<div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+<h2 style="font-size: 18px; font-weight: bold; text-transform: uppercase;">Financial Plan</h2>
+<table cellPadding="5" class="table" style="border-collapse: collapse;">
+  <tr bgcolor="#f1f1f1">
+    <td border="1" style="width: 80%; border: 1px solid #eee;"><span style="font-weight: bold;">Income/Revenue Goal</span> <span style="font-size: .8em; font-weight: normal;">({{numberformat current_business_plan.quantity}} sold x ${{current_business_plan.product_price}}/<em>{{current_business_plan.product}}</em>)</span></td>
+    <td style="width: 20%; text-align: right; padding-right: 18px; font-weight: bold;">${{numberformat current_business_plan.financial_plan.revenue}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Production Costs</span></td>
+    <td style="text-align: right; font-weight: bold;">${{numberformat current_business_plan.financial_plan.production_costs}} ↴</td>
+  </tr>
+  <tr bgcolor="#f1f1f1">
+    <td><span style="font-weight: bold;"> • Product Costs (${{current_business_plan.financial_plan.cost_per_unit}} <span style="font-size: .8em;">per</span> <em style="font-size: .8em;">{{current_business_plan.product}}</em> x {{numberformat current_business_plan.quantity}})</span></td>
+    <td style="text-align: right;">${{numberformat current_business_plan.financial_plan.material_costs}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;"> • Facility Expenses</td>
+    <td style="text-align: right;">${{numberformat current_business_plan.company_facility_cost}}</td>
+  </tr>
+  <tr bgcolor="#f1f1f1">
+    <td><span style="font-weight: bold;">Operating Expenses</span></td>
+    <td style="text-align: right; font-weight: bold;">${{numberformat current_business_plan.financial_plan.operating_expenses}} ↴</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;"> • Management Labor</td>
+    <td style="text-align: right;">${{numberformat current_business_plan.management_team_cost}}</td>
+  </tr>
+  <tr bgcolor="#f1f1f1">
+    <td><span style="font-weight: bold;"> • Marketing/Advertising Expenses</td>
+    <td style="text-align: right;">${{numberformat current_business_plan.marketing_methods_cost}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Net Profit</span></td>
+    <td style="text-align: right; font-weight: bold; padding-right: 18px;{{#if current_business_plan.financial_plan.profitable}}{{else}} color: #f00;{{/if}}">${{numberformat current_business_plan.financial_plan.net_profit}}</td>
+  </tr>
+  <tr bgcolor="#f1f1f1">
+    <td><span style="font-weight: bold;">Startup Funding</span></td>
+    <td style="text-align: right; font-weight: bold; padding-right: 18px;">${{numberformat current_business_plan.startup_funding_source_cost}}</td>
+  </tr>
+  <tr>
+    <td><span style="font-weight: bold;">Cash Reserves</span></td>
+    <td style="text-align: right; font-weight: bold; padding-right: 18px;{{#if current_business_plan.financial_plan.positive_cash_reserves}}{{else}} color: #f00;{{/if}}">${{numberformat current_business_plan.financial_plan.cash_reserves}}</td>
+  </tr>
+</table>

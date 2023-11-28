@@ -1,6 +1,7 @@
 <?php
 
 namespace BizPlanner\makepdf;
+use function BizPlanner\templates\{render_template};
 
 function custom_pdf_route(){
   add_rewrite_rule( '^print-business-plan/?', 'index.php?print-business-plan=true', 'top' );
@@ -20,27 +21,23 @@ function generate_content(){
 function custom_pdf_output() {
   if ( get_query_var( 'print-business-plan' ) ) {
     // Generate PDF content
-    $post = get_page_by_path( 'view/' );
-    $pluginElementor = \Elementor\Plugin::instance();
+    global $current_business_plan;
+    $stylesheet_1 = file_get_contents( BP_DIR . 'lib/niceadmin/assets/vendor/bootstrap/css/bootstrap.min.css' );
+    $stylesheet_2 = file_get_contents( BP_DIR . 'lib/niceadmin/assets/css/style.css' );
+    $stylesheet_3 = 'body{background-color: #fff; font-size: 12px;}';
 
-    ob_start();
-    wp_head();
-    $html = ob_get_clean();
-
-    $html.= $pluginElementor->frontend->get_builder_content($post->ID);
+    $data = [];
+    $data['current_business_plan'] = $current_business_plan;
+    $data['logo'] = BP_DIR_URI . 'lib/img/ex_logo.jpg';
+    $html = render_template('financial-plan-table', $data );
 
     $mpdf = new \Mpdf\Mpdf();
     $mpdf->setBasePath( home_url( 'print-business-plan/' ) );
-    $mpdf->WriteHTML($html);
+    $mpdf->WriteHTML( $stylesheet_1 . $stylesheet_2 . $stylesheet_3, \Mpdf\HTMLParserMode::HEADER_CSS );
+    $mpdf->WriteHTML( $html, \Mpdf\HTMLParserMode::HTML_BODY );
 
-    $mpdf->Output( 'myfile.pdf', 'D' );
-
-    //// Set headers for PDF download
-    //header('Content-Type: application/pdf');
-    //header('Content-Disposition: attachment; filename="custom-pdf.pdf"');
-
-    //// Output PDF content to the browser
-    //echo $pdfContent;
+    $filename = sanitize_title( $current_business_plan['user']['firstname'] . '-' . $current_business_plan['user']['lastname'] . '_business-plan' );
+    $mpdf->Output( $filename, 'I' );
     exit();
   }
 }
