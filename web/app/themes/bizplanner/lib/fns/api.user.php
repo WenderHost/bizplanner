@@ -81,6 +81,7 @@ function register_user_api(){
           'grade'   => $parameters['grade'],
           'avatar'  => $avatar,
         ],
+        'role'      => 'student',
       ];
       if( ! email_exists( $user_email ) && ! username_exists( $parameters['username'] ) ){
         $user_id = wp_insert_user( $user_args );
