@@ -23,26 +23,6 @@
             "append": ""
         },
         {
-            "key": "field_64f0ff27a3aa6",
-            "label": "Placeholder",
-            "name": "placeholder",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_64f0ff2fa3aa7",
             "label": "Field Type",
             "name": "type",
@@ -216,5 +196,5 @@
     "active": true,
     "description": "Options used to setup Question form pages.",
     "show_in_rest": 0,
-    "modified": 1699642947
+    "modified": 1701289128
 }
