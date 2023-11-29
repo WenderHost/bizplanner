@@ -201,6 +201,7 @@ function save_parameter( $parameter = null, $value = null ){
   $logged_value = '';
 
   switch( $parameter ){
+    /*
     case 'product_category':
       if( array_key_exists( 'ID', $current_business_plan ) && is_numeric( $current_business_plan['ID'] ) && 'business-plan' == get_post_type( $current_business_plan['ID'] ) ){
         if( is_array( $value ) )
@@ -209,6 +210,7 @@ function save_parameter( $parameter = null, $value = null ){
         $updated = update_field( $parameter, $term, $current_business_plan['ID'] );
       }
       break;
+    /**/
 
     default:
       $logged_value = ( is_array( $value ) )? print_r( $value, true ) : $value ;

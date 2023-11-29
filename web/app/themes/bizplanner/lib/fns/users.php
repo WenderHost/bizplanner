@@ -31,16 +31,18 @@ function get_current_business_plan(){
   /**
    * Set the array key for options with a single value to be equal to the option's term_id
    */
+  /*
   $set_single_term_id_as_array_key = [ 'product_category' ];
   foreach( $set_single_term_id_as_array_key as $term_name ){
     if( is_array( $business_plan ) && array_key_exists( $term_name, $business_plan ) && is_object( $business_plan[$term_name] ) )
       $business_plan[$term_name] = [ $business_plan[$term_name]->term_id => $business_plan[$term_name] ];
   }
+  /**/
 
   /**
    * Set the array key for these selected options equal to the option's term_id
    */
-  $set_term_ids_as_array_keys = [ 'marketing_methods', 'customers', 'management_team', 'sales_and_marketing_team', 'retail_sale', 'direct_sale', 'production_methods', 'company_facility', 'startup_funding_source' ];
+  $set_term_ids_as_array_keys = [ 'product_category', 'marketing_methods', 'customers', 'management_team', 'sales_and_marketing_team', 'retail_sale', 'direct_sale', 'production_methods', 'company_facility', 'startup_funding_source' ];
 
   /**
    * Inclue any terms with an ACF `cost` custom field

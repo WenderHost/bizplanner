@@ -61,10 +61,10 @@
             "save_terms": 1,
             "load_terms": 1,
             "return_format": "object",
-            "field_type": "radio",
-            "allow_null": 1,
+            "field_type": "checkbox",
             "bidirectional": 0,
             "multiple": 0,
+            "allow_null": 0,
             "bidirectional_target": []
         },
         {
@@ -432,5 +432,5 @@
     "active": true,
     "description": "These options comprise the data stored in a Business Plan.",
     "show_in_rest": 0,
-    "modified": 1699390858
+    "modified": 1701289238
 }
