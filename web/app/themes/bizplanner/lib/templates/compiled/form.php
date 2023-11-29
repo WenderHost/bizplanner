@@ -46,7 +46,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
 ' : '').'        <form class="g-3" id="bizplanner-form">
           <input type="hidden" name="field_name" value="'.htmlspecialchars((string)(($inary && isset($in['input_name'])) ? $in['input_name'] : null), ENT_QUOTES, 'UTF-8').'" />
           '.(($inary && isset($in['html'])) ? $in['html'] : null).'
-          <button type="submit" class="btn btn-primary" id="form-submit" style="margin-top: 1rem;"><span>Save</span></button>
+          <button type="submit" class="btn btn-primary" id="form-submit" style="margin-top: 1rem; display: none;"><span>Save</span></button>
         </form>
       </div>
     </div>
