@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
 
       newPlanButtonText.innerHTML = 'Setting up plan...';
-      responseMessage.innerHTML = 'One moment. We\'re setting up your new business plan...';
+      responseMessage.innerHTML = 'One moment...';
 
       const xhr = new XMLHttpRequest();
       xhr.open("POST", bpapi.endpoint + 'create', true);
@@ -22,13 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(xhr);
         if (xhr.status === 200) {
           let response = JSON.parse(xhr.response);
-          // Update the button text with the incremented counter
-          // Check if the responseMessage element exists before setting its innerHTML
-          if (responseMessage) {
-            responseMessage.innerHTML = '';
-          }
-
-          responseMessage.innerHTML = "Success! Your new plan is ready. Redirecting you, one moment...";
           setCookie('bpid', response.post_id, 1);
           setTimeout(() => {
 
