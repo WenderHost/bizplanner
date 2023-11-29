@@ -55,9 +55,12 @@
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" name="username" autocapitalize="off" required>
           </div>
-          <div class="col-12">
+          <div class="col-12" style="">
             <label for="visiblePasswordField" class="form-label">Password</label>
-            <input type="text" class="form-control" id="visiblePasswordField" oninput="updateHiddenPasswordField(event)" required>
+            <div style="display: flex; flex-direction: row;">
+              <input type="text" class="form-control" id="visiblePasswordField" oninput="updateHiddenPasswordField(event)" required style="width: 70%; border-radius: 3px 0 0 3px;"><button type="button" id="show-password" class="btn btn-primary btn-sm" style="border-radius: 0 3px 3px 0;" onclick="togglePasswordVisibility()"><i class="bi bi-eye-fill"></i> Show Password</button>
+            </div>
+
             <input type="hidden" id="hiddenPasswordField" name="password">
             <style>
               #passwordMask {
@@ -84,8 +87,24 @@
                 var maskedValue = '•'.repeat(actualPassword.length);
                 document.getElementById("visiblePasswordField").value = maskedValue;
               }
+
+              function togglePasswordVisibility() {
+                  var visiblePasswordField = document.getElementById("visiblePasswordField");
+                  var toggleButton = document.getElementById('show-password');
+
+                  // Toggle between actual password and masked value
+                  if (visiblePasswordField.value === actualPassword) {
+                      var maskedValue = '•'.repeat(actualPassword.length);
+                      visiblePasswordField.value = maskedValue;
+                      toggleButton.innerHTML = '<i class="bi bi-eye-fill"></i> Show Password';
+                  } else {
+                      visiblePasswordField.value = actualPassword;
+                      toggleButton.innerHTML = '<i class="bi bi-eye-slash-fill"></i> Hide Password';
+                  }
+              }
             </script>
           </div>
+
           <div class="col-12">
             <label for="avatar" class="form-label">Your Avatar</label>
             <div class="row">
