@@ -20,7 +20,7 @@ get_template_part( 'lib/partials/layout', 'sidebar' );
         </div>
         <div class="col text-end">
           <?php if( 'financial-plan' == $post->post_name ): ?>
-          <a href="<?= home_url( 'print-business-plan' ) ?>" target="_blank" class="btn btn-primary rounded-pill">Print</a>
+          <a href="<?= home_url( 'print-business-plan' ) ?>" target="_blank" class="btn btn-primary"><i class="bi bi-printer"></i> Generate Business Plan</a>
           <?php endif; ?>
         </div>
       </div>

@@ -20,6 +20,7 @@ function get_next_prev_button( $atts ){
   if( ! $question ){
     $data['url'] = false;
     $data['pagename'] = false;
+    $data['print_url'] = home_url( 'print-business-plan' );
   } else {
     $data['url'] = ( $question )? get_the_permalink( $question ) : false ;
     $data['pagename'] = ( $question )? $question->post_title : false ;

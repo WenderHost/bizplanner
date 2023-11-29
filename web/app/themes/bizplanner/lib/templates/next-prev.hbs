@@ -1,5 +1,13 @@
 {{#if next}}
-<a{{#if url}} href="{{url}}"{{/if}} class="btn btn-nextprev {{#if url}}btn-primary{{else}}btn-light{{/if}}" id="next-question-btn"{{#if url}}{{else}} disabled{{/if}}>Next{{#if pagename}}: {{pagename}}{{/if}} <i class="bi bi-arrow-right-circle"></i></a>
+  {{#if url}}
+    <a href="{{url}}" class="btn btn-nextprev btn-primary" id="next-question-btn">Next{{#if pagename}}: {{pagename}}{{/if}} <i class="bi bi-arrow-right-circle"></i></a>
+  {{else}}
+    <a href="{{print_url}}" target="_blank" class="btn btn-primary"><i class="bi bi-printer"></i> Generate Business Plan</a>
+  {{/if}}
 {{else}}
-<a{{#if url}} href="{{url}}"{{/if}} class="btn btn-nextprev {{#if url}}btn-primary{{else}}btn-light{{/if}}" id="previous-question-btn"{{#if url}}{{else}} disabled{{/if}}><i class="bi bi-arrow-left-circle"></i> Previous{{#if pagename}}: {{pagename}}{{/if}}</a>
+  {{#if url}}
+    <a href="{{url}}" class="btn btn-nextprev btn-primary" id="previous-question-btn"><i class="bi bi-arrow-left-circle"></i> Previous{{#if pagename}}: {{pagename}}{{/if}}</a>
+  {{else}}
+    &nbsp;
+  {{/if}}
 {{/if}}
