@@ -58,6 +58,7 @@ function render_template( $filename = '', $data = [] ){
       'helpers' => array(
         'numberformat' => __NAMESPACE__ . '\\LnC_helper_numberformat',
         'processarray' => __NAMESPACE__ . '\\LnC_helper_processarray',
+        'selected'     => __NAMESPACE__ . '\\LnC_helper_isSelected',
       ),
     ) );
     if ( ! is_writable( dirname( $template['filename_compiled'] ) ) )
@@ -71,6 +72,18 @@ function render_template( $filename = '', $data = [] ){
   $renderer = include( $template['filename_compiled'] );
 
   return $renderer( $data );
+}
+
+/**
+ * Compares the $option_value to the $selected_value
+ *
+ * @param      string  $option_value    The option value
+ * @param      string  $selected_value  The selected value
+ *
+ * @return     string    Returns ` selected="selected"` when the values match
+ */
+function LnC_helper_isSelected( $option_value, $selected_value ){
+  return ( $option_value == $selected_value )? ' selected="selected"' : false;
 }
 
 /**

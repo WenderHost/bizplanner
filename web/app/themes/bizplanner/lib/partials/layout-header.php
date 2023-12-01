@@ -43,13 +43,13 @@ $avatar_url = BP_DIR_URI . 'lib/img/bizplanner-avatar_' . $avatar . '.png';
               <hr class="dropdown-divider">
             </li>
 
-            <!--<li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="<?= home_url( 'my-profile' ) ?>">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
             </li>
-            <li>
+            <!--<li>
               <hr class="dropdown-divider">
             </li>
 
