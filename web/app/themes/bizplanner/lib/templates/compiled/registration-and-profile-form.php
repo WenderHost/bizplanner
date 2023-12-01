@@ -32,7 +32,8 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     
     $inary=is_array($in);
     return '<!-- Vertical Form -->
-<form class="row g-3" id="bizplanner-register">
+<form class="row g-3" id="bizplanner-user-update">
+  <input type="hidden" name="user_id" value="'.htmlspecialchars((string)(($inary && isset($in['current_user_id'])) ? $in['current_user_id'] : null), ENT_QUOTES, 'UTF-8').'" />
   <div class="alert alert-danger response-message fade show" style="display: none;" role="alert"></div>
   <div class="col-md-6">
     <label for="fname" class="form-label">First Name</label>

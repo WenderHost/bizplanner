@@ -95,3 +95,19 @@ function register_user_api(){
   ]);
 }
 add_action( 'rest_api_init', __NAMESPACE__ . '\\register_user_api' );
+
+function register_update_user_api(){
+  register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'updateuser', [
+    'methods' => 'POST',
+    'callback'  => function( \WP_REST_Request $request ){
+
+    },
+    'permission_callback' => function( \WP_REST_Request $request ){
+      $parameters = $request->get_params();
+      $user_id = $parameters['user_id'];
+      $current_user_id = get_current_user_id();
+      return ( $user_id == $current_user_id )? true : false ;
+    },
+  ]);
+}
+add_action( 'rest_api_init', __NAMESPACE__ . '\\register_update_user_api' );
