@@ -25,14 +25,15 @@ get_template_part( 'lib/partials/layout', 'sidebar' );
             <?php
             $current_user = wp_get_current_user();
             $data = [
-              'firstname'   => $current_user->user_firstname,
-              'lastname'    => $current_user->user_lastname,
-              'username'    => $current_user->user_login,
-              'grade'       => get_user_meta( $current_user->ID, 'grade', true ),
-              'school'      => get_user_meta( $current_user->ID, 'school', true ),
-              'avatar'      => get_user_meta( $current_user->ID, 'avatar', true ),
-              'bp_dir_uri'  => BP_DIR_URI,
-              'avatars'     => [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+              'firstname'       => $current_user->user_firstname,
+              'lastname'        => $current_user->user_lastname,
+              'username'        => $current_user->user_login,
+              'grade'           => get_user_meta( $current_user->ID, 'grade', true ),
+              'school'          => get_user_meta( $current_user->ID, 'school', true ),
+              'avatar'          => get_user_meta( $current_user->ID, 'avatar', true ),
+              'bp_dir_uri'      => BP_DIR_URI,
+              'avatars'         => [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+              'current_user_id' => $current_user->ID,
             ];
             echo render_template( 'registration-and-profile-form', $data );
             ?>

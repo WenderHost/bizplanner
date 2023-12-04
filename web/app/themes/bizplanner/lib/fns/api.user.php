@@ -100,7 +100,41 @@ function register_update_user_api(){
   register_rest_route( BP_REST_NAMESPACE, BP_BIZPLAN_ROUTE . 'updateuser', [
     'methods' => 'POST',
     'callback'  => function( \WP_REST_Request $request ){
+      $status_code = 200;
+      $parameters = $request->get_params();
 
+      $nonce = $request->get_header('X-WP-Nonce');
+      if( ! wp_verify_nonce( $nonce, 'wp_rest') )
+        wp_send_json( [ 'message' => 'Invalid nonce.' ], 403 );
+
+      // Build a fake email address from the submitted username
+      //$user_email = $parameters['username'] . '@bizplanner.dev';
+      //if( ! is_email( $user_email ) )
+        //wp_send_json( [ 'message' => 'Please correct your username to use only letters and numbers.' ], 403 );
+
+      if( 0 == $parameters['avatar'] ){
+        wp_send_json( ['message' => 'Don\'t forget to pick Your Avatar.' ], 403 );
+      }
+      $avatar = 1;
+      if( array_key_exists( 'avatar', $parameters ) && is_numeric( $parameters['avatar'] ) )
+        $avatar = $parameters['avatar'];
+
+
+      $user_args = [
+        'ID'          => $parameters['user_id'],
+        'first_name'  => $parameters['fname'],
+        'last_name'   => $parameters['lname'],
+        'meta_input' => [
+          'school'  => $parameters['school'],
+          'grade'   => $parameters['grade'],
+          'avatar'  => $avatar,
+        ],
+      ];
+      uber_log( '🪵 $user_args = ' . print_r( $user_args, true ) );
+      $success = wp_update_user( $user_args );
+      if( is_wp_error( $success ) )
+        uber_log( '🪵 $success = ' . print_r( $success, true ) );
+      wp_send_json( [ 'message' => 'Success! Your details have been updated. Refreshing...' ], 200 );
     },
     'permission_callback' => function( \WP_REST_Request $request ){
       $parameters = $request->get_params();

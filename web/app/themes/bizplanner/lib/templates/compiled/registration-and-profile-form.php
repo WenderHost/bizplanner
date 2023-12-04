@@ -57,14 +57,15 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
     <label for="school" class="form-label">School</label>
     <input type="text" class="form-control" id="school" name="school" value="'.htmlspecialchars((string)(($inary && isset($in['school'])) ? $in['school'] : null), ENT_QUOTES, 'UTF-8').'" placeholder="Enter your school..." required>
   </div>
+  <!--
   <div class="col-12">
     <label for="username" class="form-label">Username</label>
-    <input type="text" class="form-control" id="username" name="username" value="'.htmlspecialchars((string)(($inary && isset($in['username'])) ? $in['username'] : null), ENT_QUOTES, 'UTF-8').'" autocapitalize="off" required>
+    <input type="text" class="form-control" id="username" name="username" value="'.htmlspecialchars((string)(($inary && isset($in['username'])) ? $in['username'] : null), ENT_QUOTES, 'UTF-8').'" autocapitalize="off" disabled>
   </div>
   <div class="col-12" style="">
     <label for="visiblePasswordField" class="form-label">Password</label>
     <div style="display: flex; flex-direction: row;">
-      <input type="text" class="form-control" id="visiblePasswordField" oninput="updateHiddenPasswordField(event)" required style="width: 70%; border-radius: 3px 0 0 3px;"><button type="button" id="show-password" class="btn btn-primary btn-sm" style="border-radius: 0 3px 3px 0;" onclick="togglePasswordVisibility()"><i class="bi bi-eye-fill"></i> Show Password</button>
+      <input type="text" class="form-control" id="visiblePasswordField" oninput="updateHiddenPasswordField(event)" style="width: 70%; border-radius: 3px 0 0 3px;" disabled><button type="button" id="show-password" class="btn btn-primary btn-sm" style="border-radius: 0 3px 3px 0;" onclick="togglePasswordVisibility()"><i class="bi bi-eye-fill"></i> Show Password</button>
     </div>
 
     <input type="hidden" id="hiddenPasswordField" name="password">
@@ -109,14 +110,14 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
           }
       }
     </script>
-  </div>
+  </div>-->
 
   <div class="col-12">
     <label for="avatar" class="form-label">Your Avatar</label>
     <div class="row">
       <div class="col-3">
         <div class="avatar-frame"><img class="img-fluid" id="avatar" style="cursor: pointer;" src="'.htmlspecialchars((string)(($inary && isset($in['bp_dir_uri'])) ? $in['bp_dir_uri'] : null), ENT_QUOTES, 'UTF-8').'lib/img/bizplanner-avatar_'.htmlspecialchars((string)(($inary && isset($in['avatar'])) ? $in['avatar'] : null), ENT_QUOTES, 'UTF-8').'.png" data-bs-toggle="modal" data-bs-target="#ExtralargeModal" /></div>
-        <input type="hidden" name="avatar" id="selectedavatar" value="0" />
+        <input type="hidden" name="avatar" id="selectedavatar" value="'.htmlspecialchars((string)(($inary && isset($in['avatar'])) ? $in['avatar'] : null), ENT_QUOTES, 'UTF-8').'" />
       </div>
       <div class="col-9">
 
@@ -125,7 +126,7 @@ use \LightnCandy\SafeString as SafeString;use \LightnCandy\Runtime as LR;return 
           Select Your Avatar - Click Here
         </button>
 
-        <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+        <div class="modal fade" id="ExtralargeModal" style="z-index: 1100;" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
               <div class="modal-header">
