@@ -58,7 +58,8 @@
     "wpackagist-plugin/spinupwp": "^1.5",
     "wpackagist-plugin/limit-login-attempts-reloaded": "^2.25",
     "wpackagist-plugin/super-progressive-web-apps": "^2.2",
-    "wpackagist-theme/twentytwentyfour": "^1.0"
+    "wpackagist-theme/twentytwentyfour": "^1.0",
+    "wpackagist-plugin/user-switching": "^1.7"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
