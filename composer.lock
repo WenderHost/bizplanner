@@ -1816,12 +1816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ace07068606d5bbbbf32daca76cf1e7da09b2e72"
+                "reference": "1cc247a68262ff8f9656c45b373bb4ce1849045f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ace07068606d5bbbbf32daca76cf1e7da09b2e72",
-                "reference": "ace07068606d5bbbbf32daca76cf1e7da09b2e72",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1cc247a68262ff8f9656c45b373bb4ce1849045f",
+                "reference": "1cc247a68262ff8f9656c45b373bb4ce1849045f",
                 "shasum": ""
             },
             "conflict": {
@@ -2193,6 +2193,7 @@
                 "pegasus/google-for-jobs": "<1.5.1|>=2,<2.1.1",
                 "personnummer/personnummer": "<3.0.2",
                 "phanan/koel": "<5.1.4",
+                "phenx/php-svg-lib": "<0.5.1",
                 "php-mod/curl": "<2.3.2",
                 "phpbb/phpbb": "<3.2.10|>=3.3,<3.3.1",
                 "phpfastcache/phpfastcache": "<6.1.5|>=7,<7.1.2|>=8,<8.0.7",
@@ -2523,7 +2524,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-13T04:04:49+00:00"
+            "time": "2023-12-13T14:04:38+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
