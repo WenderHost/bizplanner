@@ -26,12 +26,12 @@ get_template_part( 'lib/partials/layout', 'sidebar' );
         </div>
         <div class="row text-center">
           <div class="col" style="border-top: 1px solid #cdcdcd; padding-top: 1rem; margin-top: 3rem;">
-            <p style="font-size: .8rem; color: #999;">&copy; Copyright <?= date('Y') ?> The Hollingsworth Companies. All rights reserved.</p>
+            <p style="font-size: .8rem; color: #999;">&copy; Copyright <?= date('Y') ?> The Hollingsworth Entrepreneurial Foundation. All rights reserved.</p>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-2 text-end"><?php get_template_part( 'lib/partials/juniorachievement', 'logo' ); ?></div>
-          <div class="col-2 text-start"><?php get_template_part( 'lib/partials/hollingsworth', 'logo' ); ?></div>
+          <div class="col-2 text-start"><?php get_template_part( 'lib/partials/hef', 'logo' ); ?></div>
         </div>
     </section>
 
