@@ -864,7 +864,7 @@
         },
         {
             "name": "roots/wordpress",
-            "version": "6.4.2",
+            "version": "6.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/wordpress.git",
@@ -895,7 +895,7 @@
             ],
             "support": {
                 "issues": "https://github.com/roots/wordpress/issues",
-                "source": "https://github.com/roots/wordpress/tree/6.4.2"
+                "source": "https://github.com/roots/wordpress/tree/6.4.3"
             },
             "funding": [
                 {
@@ -978,22 +978,22 @@
         },
         {
             "name": "roots/wordpress-no-content",
-            "version": "6.4.2",
+            "version": "6.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress.git",
-                "reference": "6.4.2"
+                "reference": "6.4.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/release/wordpress-6.4.2-no-content.zip",
-                "shasum": "77d5fc8e5535fc2c63c1c6ae0c4763aad10ac8e7"
+                "url": "https://downloads.wordpress.org/release/wordpress-6.4.3-no-content.zip",
+                "shasum": "4138c6337bf524159b406d5b27916deebb0f78df"
             },
             "require": {
                 "php": ">= 7.0.0"
             },
             "provide": {
-                "wordpress/core-implementation": "6.4.2"
+                "wordpress/core-implementation": "6.4.3"
             },
             "suggest": {
                 "ext-curl": "Performs remote request operations.",
@@ -1044,7 +1044,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-12-06T16:27:40+00:00"
+            "time": "2024-01-30T19:32:01+00:00"
         },
         {
             "name": "roots/wp-config",
@@ -1816,12 +1816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "cea5a32b418b44dc5a480049f531f53563c26210"
+                "reference": "b1ef8f464be59fa15bf9b4956be3e17a75c4dd03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/cea5a32b418b44dc5a480049f531f53563c26210",
-                "reference": "cea5a32b418b44dc5a480049f531f53563c26210",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/b1ef8f464be59fa15bf9b4956be3e17a75c4dd03",
+                "reference": "b1ef8f464be59fa15bf9b4956be3e17a75c4dd03",
                 "shasum": ""
             },
             "conflict": {
@@ -1913,7 +1913,7 @@
                 "contao/managed-edition": "<=1.5",
                 "corveda/phpsandbox": "<1.3.5",
                 "cosenary/instagram": "<=2.3",
-                "craftcms/cms": "<=4.5.10",
+                "craftcms/cms": "<4.6.2",
                 "croogo/croogo": "<4",
                 "cuyz/valinor": "<0.12",
                 "czproject/git-php": "<4.0.3",
@@ -1971,7 +1971,7 @@
                 "ezsystems/ezplatform-solr-search-engine": ">=1.7,<1.7.12|>=2,<2.0.2|>=3.3,<3.3.15",
                 "ezsystems/ezplatform-user": ">=1,<1.0.1",
                 "ezsystems/ezpublish-kernel": "<6.13.8.2-dev|>=7,<7.5.31",
-                "ezsystems/ezpublish-legacy": "<=2017.12.7.3|>=2018.06,<=2019.03.5.1",
+                "ezsystems/ezpublish-legacy": "<=2017.12.7.3|>=2018.6,<=2019.03.5.1",
                 "ezsystems/platform-ui-assets-bundle": ">=4.2,<4.2.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1-dev|>=2.5,<2.5.15",
                 "ezyang/htmlpurifier": "<4.1.1",
@@ -2331,6 +2331,7 @@
                 "sukohi/surpass": "<1",
                 "sulu/sulu": "<1.6.44|>=2,<2.2.18|>=2.3,<2.3.8|==2.4.0.0-RC1|>=2.5,<2.5.10",
                 "sumocoders/framework-user-bundle": "<1.4",
+                "superbig/craft-audit": "<3.0.2",
                 "swag/paypal": "<5.4.4",
                 "swiftmailer/swiftmailer": ">=4,<5.4.5",
                 "swiftyedit/swiftyedit": "<1.2",
@@ -2539,7 +2540,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-24T22:04:16+00:00"
+            "time": "2024-01-31T12:06:01+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
