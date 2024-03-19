@@ -27,7 +27,7 @@
   <!--<script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/echarts/echarts.min.js"></script>-->
   <script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/quill/quill.min.js"></script>
   <!--<script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/simple-datatables/simple-datatables.js"></script>-->
-  <!--<script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/tinymce/tinymce.min.js"></script>-->
+  <script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/tinymce/tinymce.min.js"></script>
   <!--<script src="<?= BP_DIR_URI ?>lib/niceadmin/assets/vendor/php-email-form/validate.js"></script>-->
 
   <!-- Template Main JS File -->
