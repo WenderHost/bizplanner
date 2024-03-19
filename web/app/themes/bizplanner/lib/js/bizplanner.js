@@ -516,10 +516,10 @@ avatarOptions.forEach(option => {
   //const form = document.getElementById('bizplanner-user-update');
   // Code for update a user goes here...
   const form = document.getElementById('bizplanner-user-update');
-  const responseMessage = form.querySelector(".response-message");
-  const submitButton = form.querySelector("button[type='submit']");
 
   if (form) {
+    const responseMessage = form.querySelector(".response-message");
+    const submitButton = form.querySelector("button[type='submit']");
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
